@@ -367,7 +367,6 @@ export default {
       });
     }
 
-    const router = useRouter();
     const route = useRoute();
 
     const drawer = ref(false);
@@ -379,9 +378,7 @@ export default {
     const componentMenu = ref(false);
     // const calendarMenu = ref(false);
     const hoveredTab = ref(null);
-    const goToHome = () => {
-      router.push("/");
-    };
+
     //-------------------------------------------------------- Breadcrumb ----------------------------------------------------------
     // Breadcrumbs calculation
     const breadcrumbs = computed(() => {

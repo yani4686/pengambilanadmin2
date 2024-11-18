@@ -1,6 +1,6 @@
 <template>
   <div class="page-title text-center">
-    <!-- <h1>APLIKASI AKADEMIK</h1> -->
+    <h1>PORTAL</h1>
   </div>
 
   <!-- Cards Section -->
@@ -65,11 +65,11 @@ export default {
         { title: "Menu 1", image: staffImage, disabled: false },
         { title: "Menu 2", image: fpImage, disabled: false },
         { title: "Menu 3", image: bendahariImage, disabled: false },
-        { title: "Menu 4", image: canseloriImage, disabled: true }, // Disabled
-        { title: "Menu 5", image: PpengambilanImage, disabled: true }, // Disabled
-        { title: "Menu 6", image: Hepa, disabled: true }, // Disabled
-        { title: "Menu 7", image: kolejKediaman, disabled: true }, // Disabled
-        { title: "Menu 8", image: ELearning, disabled: true }, // Disabled
+        // { title: "Menu 4", image: canseloriImage, disabled: true }, // Disabled
+        // { title: "Menu 5", image: PpengambilanImage, disabled: true }, // Disabled
+        // { title: "Menu 6", image: Hepa, disabled: true }, // Disabled
+        // { title: "Menu 7", image: kolejKediaman, disabled: true }, // Disabled
+        // { title: "Menu 8", image: ELearning, disabled: true }, // Disabled
       ],
     };
   },
@@ -93,15 +93,16 @@ export default {
 .cards-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 1px;
+  /* grid-gap: 0px; */
   justify-items: center;
-  padding: 15px;
+  padding-top: 40px;
+  padding-inline: 160px;
 }
 
 .feature-card {
   width: 300px;
   height: 240px;
-  margin: 8px;
+  margin: 20px;
   text-align: center;
   cursor: pointer;
   transition: transform 0.3s ease-in-out;
@@ -140,5 +141,14 @@ export default {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
+}
+
+.centered-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; /* Viewport height */
+  background-color: #f8f9fa; /* Optional background color */
 }
 </style>
