@@ -148,7 +148,6 @@ const routes = [
           hideRoleSelection: false,
         },
       },
-
       {
         path: "form",
         component: () => import("pages/FormPage.vue"),

@@ -175,19 +175,18 @@
               </q-item>
             </q-list>
           </q-expansion-item>
-
+          <!-- @click="router.push('/dashboard/othermenu')" -->
           <!-- Dashboard Menu -->
-          <q-item
-            style="color: white"
-            clickable
-            v-ripple
-            @click="router.push('/dashboard/dashboardpage')"
-          >
+          <q-item style="color: white" clickable v-ripple>
             <q-item-section avatar>
               <q-icon name="dashboard" />
             </q-item-section>
             <q-item-section>
-              <q-item-label> Dashboard </q-item-label>
+              <q-item-label>
+                <a href="#/dashboard/othermenu" style="color: white"
+                  >Dashboard</a
+                >
+              </q-item-label>
             </q-item-section>
           </q-item>
           <!-- Component Menu with Submenu -->
