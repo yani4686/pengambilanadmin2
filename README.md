@@ -37,5 +37,14 @@ npm run format
 quasar build
 ```
 
+### FAQ
+
+#### Error Pinina
+
+Solution here
+```php
+echo 'hai';
+```
+
 ### Customize the configuration
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
