@@ -43,7 +43,7 @@ quasar build
 
 Solution here
 ```php
-npm install -g @quasar/cli
+npm install pinia@latest
 ```
 
 ### Customize the configuration
