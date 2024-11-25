@@ -43,7 +43,7 @@ quasar build
 
 Solution here
 ```php
-echo 'hai';
+npm install -g @quasar/cli;
 ```
 
 ### Customize the configuration
