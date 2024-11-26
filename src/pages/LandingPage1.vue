@@ -79,7 +79,7 @@
           <div class="icon-cards">
             <q-card-section
               style="background-color: indigo; width: 220px; height: 70px"
-              class="q-ml-lg q-mr-md q-mt-md"
+              class="q-ml-md q-mr-sm q-mt-sm"
             >
               <div class="row">
                 <div class="col-auto">
@@ -91,15 +91,15 @@
                   />
                 </div>
                 <div class="col text-center" style="color: white">
-                  Total Students <br />
-                  <strong>2000</strong>
+                  Teaching Course 2024 <br />
+                  <strong>12</strong>
                 </div>
               </div>
             </q-card-section>
 
             <q-card-section
               style="background-color: slateblue; width: 220px; height: 70px"
-              class="q-mx-md q-mt-md"
+              class="q-mx-md q-mt-sm"
             >
               <div class="row">
                 <div class="col-auto">
@@ -119,7 +119,7 @@
 
             <q-card-section
               style="background-color: purple; width: 220px; height: 70px"
-              class="q-mx-md q-mt-md"
+              class="q-mx-md q-mt-sm"
             >
               <div class="row">
                 <div class="col-auto">
@@ -139,7 +139,7 @@
 
             <q-card-section
               style="background-color: seagreen; width: 220px; height: 70px"
-              class="q-mx-md q-mt-md"
+              class="q-mx-md q-mt-sm"
             >
               <div class="row">
                 <div class="col-auto">
@@ -151,7 +151,7 @@
                   />
                 </div>
                 <div class="col text-center" style="color: white">
-                  Full Agretation <br />
+                  Full Accreditation <br />
                   <strong>100%</strong>
                 </div>
               </div>
@@ -238,81 +238,37 @@
           </q-card-section> -->
 
           <!------------------------------------------------- Bar chart ------------------------------------------------------>
-          <q-card-section
-            class="q-ml-lg q-mr-sm"
-            style="
-              margin-top: 20px;
-              margin-bottom: 10px;
-              background-color: cornflowerblue;
-              width: 93%;
-            "
-          >
-            <div class="row q-col-gutter-lg">
-              <!-- First Bar Chart -->
-              <!-- <div class="col" style="width: 100px; height: 400px"> -->
-              <div class="col q-mx-lg">
-                <h6><b style="color: white">Undergraduate Student</b></h6>
-                <canvas id="bar-chart"></canvas>
-              </div>
-
-              <!-- Second Bar Chart -->
-              <!-- <div class="col" style="width: 300px; height: 400px"> -->
-              <div class="col q-mx-lg">
-                <h6><b style="color: white">Postgraduate Student</b></h6>
-                <canvas id="bar-chart-2"></canvas>
-              </div>
+          <div class="row">
+            <!-- First Section (Upcoming Course) -->
+            <div class="col-12 col-sm-6">
+              <q-card class="feature-card q-ma-sm">
+                <q-card-section class="" style="border-radius: 5px">
+                  <div id="chart">
+                    <apexchart
+                      type="bar"
+                      height="350"
+                      :options="chartVerticalBar"
+                      :series="series"
+                    ></apexchart>
+                  </div>
+                </q-card-section>
+              </q-card>
             </div>
-            <br />
-
-            <!------------------------------------------------ To Do List -------------------------------------------->
-            <div class="q-mt-lg text-h5 text-center">
-              <b style="color: white">To Do List</b>
+            <div class="col-12 col-sm-6">
+              <q-card class="feature-card q-ma-sm">
+                <q-card-section class="" style="border-radius: 5px">
+                  <div id="chart">
+                    <apexchart
+                      type="bar"
+                      height="350"
+                      :options="chartHorizontalBar"
+                      :series="series"
+                    ></apexchart>
+                  </div>
+                </q-card-section>
+              </q-card>
             </div>
-
-            <!-- <q-form class="q-gutter-md q-my-md">
-            <q-input
-              outlined
-              dense
-              v-model="task"
-              placeholder="Enter a task here"
-            />
-
-            <div class="row justify-center q-my-md">
-              <q-btn
-                color="primary"
-                label="SAVE"
-                @click="saveTask"
-                class="q-mr-sm"
-              />
-              <q-btn color="warning" label="GET TASKS" @click="getTasks" />
-            </div>
-          </q-form> -->
-
-            <q-table
-              :rows="tasks"
-              :columns="columns"
-              row-key="id"
-              flat
-              bordered
-              class="q-mt-md"
-            >
-              <template v-slot:body-cell-actions="props">
-                <q-td align="center">
-                  <q-btn
-                    color="negative"
-                    label="DELETE"
-                    @click="deleteTask(props.row)"
-                    class="q-mr-sm"
-                  />
-                  <q-btn
-                    color="positive"
-                    label="FINISHED"
-                    @click="markFinished(props.row)"
-                  />
-                </q-td>
-              </template>
-            </q-table>
-          </q-card-section>
+          </div>
         </div>
 
         <!--------------------------------------------- NOTICE BOARD --------------------------------------------------------------->
@@ -332,185 +288,188 @@
           <div style="text-align: center">
             <span style="color: white">NEWS & ACTIVITIES</span>
           </div>
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
-            <!------------------------------------------------------------------->
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              Undergraduate Program
-            </div>
-          </div>
-          <div class="q-mt-sm" style="color: white">DEGREE</div>
-          <hr />
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+          <div class="news-container">
+            <div class="news-content">
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
+                <!------------------------------------------------------------------->
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  Undergraduate Program
+                </div>
+              </div>
+              <div class="q-mt-sm" style="color: white">DEGREE</div>
+              <hr />
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=57&Itemid=720&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Bachelor of Computer Science (Hons) Software Development
-              </a>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=57&Itemid=720&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Bachelor of Computer Science (Hons) Software Development
+                  </a>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=65&Itemid=721&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Bachelor of Computer Science (Hons) Computer Network Security
-              </a>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=65&Itemid=721&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Bachelor of Computer Science (Hons) Computer Network
+                    Security
+                  </a>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=66&Itemid=722&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Bachelor of Computer Science (Hons) Internet Computing
-              </a>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=66&Itemid=722&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Bachelor of Computer Science (Hons) Internet Computing
+                  </a>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=67&Itemid=723&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Bachelor of Information Technology (Hons) Informatics Media
-              </a>
-            </div>
-          </div>
-          <br />
-          <!------------------------------------------------------------------->
-          <div class="q-mt-sm" style="color: white">DIPLOMA</div>
-          <!------------------------------------------------------------------->
-          <hr />
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=67&Itemid=723&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Bachelor of Information Technology (Hons) Informatics Media
+                  </a>
+                </div>
+              </div>
+              <br />
+              <!------------------------------------------------------------------->
+              <div class="q-mt-sm" style="color: white">DIPLOMA</div>
+              <!------------------------------------------------------------------->
+              <hr />
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=62&Itemid=717&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Diploma In Computer Science
-              </a>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=62&Itemid=717&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Diploma In Computer Science
+                  </a>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=63&Itemid=718&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Diploma In Information Technology
-              </a>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-            Postgraduate Program
-          </div>
-          <hr />
-          <!------------------------------------------------------------------->
-          <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-            <b> MIXED-MODE PROGRAM (FULL TIME AND PART TIME)</b>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=63&Itemid=718&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Diploma In Information Technology
+                  </a>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                Postgraduate Program
+              </div>
+              <hr />
+              <!------------------------------------------------------------------->
+              <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <b> MIXED-MODE PROGRAM (FULL TIME AND PART TIME)</b>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=70&Itemid=727&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Master of Information Technology ( Management Informatics)
-              </a>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <!-- <div class="col-auto">
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=70&Itemid=727&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Master of Information Technology ( Management Informatics)
+                  </a>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <!-- <div class="col-auto">
               <q-icon
                 name="school"
                 size="20px"
@@ -519,113 +478,115 @@
               />
             </div> -->
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <b>RESEARCH PROGRAM ( FULL TIME)</b>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <b>RESEARCH PROGRAM ( FULL TIME)</b>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=68&Itemid=725&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Master of Science ( Computer Science)
-              </a>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=68&Itemid=725&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Master of Science ( Computer Science)
+                  </a>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=69&Itemid=726&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Master of Science ( Matematics)
-              </a>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=69&Itemid=726&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Master of Science ( Matematics)
+                  </a>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=71&Itemid=729&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Doctor of Philosophy (Computer Science)
-              </a>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=71&Itemid=729&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Doctor of Philosophy (Computer Science)
+                  </a>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=72&Itemid=730&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Doctor of Philosophy (Matematics)
-              </a>
-            </div>
-          </div>
-          <!------------------------------------------------------------------->
-          <div class="row">
-            <div class="col-auto">
-              <q-icon
-                name="school"
-                size="20px"
-                class="q-mb-sm q-ml-none q-mt-md"
-                color="white"
-              />
-            </div>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=72&Itemid=730&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Doctor of Philosophy (Matematics)
+                  </a>
+                </div>
+              </div>
+              <!------------------------------------------------------------------->
+              <div class="row">
+                <div class="col-auto">
+                  <q-icon
+                    name="school"
+                    size="20px"
+                    class="q-mb-sm q-ml-none q-mt-md"
+                    color="white"
+                  />
+                </div>
 
-            <div class="col text-left q-ml-sm q-mt-md" style="color: white">
-              <a
-                href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=73&Itemid=731&lang=en"
-                target="_blank"
-                style="text-decoration: none; color: white"
-              >
-                Doctor of Philosophy (Statistics)
-              </a>
+                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                  <a
+                    href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=73&Itemid=731&lang=en"
+                    target="_blank"
+                    style="text-decoration: none; color: white"
+                  >
+                    Doctor of Philosophy (Statistics)
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
           <!------------------------------------------------------------------->
@@ -642,12 +603,14 @@
 import { ref, onMounted } from "vue";
 import { useQuasar } from "quasar";
 import Chart from "chart.js/auto";
+import chart from "vue3-apexcharts";
 import showHighlightsDate from "./HighlightDate.vue";
 
 export default {
   name: "LandingPage2",
   components: {
     showHighlightsDate,
+    apexchart: chart,
   },
 
   setup() {
@@ -656,108 +619,150 @@ export default {
     const date = ref("");
     const showHighlightsDateModal = ref(false);
 
+    //Bar Chart (Horizontal)
+    const chartHorizontalBar = {
+      chart: {
+        type: "bar",
+        height: 350,
+        stacked: true,
+        dropShadow: {
+          enabled: true,
+          blur: 1,
+          opacity: 0.25,
+        },
+      },
+      plotOptions: {
+        bar: {
+          horizontal: true,
+          barHeight: "60%", // Adjust the height of the bars
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        width: 2,
+      },
+      title: {
+        text: "Horizontal Bar", // You can customize the chart title
+      },
+      xaxis: {
+        categories: [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+      },
+      yaxis: {
+        title: {
+          text: undefined, // Remove or customize y-axis title
+        },
+      },
+      tooltip: {
+        shared: false,
+        y: {
+          formatter: function (val) {
+            return val + "students"; // Format the tooltip value
+          },
+        },
+      },
+      fill: {
+        type: "pattern",
+        opacity: 1, // Set opacity to 1 for a fully visible pattern
+        pattern: {
+          style: [
+            "circles",
+            "slantedLines",
+            "verticalLines",
+            "horizontalLines",
+          ], // Array of pattern styles you can apply
+        },
+      },
+      states: {
+        hover: {
+          filter: "none", // Disable hover effect filter
+        },
+      },
+      legend: {
+        position: "right",
+        offsetY: 40,
+      },
+    };
+
+    const series = [
+      {
+        name: "Postgraduate",
+        data: [44, 55, 41, 37, 22, 43, 21], // Sample data
+      },
+      {
+        name: "Undergraduate",
+        data: [53, 32, 33, 52, 13, 43, 32],
+      },
+    ];
+
+    // Vertical Bar Chart (Column)
+    const chartVerticalBar = {
+      chart: {
+        type: "bar",
+        height: 350,
+        stacked: true,
+        dropShadow: {
+          enabled: true,
+          blur: 1,
+          opacity: 0.25,
+        },
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false, // Change to vertical bars
+          columnWidth: "60%", // Adjust the column width if needed
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        width: 2,
+      },
+      title: {
+        text: " Vertical Bar",
+      },
+      xaxis: {
+        categories: [2018, 2019, 2020, 2021, 2022, 2023, 2024],
+      },
+      yaxis: {
+        title: {
+          text: undefined,
+        },
+      },
+      tooltip: {
+        shared: false,
+        y: {
+          formatter: function (val) {
+            return val + " students";
+          },
+        },
+      },
+      fill: {
+        type: "solid",
+        opacity: 1,
+      },
+      states: {
+        hover: {
+          filter: "none",
+        },
+      },
+      legend: {
+        position: "right",
+        offsetY: 40,
+      },
+    };
+
     function gotoHighlightDate() {
       showHighlightsDateModal.value = true;
     }
-    onMounted(() => {
-      // First bar chart initialization
-      const ctx1 = document.getElementById("bar-chart").getContext("2d");
-      new Chart(ctx1, {
-        type: "bar",
-        data: {
-          labels: ["2024", "2023", "2022", "2021", "2020"],
-          datasets: [
-            {
-              label: "Data",
-              data: [4000, 5500, 4500, 3500, 2000], // Ensure you have as many data points as labels
-              backgroundColor: "#5c8809", // Bar color
-              borderWidth: 1,
-              borderColor: "white",
-            },
-          ],
-        },
-        options: {
-          scales: {
-            x: {
-              beginAtZero: true,
-              max: 10000,
-              ticks: {
-                color: "white", // White font for x-axis labels
-              },
-              grid: {
-                color: "rgba(255, 255, 255, 0.2)", // Light white grid lines
-              },
-            },
-            y: {
-              ticks: {
-                color: "white", // White font for y-axis labels
-              },
-              grid: {
-                color: "rgba(255, 255, 255, 0.2)", // Light white grid lines
-              },
-            },
-          },
-          plugins: {
-            legend: {
-              display: false,
-              labels: {
-                color: "white", // White font for legend labels
-              },
-            },
-          },
-        },
-      });
-
-      // Second bar chart initialization
-      const ctx2 = document.getElementById("bar-chart-2").getContext("2d");
-      new Chart(ctx2, {
-        type: "bar",
-        data: {
-          labels: ["2024", "2023", "2022", "2021", "2020"],
-          datasets: [
-            {
-              label: "Data",
-              data: [3000, 3500, 4000, 6000, 8000], // Data for the second chart
-              backgroundColor: "#270587", // Bar color for second chart
-              borderWidth: 1,
-              borderColor: "white", // White border for the bars
-            },
-          ],
-        },
-        options: {
-          scales: {
-            x: {
-              beginAtZero: true,
-              max: 10000,
-              ticks: {
-                color: "white", // White font for x-axis labels
-              },
-              grid: {
-                color: "rgba(255, 255, 255, 0.2)", // Light white grid lines
-              },
-            },
-            y: {
-              ticks: {
-                color: "white", // White font for y-axis labels
-              },
-              grid: {
-                color: "rgba(255, 255, 255, 0.2)", // Light white grid lines
-              },
-            },
-          },
-          plugins: {
-            legend: {
-              display: false,
-              labels: {
-                color: "white", // White font for legend labels
-              },
-            },
-          },
-        },
-      });
-    });
+    onMounted(() => {});
 
     return {
+      chartHorizontalBar,
+      chartVerticalBar,
+      series,
       rightDrawerOpen,
       date,
       task: "",
@@ -861,5 +866,29 @@ canvas {
 .child-menu {
   left: 0; /* Aligns to the left */
   position: fixed; /* Absolute positioning to enable left alignment */
+}
+.news-container {
+  width: 100%;
+  height: 400px; /* Adjust based on visible area */
+  overflow: hidden;
+  position: relative;
+}
+
+.news-content {
+  display: inline-block;
+  animation: scroll-vertical 40s linear infinite;
+}
+
+.news-container:hover .news-content {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-vertical {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(-100%);
+  }
 }
 </style>

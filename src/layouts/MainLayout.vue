@@ -1,6 +1,7 @@
 <template>
-  <div class="q-pa-sm full-height-layout">
-    <q-layout view="hHh Lpr Ff" class="layout-no-scroll full-height-layout">
+  <!-- <q-layout view="hHh Lpr fFf" class="layout-no-scroll"> -->
+  <div class="q-pa-sm">
+    <q-layout view="lHh Lpr fFf" class="rounded-borders">
       <!------------------------------------------- Top Header ---------------------------------------->
       <q-header elevated style="background: #343331; height: 75px">
         <q-toolbar>
@@ -20,7 +21,7 @@
                   overflow-y: hidden;
                 "
               />
-              <img
+              <!-- <img
                 src="images/unisza_logo.png"
                 style="padding-left: 15px"
                 class="adjusted-image"
@@ -29,21 +30,86 @@
                 src="~/assets/idfiw.png"
                 style="margin-left: 20px"
                 class="adjusted-image"
-              />
+              /> -->
             </q-item-label>
           </q-toolbar-title>
 
           <q-item-section side class="q-pa-none q-ma-none">
-            <div class="row items-center justify-end no-wrap header-icons">
-              <q-item>
+            <div class="row items-center justify-end no-wrap">
+              <!-- <q-item>
                 <a href="https://portal.unisza.edu.my/sis">
                   <q-icon
-                    name="fa fa-home"
+                    name="apps"
                     title="Dashboard Staf UniSZA"
-                    class="icon-link"
+                    style="font-size: 14px; color: #ffc000; margin: 0"
                   />
                 </a>
+              </q-item> -->
+
+              <q-item>
+                <q-icon
+                  name="notifications"
+                  title="Notification "
+                  style="font-size: 20px; color: #ffc000; margin: 0"
+                />
+                <q-badge floating color="red">2</q-badge>
+                <q-menu>
+                  <q-list style="min-width: 400px">
+                    <p class="text-center q-pt-md text-bold">NOTIFICATION</p>
+                    <div class="row q-pa-md">
+                      <!-- Loop through quickLinkIcons -->
+                      <div
+                        v-for="(icon, index) in quickLinkIcons"
+                        :key="index"
+                        class="col-4 text-center"
+                      >
+                        <q-avatar size="md" class="icon-badge-container">
+                          <img :src="icon.src" :alt="icon.alt" />
+                          <q-badge
+                            :label="notificationCounts[icon.title] || 0"
+                            floating
+                            color="red"
+                            class="icon-badge"
+                          />
+                        </q-avatar>
+
+                        <!-- Title visible only when miniState is false -->
+                        <div v-if="!miniState" class="q-mt-sm quick-link-title">
+                          {{ icon.title }}
+                        </div>
+                        <div>{{ icon.title }}</div>
+
+                        <!-- Notifications for each icon title -->
+                        <ul v-if="groupedNotifications[icon.title]">
+                          <li
+                            v-for="(notification, i) in groupedNotifications[
+                              icon.title
+                            ]"
+                            :key="i"
+                          >
+                            <q-item
+                              :class="{
+                                'bg-blue-1': notification.status === 'Unread',
+                                'bg-white': notification.status === 'Read',
+                              }"
+                              clickable
+                              @click="openNotificationLink(notification.url)"
+                            >
+                              <q-item-section>
+                                <div>{{ notification.description }}</div>
+                                <span class="text-grey-8">{{
+                                  notification.date
+                                }}</span>
+                              </q-item-section>
+                            </q-item>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </q-list>
+                </q-menu>
               </q-item>
+              <!-- <q-btn flat round dense icon="gamepad" /> -->
               <q-item>
                 <a
                   href="#"
@@ -51,45 +117,30 @@
                   aria-expanded="false"
                 >
                   <q-icon
-                    name="fa fa-th"
+                    name="app_shortcut"
                     title="Klik di sini untuk Pautan Pantas"
-                    class="icon-link"
+                    style="font-size: 18px; color: #ffc000; margin: 0"
                   />
                 </a>
               </q-item>
               <q-item>
                 <a href="https://portal.unisza.edu.my/aduan" target="_blank">
                   <q-icon
-                    name="fas fa-headset"
+                    name="headset_mic"
                     title="Aduan/Helpdesk"
-                    class="icon-link"
+                    style="font-size: 18px; color: #ffc000; margin: 0"
                   />
                 </a>
               </q-item>
-              <!-- <div class="q-mx-sm"> -->
-              <!-- <div class="q-avatar cursor-pointer">
-                <div class="q-avatar__content row flex-center overflow-hidden">
-                  <img src="https://cdn.quasar.dev/img/avatar3.jpg" alt="" />
-                  <div
-                    class="q-badge flex inline items-center no-wrap q-badge--single-line bg-green q-badge--floating q-badge--rounded"
-                    role="status"
-                  ></div>
 
-                </div>
-              </div> -->
               <q-item>
-                <q-avatar square size="28px">
-                  <img
-                    src="https://portal.unisza.edu.my/modules/Staff_Info/images/photos/SKP003.jpg"
-                  />
-                </q-avatar>
-
-                <div class="user-info">
-                  {{ users.username }}
-                  <small>{{ users.email }}</small>
-                </div>
-
-                <q-btn flat icon="arrow_drop_down" size="sm" />
+                <!-- <a href="https://portal.unisza.edu.my/aduan" target="_blank"> -->
+                <q-icon
+                  name="logout"
+                  title="Logout"
+                  style="font-size: 18px; color: #ffc000; margin: 0"
+                />
+                <!-- </a> -->
               </q-item>
               <!-- </div> -->
             </div>
@@ -100,177 +151,214 @@
       <q-drawer
         v-if="!$route.meta.hideDrawer"
         v-model="drawer"
-        :mini="miniState"
-        mini-to-overlay
         show-if-above
+        :width="270"
+        :breakpoint="400"
         bordered
-        style="background: #343331; width: 250px"
-        @mouseover="miniState = false"
-        @mouseout="miniState = true"
+        style="background: #343331"
         class="full-height-drawer"
       >
-        <q-list>
-          <!-- Login Menu -->
-          <q-item
-            style="color: white"
-            clickable
-            v-ripple
-            @click="router.push('/#/')"
-          >
-            <q-item-section avatar>
-              <q-icon name="login" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>
-                <a href="#/login" style="color: white">Login </a></q-item-label
-              >
-            </q-item-section>
-          </q-item>
+        <q-scroll-area
+          style="
+            height: calc(100% - 150px);
+            margin-top: 70px;
+            border-right: 1px solid #ddd;
+          "
+        >
+          <!-- Profile Section -->
+          <div class="q-pa-md text-center text-white">
+            <!-- <div class="corner-image"></div> -->
+            <q-avatar size="62px" class="q-mb-sm">
+              <img
+                src="https://portal.unisza.edu.my/modules/Staff_Info/images/photos/SKP003.jpg"
+                alt="Profile Picture"
+              />
+            </q-avatar>
+            <div class="text-h6">NUR SYAZWANI</div>
+            <div class="text-caption">nsyazwanimyusoff@unisza.edu.my</div>
+          </div>
+          <!-- <q-item-label caption class="text-center text-white q-mb-sm">
+            Last Login: 02 Jun 2024 09:10:27 AM
+          </q-item-label> -->
+          <q-separator style="margin: 0 12px; background-color: white" />
 
-          <!-- Landing Page Menu with Submenu -->
-          <q-expansion-item
-            style="color: white"
-            icon="find_in_page"
-            label="Landing Page"
-            expand-separator
-            :expanded="showSubmenu"
-            @mouseover="showSubmenu = true"
-            @mouseleave="showSubmenu = false"
-          >
-            <!-- submenu -->
-            <q-list class="submenu">
-              <q-item>
-                <q-item-section>
-                  <q-item-label>
-                    <a href="#/" style="color: white">Landing Page 1</a>
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section>
-                  <q-item-label>
-                    <a href="#/dashboard/landingpage2" style="color: white"
-                      >Landing Page 2</a
-                    >
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section>
-                  <q-item-label>
-                    <a href="#/dashboard/landingpage3" style="color: white"
-                      >Landing Page 3</a
-                    >
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section>
-                  <q-item-label>
-                    <a href="#/dashboard/landingpage4" style="color: white"
-                      >Landing Page 4</a
-                    >
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-expansion-item>
-          <!-- @click="router.push('/dashboard/othermenu')" -->
-          <!-- Dashboard Menu -->
-          <q-item style="color: white" clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="dashboard" />
-            </q-item-section>
-            <q-item-section>
-              <q-item-label>
-                <a href="#/dashboard/othermenu" style="color: white"
-                  >Dashboard</a
+          <!-- <q-separator style="width: 80%; text-align: center" /> -->
+          <q-list>
+            <!-- Login Menu -->
+            <q-item
+              style="color: white"
+              clickable
+              v-ripple
+              :class="{ 'active-menu': $route.path === '/dashboard' }"
+              @click="$router.push('/dashboard')"
+            >
+              <q-item-section avatar>
+                <q-icon name="login" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>
+                  <a href="#/login" style="color: white"
+                    >Login
+                  </a></q-item-label
                 >
-              </q-item-label>
-            </q-item-section>
-          </q-item>
-          <!-- Component Menu with Submenu -->
-          <q-expansion-item
-            style="color: white"
-            icon="description"
-            label="Component"
-            expand-separator
-            :expanded="showSubmenu"
-            @mouseover="showSubmenu = true"
-            @mouseleave="showSubmenu = false"
-          >
-            <!-- submenu -->
-            <q-list class="submenu">
-              <!-- <q-item>
+              </q-item-section>
+            </q-item>
+
+            <!-- Landing Page Menu with Submenu -->
+            <q-expansion-item
+              style="color: white"
+              icon="find_in_page"
+              label="Landing Page"
+              expand-separator
+              :expanded="showSubmenu"
+              @mouseover="showSubmenu = true"
+              @mouseleave="showSubmenu = false"
+            >
+              <!-- submenu -->
+              <q-list class="submenu">
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/" style="color: white">Landing Page 1</a>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/dashboard/landingpage2" style="color: white"
+                        >Landing Page 2</a
+                      >
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/dashboard/landingpage3" style="color: white"
+                        >Landing Page 3</a
+                      >
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/dashboard/landingpage4" style="color: white"
+                        >Landing Page 4</a
+                      >
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-expansion-item>
+            <!-- @click="router.push('/dashboard/othermenu')" -->
+            <!-- Dashboard Menu -->
+            <q-item style="color: white" clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="dashboard" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>
+                  <a href="#/dashboard/othermenu" style="color: white"
+                    >Dashboard</a
+                  >
+                </q-item-label>
+              </q-item-section>
+            </q-item>
+            <!-- Component Menu with Submenu -->
+            <q-expansion-item
+              style="color: white"
+              icon="description"
+              label="Component"
+              expand-separator
+              :expanded="showSubmenu"
+              @mouseover="showSubmenu = true"
+              @mouseleave="showSubmenu = false"
+            >
+              <!-- submenu -->
+              <q-list class="submenu">
+                <!-- <q-item>
                 <q-item-section>
                   <q-item-label>
                     <a href="#/modal" style="color: white">Modal</a>
                   </q-item-label>
                 </q-item-section>
               </q-item> -->
-              <q-item>
-                <q-item-section>
-                  <q-item-label>
-                    <a href="#/dashboard/tab" style="color: white">Tab</a>
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section>
-                  <q-item-label>
-                    <a href="#/dashboard/accordian" style="color: white"
-                      >Accordian</a
-                    >
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section>
-                  <q-item-label>
-                    <a href="#/dashboard/button" style="color: white">Button</a>
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-expansion-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/dashboard/tab" style="color: white">Tab</a>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/dashboard/accordian" style="color: white"
+                        >Accordian</a
+                      >
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/dashboard/button" style="color: white"
+                        >Button</a
+                      >
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-expansion-item>
 
-          <!-- Calendar Menu with Submenu -->
-          <q-expansion-item
-            style="color: white"
-            icon="calendar_month"
-            label="Calendar"
-            expand-separator
-          >
-            <q-list class="submenu">
-              <q-item>
-                <q-item-section>
-                  <q-item-label>
-                    <a href="#/dashboard/event-calendar" style="color: white"
-                      >Event Calendar</a
-                    >
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-              <q-item>
-                <q-item-section>
-                  <q-item-label>
-                    <a href="#/dashboard/schedule-calendar" style="color: white"
-                      >Schedule Calendar</a
-                    >
-                  </q-item-label>
-                </q-item-section>
-              </q-item>
-            </q-list>
-          </q-expansion-item>
+            <!-- Calendar Menu with Submenu -->
+            <q-expansion-item
+              style="color: white"
+              icon="calendar_month"
+              label="Calendar"
+              expand-separator
+            >
+              <q-list class="submenu">
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/dashboard/event-calendar" style="color: white"
+                        >Event Calendar</a
+                      >
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a
+                        href="#/dashboard/schedule-calendar"
+                        style="color: white"
+                        >Schedule Calendar</a
+                      >
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-expansion-item>
 
-          <!-- Other Menus -->
-          <NavLink
-            style="color: white"
-            v-for="link in linksList"
-            :key="link.title"
-            v-bind="link"
-          />
-        </q-list>
+            <!-- Other Menus -->
+            <NavLink
+              style="color: white"
+              v-for="link in linksList"
+              :key="link.title"
+              v-bind="link"
+            />
+          </q-list>
+        </q-scroll-area>
+
+        <!-- Centered Image (logo-unisza) -->
+        <q-img
+          class="absolute-top adjusted-image"
+          src="images/logo-unisza.png"
+        ></q-img>
       </q-drawer>
 
       <!-- Page Content -->
@@ -413,7 +501,7 @@ export default {
 
     // Dynamically control the quick links submenu based on route
     const quickLinks = computed(() => {
-      if (route.path.includes("#/dashboard/portalpensyarah")) {
+      if (route.path.includes("#/dashboard/menu1")) {
         return [
           { title: "Assessment", link: "#/landingpage/assessment" },
           { title: "DCI", link: "#/landingpage/dci" },
@@ -562,12 +650,10 @@ export default {
 }
 
 .adjusted-image {
-  /* width: 100%;
-  height: auto; */
-
+  margin: 20px;
+  margin-left: 78px;
   max-width: 110px;
-  max-height: 80px;
-  object-fit: contain;
+  max-height: 60px;
 }
 
 .corner-image {
@@ -578,10 +664,10 @@ export default {
   position: absolute;
   -webkit-transform: scaleX(-1);
   transform: scaleX(-1);
-  top: 70px; /* Adjust the distance from the top */
-  right: -12px; /* Adjust the distance from the right */
-  width: 250px; /* Adjust the size of the image */
-  height: 300px; /* Adjust height to ensure the image has space */
+  top: 2px; /* Adjust the distance from the top */
+  right: -10px; /* Adjust the distance from the right */
+  width: 70px; /* Adjust the size of the image */
+  height: 100px; /* Adjust height to ensure the image has space */
 }
 .sidemenu {
   font-size: 5px;
@@ -607,5 +693,9 @@ export default {
 .user-info small {
   color: gray;
   font-size: 12px;
+}
+.active-menu {
+  background-color: #575757;
+  border-radius: 8px;
 }
 </style>
