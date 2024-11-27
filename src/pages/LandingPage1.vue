@@ -76,10 +76,10 @@
       <div class="row responsive-layout">
         <div class="col">
           <!-- Icon Cards -->
-          <div class="icon-cards">
+          <div class="icon-cards q-gutter-xs">
             <q-card-section
               style="background-color: indigo; width: 220px; height: 70px"
-              class="q-ml-md q-mr-sm q-mt-sm"
+              class="q-mt-sm"
             >
               <div class="row">
                 <div class="col-auto">
@@ -99,7 +99,7 @@
 
             <q-card-section
               style="background-color: slateblue; width: 220px; height: 70px"
-              class="q-mx-md q-mt-sm"
+              class="q-mt-sm"
             >
               <div class="row">
                 <div class="col-auto">
@@ -119,7 +119,7 @@
 
             <q-card-section
               style="background-color: purple; width: 220px; height: 70px"
-              class="q-mx-md q-mt-sm"
+              class="q-mt-sm"
             >
               <div class="row">
                 <div class="col-auto">
@@ -139,7 +139,7 @@
 
             <q-card-section
               style="background-color: seagreen; width: 220px; height: 70px"
-              class="q-mx-md q-mt-sm"
+              class="q-mt-sm"
             >
               <div class="row">
                 <div class="col-auto">
@@ -159,83 +159,6 @@
           </div>
           <br />
           <!------------------------------------------------------------ TABLE HIGHLIGHT DATES ------------------------------------------------------>
-          <!-- <q-card-section>
-            <q-markup-table
-              class="q-mb-sm q-mt-sm q-ml-sm"
-              style="width: 96%; border: 1px solid #ccc"
-            >
-              <caption
-                class="text-h6 text-center"
-                style="
-                  border-bottom: 1px solid #f0edf8;
-                  padding-bottom: 10px;
-                  font-weight: bold;
-                "
-              >
-                Highlight Dates
-              </caption>
-              <thead>
-                <tr style="background-color: #f0f0f0; color: #333">
-                  <th
-                    class="text-center"
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      border: 1px solid #ccc;
-                    "
-                  >
-                    Activity
-                  </th>
-                  <th
-                    class="text-center"
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      border: 1px solid #ccc;
-                    "
-                  >
-                    Session
-                  </th>
-                  <th
-                    class="text-center"
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      border: 1px solid #ccc;
-                    "
-                  >
-                    Level
-                  </th>
-                  <th
-                    class="text-center"
-                    style="
-                      font-size: 14px;
-                      font-weight: bold;
-                      border: 1px solid #ccc;
-                    "
-                  >
-                    Date
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="background-color: #e6f7ff">
-                  <td class="text-left" style="border: 1px solid #ccc">
-                    PENDAFTARAN PELAJAR BARU
-                  </td>
-                  <td class="text-left" style="border: 1px solid #ccc">
-                    SEM 1 2024/2025
-                  </td>
-                  <td class="text-left" style="border: 1px solid #ccc">
-                    IJAZAH SARJANA MUDA
-                  </td>
-                  <td class="text-left" style="border: 1px solid #ccc">
-                    29-09-2024 until 03-10-2024
-                  </td>
-                </tr>
-              </tbody>
-            </q-markup-table>
-          </q-card-section> -->
 
           <!------------------------------------------------- Bar chart ------------------------------------------------------>
           <div class="row">
@@ -274,7 +197,7 @@
         <!--------------------------------------------- NOTICE BOARD --------------------------------------------------------------->
         <q-card-section class="right-card q-mr-lg q-mt-md">
           <!-------------------- HIGHLIGHT DATE ------------------------------>
-          <div class="row justify-center">
+          <div class="col justify-center">
             <!-- <q-btn label="HIGHLIGHT DATE" color="lime-8" @click="icon = true" /> -->
             <q-btn
               label="HIGHLIGHT DATE"
@@ -875,8 +798,8 @@ canvas {
 }
 
 .news-content {
-  display: inline-block;
-  animation: scroll-vertical 40s linear infinite;
+  /* display: inline-block; */
+  animation: scroll-vertical 35s linear infinite;
 }
 
 .news-container:hover .news-content {
