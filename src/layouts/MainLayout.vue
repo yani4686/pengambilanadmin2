@@ -5,7 +5,7 @@
       <!------------------------------------------- Top Header ---------------------------------------->
       <q-header elevated style="background: #343331; height: 75px">
         <q-toolbar>
-          <q-toolbar-title>
+          <q-toolbar-title class="row">
             <q-item-label header>
               <q-btn
                 v-if="!$route.meta.hideDrawer"
@@ -21,6 +21,7 @@
                   overflow-y: hidden;
                 "
               />
+
               <!-- <img
                 src="images/unisza_logo.png"
                 style="padding-left: 15px"
@@ -32,6 +33,9 @@
                 class="adjusted-image"
               /> -->
             </q-item-label>
+            <span class="q-pt-lg text-yellow" style="font-size: 17px"
+              >SYSTEM</span
+            >
           </q-toolbar-title>
 
           <q-item-section side class="q-pa-none q-ma-none">

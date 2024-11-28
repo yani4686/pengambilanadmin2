@@ -76,7 +76,7 @@
       <div class="row responsive-layout">
         <div class="col">
           <!-- Icon Cards -->
-          <div class="icon-cards q-gutter-xs">
+          <div class="icon-cards q-gutter-xs flex-center">
             <q-card-section
               style="background-color: indigo; width: 220px; height: 70px"
               class="q-mt-sm"
@@ -164,7 +164,7 @@
           <div class="row">
             <!-- First Section (Upcoming Course) -->
             <div class="col-12 col-sm-6">
-              <q-card class="feature-card q-ma-sm">
+              <q-card class="q-ma-sm">
                 <q-card-section class="" style="border-radius: 5px">
                   <div id="chart">
                     <apexchart
@@ -178,7 +178,7 @@
               </q-card>
             </div>
             <div class="col-12 col-sm-6">
-              <q-card class="feature-card q-ma-sm">
+              <q-card class="q-ma-sm">
                 <q-card-section class="" style="border-radius: 5px">
                   <div id="chart">
                     <apexchart
@@ -195,7 +195,10 @@
         </div>
 
         <!--------------------------------------------- NOTICE BOARD --------------------------------------------------------------->
-        <q-card-section class="right-card q-mr-lg q-mt-md">
+        <q-card-section
+          class="right-card border border-1 q-mr-lg q-mt-md"
+          style="border-radius: 5px; border: 1px solid grey"
+        >
           <!-------------------- HIGHLIGHT DATE ------------------------------>
           <div class="col justify-center">
             <!-- <q-btn label="HIGHLIGHT DATE" color="lime-8" @click="icon = true" /> -->
@@ -209,7 +212,7 @@
           <hr />
           <br />
           <div style="text-align: center">
-            <span style="color: white">NEWS & ACTIVITIES</span>
+            <span>NEWS & ACTIVITIES</span>
           </div>
           <div class="news-container">
             <div class="news-content">
@@ -219,15 +222,14 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
                 <!------------------------------------------------------------------->
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   Undergraduate Program
                 </div>
               </div>
-              <div class="q-mt-sm" style="color: white">DEGREE</div>
+              <div class="q-mt-sm">DEGREE</div>
               <hr />
               <!------------------------------------------------------------------->
               <div class="row">
@@ -236,11 +238,10 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=57&Itemid=720&lang=en"
                     target="_blank"
@@ -257,15 +258,14 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=65&Itemid=721&lang=en"
                     target="_blank"
-                    style="text-decoration: none; color: white"
+                    style="text-decoration: none"
                   >
                     Bachelor of Computer Science (Hons) Computer Network
                     Security
@@ -279,11 +279,10 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=66&Itemid=722&lang=en"
                     target="_blank"
@@ -300,15 +299,14 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=67&Itemid=723&lang=en"
                     target="_blank"
-                    style="text-decoration: none; color: white"
+                    style="text-decoration: none"
                   >
                     Bachelor of Information Technology (Hons) Informatics Media
                   </a>
@@ -316,7 +314,7 @@
               </div>
               <br />
               <!------------------------------------------------------------------->
-              <div class="q-mt-sm" style="color: white">DIPLOMA</div>
+              <div class="q-mt-sm">DIPLOMA</div>
               <!------------------------------------------------------------------->
               <hr />
               <div class="row">
@@ -325,15 +323,14 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=62&Itemid=717&lang=en"
                     target="_blank"
-                    style="text-decoration: none; color: white"
+                    style="text-decoration: none"
                   >
                     Diploma In Computer Science
                   </a>
@@ -350,23 +347,23 @@
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=63&Itemid=718&lang=en"
                     target="_blank"
-                    style="text-decoration: none; color: white"
+                    style="text-decoration: none"
                   >
                     Diploma In Information Technology
                   </a>
                 </div>
               </div>
               <!------------------------------------------------------------------->
-              <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+              <div class="col text-left q-ml-sm q-mt-md">
                 Postgraduate Program
               </div>
               <hr />
               <!------------------------------------------------------------------->
-              <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+              <div class="col text-left q-ml-sm q-mt-md">
                 <b> MIXED-MODE PROGRAM (FULL TIME AND PART TIME)</b>
               </div>
               <!------------------------------------------------------------------->
@@ -376,15 +373,14 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=70&Itemid=727&lang=en"
                     target="_blank"
-                    style="text-decoration: none; color: white"
+                    style="text-decoration: none"
                   >
                     Master of Information Technology ( Management Informatics)
                   </a>
@@ -401,7 +397,7 @@
               />
             </div> -->
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <b>RESEARCH PROGRAM ( FULL TIME)</b>
                 </div>
               </div>
@@ -412,15 +408,14 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=68&Itemid=725&lang=en"
                     target="_blank"
-                    style="text-decoration: none; color: white"
+                    style="text-decoration: none"
                   >
                     Master of Science ( Computer Science)
                   </a>
@@ -433,15 +428,14 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=69&Itemid=726&lang=en"
                     target="_blank"
-                    style="text-decoration: none; color: white"
+                    style="text-decoration: none"
                   >
                     Master of Science ( Matematics)
                   </a>
@@ -454,15 +448,14 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=71&Itemid=729&lang=en"
                     target="_blank"
-                    style="text-decoration: none; color: white"
+                    style="text-decoration: none"
                   >
                     Doctor of Philosophy (Computer Science)
                   </a>
@@ -479,11 +472,11 @@
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=72&Itemid=730&lang=en"
                     target="_blank"
-                    style="text-decoration: none; color: white"
+                    style="text-decoration: none"
                   >
                     Doctor of Philosophy (Matematics)
                   </a>
@@ -496,15 +489,14 @@
                     name="school"
                     size="20px"
                     class="q-mb-sm q-ml-none q-mt-md"
-                    color="white"
                   />
                 </div>
 
-                <div class="col text-left q-ml-sm q-mt-md" style="color: white">
+                <div class="col text-left q-ml-sm q-mt-md">
                   <a
                     href="https://fik.unisza.edu.my/index.php?option=com_sppagebuilder&view=page&id=73&Itemid=731&lang=en"
                     target="_blank"
-                    style="text-decoration: none; color: white"
+                    style="text-decoration: none"
                   >
                     Doctor of Philosophy (Statistics)
                   </a>
@@ -749,7 +741,7 @@ export default {
 .right-card {
   height: auto;
   width: 350px;
-  background-color: cadetblue;
+
   padding: 20px;
   box-sizing: border-box;
 }

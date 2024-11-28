@@ -292,9 +292,7 @@
       <q-card class="col-12">
         <q-card-section class="card-title"
           >Horizontal Form
-          <span style="color: crimson; font-size: small"
-            >(two-colum)</span
-          ></q-card-section
+          <span style="font-size: small">(two-colum)</span></q-card-section
         >
 
         <!-- Input type text -->
