@@ -436,6 +436,17 @@ export default {
   },
   setup() {
     const $q = useQuasar();
+    const route = useRoute();
+    const drawer = ref(false);
+    const miniState = ref(true); // Mini sidebar initially active
+    const showSubmenu = ref(false); // Control submenu visibility
+    const showQuickmenu = ref(false);
+    // const showCalendarmenu = ref(false);
+    //const topNavTab = ref("dashboard");
+    const componentMenu = ref(false);
+    // const calendarMenu = ref(false);
+    const hoveredTab = ref(null);
+
     var token = $q.sessionStorage.getItem("token");
     var users = ref({});
 
@@ -447,18 +458,6 @@ export default {
         console.log(res.data.data.name);
       });
     }
-
-    const route = useRoute();
-
-    const drawer = ref(false);
-    const miniState = ref(true); // Mini sidebar initially active
-    const showSubmenu = ref(false); // Control submenu visibility
-    const showQuickmenu = ref(false);
-    // const showCalendarmenu = ref(false);
-    //const topNavTab = ref("dashboard");
-    const componentMenu = ref(false);
-    // const calendarMenu = ref(false);
-    const hoveredTab = ref(null);
 
     //-------------------------------------------------------- Breadcrumb ----------------------------------------------------------
     // Breadcrumbs calculation

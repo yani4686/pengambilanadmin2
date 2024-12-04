@@ -9,26 +9,19 @@
               <q-card-section class="col-6 black-background">
                 <!-- <div class="q-pa-md"> -->
                 <img src="images/unisza_logo.png" class="adjusted-image" />
-                <hr />
+                <!-- <hr /> -->
                 <!-- </div> -->
                 <div class="line-container">
-                  <div class="text-white">
-                    <q-icon name="check_circle" />
+                  <div class="text-white" style="text-align: center">
+                    SYSTEM
+                    <!-- <q-icon name="check_circle" />
                     <span>Cookies must be enabled in your browser</span>
-                    <q-icon name="help" />
+                    <q-icon name="help" />-->
                   </div>
-                  <br />
+                  <!-- <br />
                   <span class="text-white">Log in using your account on:</span>
                   <br />
-                  <br />
-                  <q-btn @click="staffLogin" color="white">
-                    <img
-                      src="images/google-logo.png"
-                      style="width: 20px; height: 20px"
-                      alt="Google Icon"
-                    />
-                    <span class="text-black">Login via UNISZA ID</span>
-                  </q-btn>
+                  <br /> -->
                 </div>
                 <br />
               </q-card-section>
@@ -82,6 +75,18 @@
                       class="full-width q-mb-sm"
                       @click="onSubmit"
                     />
+                    <q-btn
+                      @click="staffLogin"
+                      color="primary"
+                      class="full-width q-mb-sm"
+                    >
+                      <img
+                        src="images/google-logo.png"
+                        style="width: 20px; height: 20px"
+                        alt="Google Icon"
+                      />
+                      <span>Login via UNISZA ID</span>
+                    </q-btn>
                     <q-btn
                       flat
                       label="Forgotten your username or password?"

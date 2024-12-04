@@ -145,15 +145,15 @@
 
             <div class="col-12 col-sm-9">
               <q-input
+                v-model="form.date"
                 outlined
                 dense
-                v-model="form.date"
-                mask="####/##/##"
-                label="yyyy/mm/dd"
-                :rules="['date']"
-                style="margin: 0 12px"
-              >
-                <template v-slot:prepend>
+                label="dd-mm-yyyy"
+                style="margin: 0 12px; margin-bottom: auto"
+                @blur="formatDate(form.date)"
+              />
+              <!-- <q-input v-model="date" filled type="date" hint="Native date" /> -->
+              <!-- <template v-slot:>
                   <q-icon name="event" class="cursor-pointer">
                     <q-popup-proxy
                       cover
@@ -173,7 +173,7 @@
                     </q-popup-proxy>
                   </q-icon>
                 </template>
-              </q-input>
+              </q-input> -->
             </div>
           </div>
 
@@ -1303,7 +1303,16 @@ export default {
     };
 
     const formatDate = (date) => {
-      form.value.date = date;
+      // Convert to a Date object if not already
+      const formattedDate = new Date(date);
+
+      // Format the date to "day-month-year" (dd-mm-yyyy)
+      const day = String(formattedDate.getDate()).padStart(2, "0");
+      const month = String(formattedDate.getMonth() + 1).padStart(2, "0"); // getMonth() returns 0-11
+      const year = formattedDate.getFullYear();
+
+      // Update the model with the formatted date
+      form.value.date = `${day}-${month}-${year}`;
     };
 
     return {
