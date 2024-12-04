@@ -21,17 +21,6 @@
                   overflow-y: hidden;
                 "
               />
-
-              <!-- <img
-                src="images/unisza_logo.png"
-                style="padding-left: 15px"
-                class="adjusted-image"
-              />
-              <img
-                src="~/assets/idfiw.png"
-                style="margin-left: 20px"
-                class="adjusted-image"
-              /> -->
             </q-item-label>
             <span class="q-pt-lg text-yellow" style="font-size: 17px"
               >SYSTEM</span

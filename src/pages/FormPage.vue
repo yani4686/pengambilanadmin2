@@ -1331,12 +1331,7 @@ export default {
 body {
   font-family: roboto;
 }
-.q-card > div:not(.q--avoid-card-border) {
-  border-left: 0;
-  border-right: 0;
-  box-shadow: none;
-  margin-bottom: -16px;
-}
+
 .card-title {
   font-size: 16px;
   margin: 0 0 7px 0;
@@ -1352,13 +1347,6 @@ hr {
 .submit-button {
   padding-bottom: 30px;
   margin-right: 5px;
-}
-.q-card > div:nth-child(1 of :not(.q--avoid-card-border)),
-.q-card > img:nth-child(1 of :not(.q--avoid-card-border)) {
-  background-color: #fdebb497;
-  padding: 10px;
-  color: black;
-  /* color: rgb(31, 31, 31); */
 }
 
 /* .q-field--auto-height.q-field--dense .q-field__control,
