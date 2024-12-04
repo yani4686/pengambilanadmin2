@@ -18,6 +18,16 @@
                     <span>Cookies must be enabled in your browser</span>
                     <q-icon name="help" />-->
                   </div>
+                  <br />
+                  <div style="text-align: center">
+                    <span>OBE</span>
+                  </div>
+                  <div style="text-align: center">
+                    <span>SPB</span>
+                  </div>
+                  <div style="text-align: center">
+                    <span>U-Time</span>
+                  </div>
                   <!-- <br />
                   <span class="text-white">Log in using your account on:</span>
                   <br />
@@ -29,9 +39,6 @@
               <!-- Second q-card-section -->
               <q-card-section class="col-6">
                 <div class="q-pa-md">
-                  <div>
-                    <span>Already have an account?</span>
-                  </div>
                   <br />
                   <div>
                     <q-input
@@ -75,6 +82,9 @@
                       class="full-width q-mb-sm"
                       @click="onSubmit"
                     />
+                    <div>
+                      <span>Already have an account?</span>
+                    </div>
                     <q-btn
                       @click="staffLogin"
                       color="primary"

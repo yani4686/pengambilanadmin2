@@ -52,7 +52,7 @@
                     <div class="row q-pa-md">
                       <!-- Loop through quickLinkIcons -->
                       <div
-                        v-for="(icon, index) in quickLinkIcons"
+                        v-for="(icon, index) in quickLinksIcons"
                         :key="index"
                         class="col-4 text-center"
                       >
@@ -104,17 +104,57 @@
               </q-item>
               <!-- <q-btn flat round dense icon="gamepad" /> -->
               <q-item>
-                <a
+                <!-- <a
                   href="#"
                   class="dropdown-toggle nav-link pr-0"
                   aria-expanded="false"
-                >
-                  <q-icon
-                    name="app_shortcut"
-                    title="Klik di sini untuk Pautan Pantas"
-                    style="font-size: 18px; color: #ffc000; margin: 0"
-                  />
-                </a>
+                > -->
+                <q-icon
+                  name="app_shortcut"
+                  title="Klik di sini untuk Pautan Pantas"
+                  style="font-size: 18px; color: #ffc000; margin: 0"
+                />
+                <q-menu>
+                  <q-list style="min-width: 400px">
+                    <p class="text-center q-pt-md text-bold">QUICKLINK</p>
+                    <div class="row q-pa-md">
+                      <!-- Loop through quickLinkIcons -->
+                      <q-avatar size="sm">
+                        <img src="images/assesment.png" alt="icon" />
+                        <q-tooltip> Assesment </q-tooltip>
+                      </q-avatar>
+                      <q-avatar size="sm" class="q-ml-lg">
+                        <img src="images/dci.png" alt="icon" />
+                        <q-tooltip>DCI</q-tooltip>
+                      </q-avatar>
+                      <q-avatar size="sm" class="q-ml-lg">
+                        <img src="images/supervision.png" alt="icon" />
+                        <q-tooltip> Supervision</q-tooltip>
+                      </q-avatar>
+                      <q-avatar size="sm" class="q-ml-lg">
+                        <img src="images/intern.png" alt="icon" />
+                        <q-tooltip> LI </q-tooltip>
+                      </q-avatar>
+                      <q-avatar size="sm" class="q-ml-lg">
+                        <img src="images/course-structure.png" alt="icon" />
+                        <q-tooltip> Course Structure </q-tooltip>
+                      </q-avatar>
+                      <q-avatar size="sm" class="q-ml-lg">
+                        <img src="images/u-time.png" alt="icon" />
+                        <q-tooltip> U-Time </q-tooltip>
+                      </q-avatar>
+                      <q-avatar size="sm" class="q-ml-lg">
+                        <img src="images/OBE-icon.png" alt="icon" />
+                        <q-tooltip> OBE </q-tooltip>
+                      </q-avatar>
+                      <q-avatar size="sm" class="q-ml-lg">
+                        <img src="images/SPB-icon.png" alt="icon" />
+                        <q-tooltip> SPB </q-tooltip>
+                      </q-avatar>
+                    </div>
+                  </q-list>
+                </q-menu>
+                <!-- </a> -->
               </q-item>
               <q-item>
                 <a href="https://portal.unisza.edu.my/aduan" target="_blank">
