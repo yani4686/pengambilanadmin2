@@ -20,6 +20,7 @@
     "chart.js": "^4.4.4",
     "jspdf": "^2.5.2",
     "jspdf-autotable": "^3.8.3",
+    "lottie-web": "^5.12.2",
     "pinia": "^2.2.11",
     "quasar": "^2.16.0",
     "vue": "^3.4.18",

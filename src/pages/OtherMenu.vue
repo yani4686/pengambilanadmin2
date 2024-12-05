@@ -5,7 +5,11 @@
       <div class="cards-container q-pa-sm">
         <q-card class="feature-card">
           <q-card-section class="card-content">
-            <img src="~/assets/D6.png" class="icon-left" />
+            <img
+              src="~/assets/program.png"
+              class="icon-left"
+              style="width: 30px; height: 30px"
+            />
             <div class="card-text">
               <div class="text-subtitle2">Total Program</div>
               <div class="text-h5">100</div>
@@ -15,7 +19,11 @@
 
         <q-card class="feature-card">
           <q-card-section class="card-content">
-            <img src="~/assets/D7.png" class="icon-left" />
+            <img
+              src="~/assets/student.png"
+              class="icon-left"
+              style="width: 30px; height: 30px"
+            />
             <div class="card-text">
               <div class="text-subtitle2">Total Active Student</div>
               <div class="text-h5">1,294</div>
@@ -25,7 +33,11 @@
 
         <q-card class="feature-card">
           <q-card-section class="card-content">
-            <img src="~/assets/D8.png" class="icon-left" />
+            <img
+              src="~/assets/visitors.png"
+              class="icon-left"
+              style="width: 30px; height: 30px"
+            />
             <div class="card-text">
               <div class="text-subtitle2">Visitors</div>
               <div class="text-h5">1,294</div>
@@ -35,7 +47,11 @@
 
         <q-card class="feature-card">
           <q-card-section class="card-content">
-            <img src="~/assets/D9.png" class="icon-left" />
+            <img
+              src="~/assets/visitors.png"
+              class="icon-left"
+              style="width: 30px; height: 30px"
+            />
             <div class="card-text">
               <div class="text-subtitle2">Total Visitors</div>
               <div class="text-h5">1,294</div>
