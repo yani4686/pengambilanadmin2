@@ -140,11 +140,11 @@
 
           <!-- Date -->
           <div class="row">
-            <div class="col-12 col-sm-3">
+            <!-- <div class="col-12 col-sm-3">
               <label class="col-form-label" style="margin-left: 20px"
                 >Date<span style="color: red">*</span></label
               >
-            </div>
+            </div> -->
 
             <div class="col-12 col-sm-9">
               <q-input
@@ -155,38 +155,16 @@
                 style="margin: 0 12px; margin-bottom: auto"
                 @blur="formatDate(form.date)"
               />
-              <!-- <q-input v-model="date" filled type="date" hint="Native date" /> -->
-              <!-- <template v-slot:>
-                  <q-icon name="event" class="cursor-pointer">
-                    <q-popup-proxy
-                      cover
-                      transition-show="scale"
-                      transition-hide="scale"
-                    >
-                      <q-date v-model="form.date" @input="formatDate">
-                        <div class="row items-center justify-end">
-                          <q-btn
-                            v-close-popup
-                            label="Close"
-                            color="primary"
-                            flat
-                          />
-                        </div>
-                      </q-date>
-                    </q-popup-proxy>
-                  </q-icon>
-                </template>
-              </q-input> -->
             </div>
           </div>
 
           <!-- radio button -->
           <div class="row q-gutter-none">
-            <div class="col-sm-3">
+            <!-- <div class="col-sm-3">
               <label class="col-form-label" style="margin-left: 20px"
                 >Radio Button<span style="color: red">*</span></label
               >
-            </div>
+            </div> -->
             <div class="col-12 col-sm-9">
               <q-radio
                 v-model="form.radioButton"
@@ -217,11 +195,11 @@
 
           <!-- checkbox button -->
           <div class="row q-pt-lg">
-            <div class="col-sm-3">
+            <!-- <div class="col-sm-3">
               <label class="col-form-label" style="margin-left: 20px"
                 >Checkbox Button<span style="color: red">*</span></label
               >
-            </div>
+            </div> -->
             <div class="col-12 col-sm-9">
               <q-checkbox
                 v-model="form.CheckboxButton"
@@ -254,17 +232,18 @@
           <br />
           <!-- Date -->
           <div class="row">
-            <div class="col-12 col-sm-3">
+            <!-- <div class="col-12 col-sm-3">
               <label class="col-form-label" style="margin-left: 20px"
                 >Upload Files<span style="color: red">*</span></label
               >
-            </div>
+            </div> -->
 
             <div class="col-12 col-sm-9">
               <q-file
                 ref="step2Ref"
                 color="blue"
                 v-model="form.files"
+                label="Upload Files"
                 outlined
                 multiple
                 dense
