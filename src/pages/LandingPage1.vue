@@ -2,7 +2,7 @@
   <q-card>
     <q-page>
       <!-- Mega Menu -->
-      <q-card-section>
+      <!-- <q-card-section>
         <div class="row responsive-layout">
           <div class="col">
             <div class="icon-menu">
@@ -11,57 +11,53 @@
                   <img src="images/assesment.png" alt="icon" />
                   <q-tooltip> Assesment </q-tooltip>
                 </q-avatar>
-                <!--------------------->
+
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/dci.png" alt="icon" />
                   <q-tooltip>DCI</q-tooltip>
                 </q-avatar>
-                <!--------------------->
+
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/supervision.png" alt="icon" />
                   <q-tooltip> Supervision</q-tooltip>
                 </q-avatar>
-                <!--------------------->
+
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/intern.png" alt="icon" />
                   <q-tooltip> LI </q-tooltip>
                 </q-avatar>
-                <!--------------------->
+
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/course-structure.png" alt="icon" />
                   <q-tooltip> Course Structure </q-tooltip>
                 </q-avatar>
-                <!--------------------->
+
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/u-time.png" alt="icon" />
                   <q-tooltip> U-Time </q-tooltip>
                 </q-avatar>
-                <!--------------------->
+
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/OBE-icon.png" alt="icon" />
                   <q-tooltip> OBE </q-tooltip>
                 </q-avatar>
-                <!--------------------->
+
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/SPB-icon.png" alt="icon" />
                   <q-tooltip> SPB </q-tooltip>
                 </q-avatar>
-                <!--------------------->
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/muet-and-cefr.png" alt="icon" />
                   <q-tooltip>MUET & CEFR </q-tooltip>
                 </q-avatar>
-                <!--------------------->
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/lecturer-info.png" alt="icon" />
                   <q-tooltip> Lecturer Info </q-tooltip>
                 </q-avatar>
-                <!--------------------->
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/program-info.png" alt="icon" />
                   <q-tooltip> Program Info </q-tooltip>
                 </q-avatar>
-                <!--------------------->
                 <q-avatar size="md" class="q-ml-xl">
                   <img src="images/kalendar-akademik.png" alt="icon" />
                   <q-tooltip> Kalendar Akademik </q-tooltip>
@@ -70,7 +66,7 @@
             </div>
           </div>
         </div>
-      </q-card-section>
+      </q-card-section> -->
 
       <!-- <q-card class="main-card"> -->
       <div class="row responsive-layout">
@@ -85,7 +81,7 @@
                 <div class="col-auto">
                   <q-icon
                     name="school"
-                    size="40px"
+                    size="30px"
                     class="q-mb-sm q-ml-none"
                     color="white"
                   />
@@ -105,7 +101,7 @@
                 <div class="col-auto">
                   <q-icon
                     name="cast_for_education"
-                    size="40px"
+                    size="30px"
                     class="q-mb-sm q-ml-none"
                     color="white"
                   />
@@ -125,7 +121,7 @@
                 <div class="col-auto">
                   <q-icon
                     name="business"
-                    size="40px"
+                    size="30px"
                     class="q-mb-sm q-ml-none"
                     color="white"
                   />
@@ -145,7 +141,7 @@
                 <div class="col-auto">
                   <q-icon
                     name="download"
-                    size="40px"
+                    size="30px"
                     class="q-mb-sm q-ml-none"
                     color="white"
                   />

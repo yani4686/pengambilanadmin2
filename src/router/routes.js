@@ -154,6 +154,11 @@ const routes = [
         meta: { hideDrawer: false, hideRoleSelection: true },
       },
       {
+        path: "form2",
+        component: () => import("pages/FormPage2.vue"),
+        meta: { hideDrawer: false, hideRoleSelection: true },
+      },
+      {
         path: "chart",
         component: () => import("pages/ChartPage.vue"),
         meta: { hideDrawer: false, hideRoleSelection: true },
