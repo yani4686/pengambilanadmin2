@@ -1345,6 +1345,7 @@ body {
   font-size: 16px;
   margin: 0 0 7px 0;
   font-weight: 500;
+  background-color: rgb(217, 226, 43);
 }
 hr {
   margin-left: 14px;
