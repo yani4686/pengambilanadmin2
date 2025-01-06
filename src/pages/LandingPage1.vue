@@ -75,7 +75,7 @@
           <div class="icon-cards q-gutter-xs flex-center">
             <q-card-section
               style="background-color: indigo; width: 220px; height: 70px"
-              class="q-mt-sm"
+              class="q-mt-sm fourcard"
             >
               <div class="row">
                 <div class="col-auto">
@@ -95,7 +95,7 @@
 
             <q-card-section
               style="background-color: slateblue; width: 220px; height: 70px"
-              class="q-mt-sm"
+              class="q-mt-sm fourcard"
             >
               <div class="row">
                 <div class="col-auto">
@@ -115,7 +115,7 @@
 
             <q-card-section
               style="background-color: purple; width: 220px; height: 70px"
-              class="q-mt-sm"
+              class="q-mt-sm fourcard"
             >
               <div class="row">
                 <div class="col-auto">
@@ -135,7 +135,7 @@
 
             <q-card-section
               style="background-color: seagreen; width: 220px; height: 70px"
-              class="q-mt-sm"
+              class="q-mt-sm fourcard"
             >
               <div class="row">
                 <div class="col-auto">
@@ -729,6 +729,11 @@ export default {
 </script>
 
 <style scoped>
+/* .fourcard {
+  border: 1px solid gainsboro;
+  border-radius: 10px;
+  box-shadow: 5px 5px rgb(66, 51, 51);
+} */
 .main-card {
   height: 100vh;
   position: relative;

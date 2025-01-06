@@ -377,6 +377,33 @@
               </q-list>
             </q-expansion-item>
 
+            <!-- Form Menu with Submenu -->
+            <q-expansion-item
+              style="color: white"
+              icon="assignment_add"
+              label="Form"
+              expand-separator
+            >
+              <q-list class="submenu">
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/dashboard/form" style="color: white">Form 1</a>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/dashboard/form2" style="color: white"
+                        >Form 2</a
+                      >
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-expansion-item>
+
             <!-- Other Menus -->
             <NavLink
               style="color: white"
@@ -590,11 +617,6 @@ export default {
     //------------------------------------------------- Sidebar Menu ---------------------------------------------
 
     const linksList = [
-      {
-        title: "Forms",
-        icon: "assignment_add",
-        link: "#/dashboard/form",
-      },
       {
         title: "Tables",
         icon: "table_chart",

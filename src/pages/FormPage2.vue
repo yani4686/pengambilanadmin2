@@ -4,267 +4,164 @@
       <!------------------- Section A - First Card Horizontal Form (one-column) ---------------------->
       <div class="row">
         <q-card class="col-12">
-          <q-card-section class="card-title"
-            >Horizontal Form
+          <q-card-section class="card-title">
+            Example Form
             <span style="color: crimson; font-size: small"
-              >(one-column)</span
+              >(with API)</span
             ></q-card-section
           >
+          <div class="row q-gutter">
+            <q-card class="col-12 q-pa-sm q-mx-sm">
+              <p>CHECK DETAIL</p>
+              <!-- <q-card-section class="card-title"> Example Form </q-card-section> -->
+              <div class="row q-gutter">
+                <div class="col-12">
+                  <q-select
+                    class="q-mb-sm"
+                    v-model="input.session"
+                    :options="sessionOptions"
+                    label="Session"
+                    option-label="sessionname2"
+                    option-value="session"
+                    outlined
+                    dense
+                  />
+                </div>
+              </div>
 
-          <!-- Input type text -->
-          <div class="row q-gutter-none q-mt-lg">
-            <!-- <div class="col-12 col-sm-3">
-              <label class="col-form-label q-mb-none" style="margin-left: 20px"
-                >Input Text <span style="color: red">*</span></label
-              >
-            </div> -->
-            <div class="col-12 col-sm-9">
-              <q-input
-                color="blue"
-                v-model="form.inputtext1"
-                label="Input Text"
-                outlined
-                dense
-                :rules="[(val) => !!val || 'This is required']"
-                required
-                style="margin: 0 12px"
-              />
-            </div>
+              <div class="row q-gutter">
+                <div class="col-12">
+                  <!-- tahap pengajian selection -->
+                  <q-select
+                    class="q-mb-sm"
+                    v-model="input.levelstudy"
+                    :options="levelstudyOptions"
+                    label="Level of Study"
+                    option-label="a024bnjkprog"
+                    option-value="a024bjkprog"
+                    outlined
+                    dense
+                  />
+                </div>
+              </div>
+
+              <div class="row q-gutter">
+                <div class="col-12">
+                  <!-- Kod Program -->
+                  <q-select
+                    class="q-mb-sm"
+                    v-model="input.programcode"
+                    :options="programcodeOptions"
+                    label="Program Code"
+                    option-label="y005namaprog"
+                    option-value="a006kprog"
+                    outlined
+                    dense
+                    :disable="!input.session || !input.levelstudy"
+                  >
+                  </q-select>
+                </div>
+              </div>
+
+              <div class="row q-gutter">
+                <div class="col-12">
+                  <!--Semester -->
+                  <q-select
+                    class="q-mb-sm"
+                    v-model="input.semester"
+                    :options="semesterOptions"
+                    label="Semester"
+                    option-label="sem"
+                    option-value="sem"
+                    outlined
+                    dense
+                    :disable="
+                      !input.session || !input.levelstudy || !input.programcode
+                    "
+                  />
+                </div>
+              </div>
+
+              <div class="row q-gutter">
+                <div class="col-12">
+                  <!-- number -->
+                  <q-input
+                    class="q-mb-sm"
+                    v-model="input.number"
+                    label="Number of Student"
+                    outlined
+                    dense
+                    readonly
+                  />
+                </div>
+              </div>
+
+              <div class="row q-gutter">
+                <div class="col-12">
+                  <!-- Programme Name -->
+                  <q-input
+                    class="q-mb-sm"
+                    v-model="input.progstudy"
+                    label="Program Study"
+                    outlined
+                    dense
+                  />
+                </div>
+              </div>
+
+              <div class="row q-gutter">
+                <div class="col-12">
+                  <!-- faculty Name -->
+                  <q-input
+                    class="q-mb-sm"
+                    v-model="input.facstudy"
+                    label="Faculty of Studies"
+                    outlined
+                    dense
+                  />
+                </div>
+              </div>
+
+              <div class="row q-gutter">
+                <div class="col-12">
+                  <!-- Programme Name -->
+                  <q-input
+                    class="q-mb-sm"
+                    v-model="input.progname"
+                    label="Programme Name"
+                    outlined
+                    dense
+                  />
+                </div>
+              </div>
+
+              <div class="row q-gutter">
+                <div class="col-12">
+                  <!-- faculty Name -->
+                  <q-input
+                    class="q-mb-sm"
+                    v-model="input.facname"
+                    label="Faculty Name"
+                    outlined
+                    dense
+                    @focus="askConfirmation"
+                  />
+                </div>
+              </div>
+              <!-- Submit button -->
+              <q-card-actions align="right" class="submit-button">
+                <q-btn
+                  label="Submit"
+                  type="submit"
+                  color="primary"
+                  class="q-mr-sm submitbutton"
+                  size="md"
+                  @click="Submit()"
+                />
+                <!-- <q-btn label="Submit" type="submit" color="primary" /> -->
+              </q-card-actions>
+            </q-card>
           </div>
-
-          <!-- Input type Textarea -->
-          <div class="row q-gutter-none">
-            <!-- <div class="col-12 col-sm-3">
-              <label class="col-form-label q-mb-none" style="margin-left: 20px"
-                >Input Textarea<span style="color: red">*</span></label
-              >
-            </div> -->
-
-            <div class="col-12 col-sm-9">
-              <q-input
-                color="blue"
-                type="textarea"
-                v-model="form.inputtextarea"
-                label="Input Textarea"
-                outlined
-                dense
-                :rules="[(val) => !!val || 'Name is required']"
-                style="margin: 0 12px"
-              />
-            </div>
-          </div>
-          <!------ Text Editor WYSIWYG ------------->
-          <div class="row q-gutter-none">
-            <!-- <div class="col-12 col-sm-3">
-              <label class="col-form-label q-mb-none" style="margin-left: 20px"
-                >Input Text Editor<span style="color: red">*</span></label
-              >
-            </div> -->
-            <div class="col-12 col-sm-9 q-mb-lg">
-              <q-editor v-model="editor" style="margin: 0 12px" />
-            </div>
-          </div>
-
-          <!-- Dropdown Single select -->
-          <div class="row q-gutter-none">
-            <!-- <div class="col-12 col-sm-3">
-              <label class="col-form-label q-mb-none" style="margin-left: 20px"
-                >Single Dropdown<span style="color: red">*</span></label
-              >
-            </div> -->
-            <div class="col-12 col-sm-9">
-              <q-select
-                color="blue"
-                v-model="form.singleDropdown"
-                :options="singleDropdownOptions"
-                label="Single Dropdown"
-                outlined
-                dense
-                :rules="[(val) => !!val || 'Program is required']"
-                required
-                style="margin: 0 12px"
-              />
-            </div>
-          </div>
-
-          <!-- Dropdown Multiple select -->
-          <div class="row q-gutter-none">
-            <!-- <div class="col-12 col-sm-3">
-              <label class="col-form-label" style="margin-left: 20px"
-                >Multiple Dropdown<span style="color: red">*</span></label
-              >
-            </div> -->
-            <div class="col-12 col-sm-9">
-              <q-select
-                color="blue"
-                v-model="form.multiplechoice"
-                :options="multipleDropdownOption"
-                label="Multiple Dropdown"
-                outlined
-                dense
-                multiple
-                :rules="[(val) => !!val || 'Program is required']"
-                required
-                style="margin: 0 12px"
-                clearable
-              />
-            </div>
-          </div>
-
-          <!-- Filtering Dropdown -->
-          <div class="row">
-            <!-- <div class="col-12 col-sm-3">
-              <label class="col-form-label" style="margin-left: 20px"
-                >Filtering Dropdown<span style="color: red">*</span></label
-              >
-            </div> -->
-
-            <div class="col-12 col-sm-9">
-              <q-select
-                color="blue"
-                outlined
-                dense
-                :rules="[(val) => !!val || 'This is required']"
-                required
-                style="margin: 0 12px"
-                v-model="model"
-                use-input
-                input-debounce="0"
-                label="Filtering Dropdown"
-                :options="options"
-                @filter="filterFn"
-                clearable
-              />
-            </div>
-          </div>
-
-          <!-- Date -->
-          <div class="row">
-            <!-- <div class="col-12 col-sm-3">
-              <label class="col-form-label" style="margin-left: 20px"
-                >Date<span style="color: red">*</span></label
-              >
-            </div> -->
-
-            <div class="col-12 col-sm-9">
-              <q-input
-                v-model="form.date"
-                outlined
-                dense
-                label="dd-mm-yyyy"
-                style="margin: 0 12px; margin-bottom: auto"
-                @blur="formatDate(form.date)"
-              />
-            </div>
-          </div>
-
-          <!-- radio button -->
-          <div class="row q-gutter-none">
-            <!-- <div class="col-sm-3">
-              <label class="col-form-label" style="margin-left: 20px"
-                >Radio Button<span style="color: red">*</span></label
-              >
-            </div> -->
-            <div class="col-12 col-sm-9">
-              <q-radio
-                v-model="form.radioButton"
-                label="Option 1"
-                val="opt1"
-                name="radioButton"
-                size="xs"
-                style="margin-left: 5px"
-              />
-              <q-radio
-                v-model="form.radioButton"
-                label="Option 2"
-                val="opt2"
-                name="radioButton"
-                size="xs"
-                style="margin-left: 20px"
-              />
-              <q-radio
-                v-model="form.radioButton"
-                label="Option 3"
-                val="opt3"
-                name="radioButton"
-                size="xs"
-                style="margin-left: 20px"
-              />
-            </div>
-          </div>
-
-          <!-- checkbox button -->
-          <div class="row q-pt-lg">
-            <!-- <div class="col-sm-3">
-              <label class="col-form-label" style="margin-left: 20px"
-                >Checkbox Button<span style="color: red">*</span></label
-              >
-            </div> -->
-            <div class="col-12 col-sm-9">
-              <q-checkbox
-                v-model="form.CheckboxButton"
-                label="Option A"
-                val="optA"
-                name="CheckboxButton"
-                size="xs"
-                style="margin-left: 5px"
-              />
-              <q-checkbox
-                v-model="form.CheckboxButton"
-                label="Option B"
-                val="optB"
-                name="CheckboxButton"
-                size="xs"
-                style="margin-left: 20px"
-              />
-              <q-checkbox
-                v-model="form.CheckboxButton"
-                label="Option C"
-                val="optC"
-                name="CheckboxButton"
-                size="xs"
-                style="margin-left: 20px"
-              />
-            </div>
-          </div>
-          <br />
-          <hr />
-          <br />
-          <!-- Date -->
-          <div class="row">
-            <!-- <div class="col-12 col-sm-3">
-              <label class="col-form-label" style="margin-left: 20px"
-                >Upload Files<span style="color: red">*</span></label
-              >
-            </div> -->
-
-            <div class="col-12 col-sm-9">
-              <q-file
-                ref="step2Ref"
-                color="blue"
-                v-model="form.files"
-                label="Upload Files"
-                outlined
-                multiple
-                dense
-                :rules="[(val) => !!val || 'Evidence is required']"
-                required
-                style="margin: 0 12px"
-              />
-            </div>
-          </div>
-          <!-- Submit button -->
-          <q-card-actions align="right" class="submit-button">
-            <q-btn
-              label="Submit"
-              type="submit"
-              color="primary"
-              class="q-mr-sm submitbutton"
-              size="md"
-              @click="Submit()"
-            />
-            <!-- <q-btn label="Submit" type="submit" color="primary" /> -->
-          </q-card-actions>
         </q-card>
       </div>
     </q-form>
@@ -273,129 +170,342 @@
 
 <script>
 import { ref } from "vue";
+import { api } from "src/boot/axios";
+import { onMounted } from "vue";
+import { md5 } from "js-md5";
 
 export default {
-  setup() {
-    const editor = ref([]);
-    const stringOptions = ["Google", "Facebook", "Twitter", "Apple", "Oracle"];
+  data() {
+    return {
+      input: {
+        nopel: "",
+        kodprogram: "",
+        session: "",
+        levelstudy: "",
+        programcode: "",
+        semester: "",
+        facname: "",
+      },
+      showConfirmation: false, // Controls the confirmation dialog visibility
+      // sessions: [], // To store session options
+      nopelError: "",
+      kodProgramLoading: false,
+      isVisible: this.visible,
+      sessionOptions: [], // Store fetched session options
+      levelstudyOptions: [], // Store level study options
+      programcodeOptions: [], // Store program code options
+      semesterOptions: [],
+    };
+  },
+  watch: {
+    "input.session"(newVal) {
+      console.log("Session changed to:", newVal);
+      this.fetchProgramCode();
+    },
+    "input.levelstudy"(newVal) {
+      console.log("Level study changed to:", newVal);
+      this.fetchProgramCode();
+    },
+    "input.semester"(newVal) {
+      console.log("Semester changed:", newVal);
+      if (newVal) {
+        this.fetchNumber();
+        this.fetchprogstud();
+      }
+    },
+    "input.programcode"(newVal) {
+      console.log("Program code changed:", newVal);
+      if (newVal) {
+        this.fetchSemester();
+      }
+    },
+    visible(newVal) {
+      this.isVisible = newVal;
+    },
+    isVisible(newVal) {
+      this.$emit("update:visible", newVal);
+    },
+    // Watch for changes in session and levelstudy
+    "input.session": "fetchProgramCode",
+    "input.levelstudy": "fetchProgramCode",
+  },
+  mounted() {
+    this.fetchSessions();
+    this.fetchLevelStudy();
+    this.fetchProgramCode();
+    this.fetchSemester();
+    this.fetchNumber();
+    this.fetchprogstud();
+  },
+  methods: {
+    fetchSessions() {
+      let mdate = new Date();
+      // console.log(mdate);
+      // Ensure day and month are always two digits (with leading zeros if needed)
+      let day = mdate.getDate().toString().padStart(2, "0");
+      let month = (mdate.getMonth() + 1).toString().padStart(2, "0");
+      let year = mdate.getFullYear().toString();
 
-    const color = ref("cyan");
-    const form = ref({
-      inputtext1: "",
-      inputtextarea: "",
-      singleDropdown: "",
-      multiplechoice: [],
-      date: "",
-      radioButton: "",
-      CheckboxButton: "",
-      inputtext2: "",
-      coreStrategic: "",
-      strategicExecution: "",
-      initiativeName: "",
-      balancedScoreCard: "",
-      expectedOutcome: "",
-      quarter: "",
-      selection: "",
-      step: 1,
-      step1: "",
-      step2: "",
-      step3: "",
-    });
+      let token = md5(day + month + year);
+      // console.log(token);
 
-    const model = ref(null);
-    const options = ref([]);
-    const files = ref(null);
-    const singleDropdownOptions = ["Option 1", "Option 2", "Option 3"];
-    const multipleDropdownOption = ["Card 1", "Card 2", "Card 3"];
-    const dataOptions = [
-      "Form Checkbox checked",
-      "Toggle this switch element",
-      "Small Size Switch",
-      "Form Large input",
-      "Form Radios Right",
-      "Horizontal form",
-    ];
-    const filteredDataOptions = ref([
-      "Google",
-      "Facebook",
-      "Twitter",
-      "Apple",
-      "Oracle",
-    ]);
+      api.get("/v2/get-academic-session?token=" + token).then((res) => {
+        console.log(res);
+        if (res.data.status == "success") {
+          this.sessionOptions = res.data.data;
+        } else {
+          this.sessionOptions = [];
+          console.warn("No data available");
+        }
+      });
+    },
+    fetchLevelStudy() {
+      let mdate = new Date();
+      // console.log(mdate);
+      // Ensure day and month are always two digits (with leading zeros if needed)
+      let day = mdate.getDate().toString().padStart(2, "0");
+      let month = (mdate.getMonth() + 1).toString().padStart(2, "0");
+      let year = mdate.getFullYear().toString();
+      let token = md5(day + month + year);
 
-    const filterFn = (val, update) => {
-      if (val === "") {
-        update(() => {
-          options.value = stringOptions; // Restore full options when input is empty
-        });
+      api.get("/academic/get-levelstudy?token=" + token).then((res) => {
+        if (res.data.status == "success") {
+          this.levelstudyOptions = res.data.data;
+        } else {
+          this.levelstudyOptions = [];
+          console.warn("No data available");
+        }
+      });
+    },
+
+    fetchProgramCode() {
+      if (!this.input.session.session || !this.input.levelstudy.a024bjkprog) {
+        this.programcodeOptions = []; // Clear program options if session/levelstudy is not selected
         return;
       }
 
-      const needle = val.toLowerCase();
-      update(() => {
-        options.value = stringOptions.filter((v) =>
-          v.toLowerCase().includes(needle)
-        );
-      });
-    };
+      let mdate = new Date();
+      // console.log(mdate);
+      // Ensure day and month are always two digits (with leading zeros if needed)
+      let day = mdate.getDate().toString().padStart(2, "0");
+      let month = (mdate.getMonth() + 1).toString().padStart(2, "0");
+      let year = mdate.getFullYear().toString();
+      let tokendate = day + month + year;
 
-    const onContinueStep = () => {
-      switch (form.value.step) {
-        case 1:
-          // Add validation logic here
-          form.value.step++;
-          break;
-        case 2:
-          form.value.step++;
-          break;
-        case 3:
-          alert(
-            `Form submitted with values: ${form.value.step1} - ${form.value.step2} - ${form.value.step3}`
-          );
-          break;
+      const token = md5(
+        this.input.session.session +
+          this.input.levelstudy.a024bjkprog +
+          tokendate
+      );
+
+      api
+        .get(
+          "/academic/get-programcode?token=" +
+            token +
+            "&session=" +
+            this.input.session.session +
+            "&levelstudy=" +
+            this.input.levelstudy.a024bjkprog
+        )
+        .then((res) => {
+          console.log(res);
+          // console.log("Program Code:", res.data.data);
+          if (res.data.status == "success") {
+            this.programcodeOptions = res.data.data;
+          } else {
+            this.programcodeOptions = [];
+            console.warn("No data available");
+          }
+        });
+    },
+
+    fetchSemester() {
+      // console.log("Session:", this.input.session);
+      // console.log("Level Study:", this.input.levelstudy);
+      // console.log("Program Code:", this.input.programcode.A006KPROG);
+
+      if (
+        !this.input.session.session ||
+        !this.input.levelstudy.a024bjkprog ||
+        !this.input.programcode.a006kprog
+      ) {
+        // console.warn("Missing required fields for fetching semester!");
+        this.semesterOptions = []; // Clear program options if session/levelstudy is not selected
+        return;
       }
-    };
 
-    const onBackStep = () => {
-      if (form.value.step > 1) {
-        form.value.step--;
+      let mdate = new Date();
+      // console.log(mdate);
+      // Ensure day and month are always two digits (with leading zeros if needed)
+      let day = mdate.getDate().toString().padStart(2, "0");
+      let month = (mdate.getMonth() + 1).toString().padStart(2, "0");
+      let year = mdate.getFullYear().toString();
+      let tokendate = day + month + year;
+
+      const token = md5(
+        this.input.session.session +
+          this.input.levelstudy.a024bjkprog +
+          this.input.programcode.a006kprog +
+          tokendate
+      );
+
+      api
+        .get(
+          "/academic/get-semester?token=" +
+            token +
+            "&session=" +
+            this.input.session.session +
+            "&levelstudy=" +
+            this.input.levelstudy.a024bjkprog +
+            "&kprog=" +
+            this.input.programcode.a006kprog
+        )
+        .then((res) => {
+          console.log(res);
+          console.log("sem:", res.data.data);
+          if (res.data.status == "success") {
+            this.semesterOptions = res.data.data;
+            // Add "All Sem" option at the end of the array
+            this.semesterOptions.push({
+              sem: "All",
+            });
+          } else {
+            this.semesterOptions = [];
+            console.warn("No data available");
+          }
+        });
+    },
+
+    fetchNumber() {
+      if (
+        !this.input.session.session ||
+        !this.input.levelstudy.a024bjkprog ||
+        !this.input.programcode.a006kprog ||
+        !this.input.semester.sem
+      ) {
+        this.input.number = ""; // Clear the number field if required values are missing
+        return;
       }
-    };
 
-    const submitForm = () => {
-      // Handle form submission
-      console.log("Form Submitted", form.value);
-    };
+      // Generate token based on inputs
+      let mdate = new Date();
+      // console.log(mdate);
+      // Ensure day and month are always two digits (with leading zeros if needed)
+      let day = mdate.getDate().toString().padStart(2, "0");
+      let month = (mdate.getMonth() + 1).toString().padStart(2, "0");
+      let year = mdate.getFullYear().toString();
+      let tokendate = day + month + year;
 
-    const formatDate = (date) => {
-      // Convert to a Date object if not already
-      const formattedDate = new Date(date);
+      const token = md5(
+        this.input.session.session +
+          this.input.levelstudy.a024bjkprog +
+          this.input.programcode.a006kprog +
+          this.input.semester.sem +
+          tokendate
+      );
 
-      // Format the date to "day-month-year" (dd-mm-yyyy)
-      const day = String(formattedDate.getDate()).padStart(2, "0");
-      const month = String(formattedDate.getMonth() + 1).padStart(2, "0"); // getMonth() returns 0-11
-      const year = formattedDate.getFullYear();
+      // API call to fetch the number based on selected inputs
+      api
+        .get(
+          "/academic/get-number?token=" +
+            token +
+            "&session=" +
+            this.input.session.session +
+            "&levelstudy=" +
+            this.input.levelstudy.a024bjkprog +
+            "&kprog=" +
+            this.input.programcode.a006kprog +
+            "&semester=" +
+            this.input.semester.sem
+        )
+        .then((res) => {
+          console.log(res);
+          console.log("no student:", res.data.data[0].count);
+          if (res.data.status === "success") {
+            this.input.number = res.data.data[0].count; // Set the fetched number
+          } else {
+            this.input.number = "";
+            console.warn("No number available for the selected options.");
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching number:", err);
+          this.input.number = "";
+        });
+    },
+    fetchprogstud() {
+      if (
+        !this.input.session.session ||
+        !this.input.levelstudy.a024bjkprog ||
+        !this.input.programcode.a006kprog ||
+        !this.input.semester.sem
+      ) {
+        this.input.progstudy = ""; // Clear the number field if required values are missing
+        this.input.facstudy = "";
+        this.input.progname = "";
+        this.input.facname = "";
+        return;
+      }
 
-      // Update the model with the formatted date
-      form.value.date = `${day}-${month}-${year}`;
-    };
-    return {
-      color,
-      form,
-      editor,
-      model,
-      options,
-      filterFn,
-      files,
-      singleDropdownOptions,
-      multipleDropdownOption,
-      dataOptions,
-      filteredDataOptions,
-      onContinueStep,
-      onBackStep,
-      submitForm,
-      formatDate,
-    };
+      let mdate = new Date();
+      // console.log(mdate);
+      // Ensure day and month are always two digits (with leading zeros if needed)
+      let day = mdate.getDate().toString().padStart(2, "0");
+      let month = (mdate.getMonth() + 1).toString().padStart(2, "0");
+      let year = mdate.getFullYear().toString();
+      let tokendate = day + month + year;
+
+      const token = md5(
+        this.input.session.session +
+          this.input.levelstudy.a024bjkprog +
+          this.input.programcode.a006kprog +
+          this.input.semester.sem +
+          tokendate
+      );
+
+      // API call to fetch the number based on selected inputs
+      api
+        .get(
+          "/academic/get-progdetail?token=" +
+            token +
+            "&session=" +
+            this.input.session.session +
+            "&levelstudy=" +
+            this.input.levelstudy.a024bjkprog +
+            "&kprog=" +
+            this.input.programcode.a006kprog +
+            "&semester=" +
+            this.input.semester.sem
+        )
+        .then((res) => {
+          console.log(res);
+          console.log("detail:", res.data.data);
+          if (res.data.status === "success") {
+            this.input.progstudy = res.data.data[0].progstudy;
+            this.input.facstudy = res.data.data[0].facstudy;
+            this.input.progname = res.data.data[0].progname;
+            this.input.facname = res.data.data[0].facname; // Set the fetched number
+          } else {
+            this.input.progstudy = "";
+            this.input.facstudy = "";
+            this.input.progname = "";
+            this.input.facname = "";
+            console.warn("No data.");
+          }
+        })
+        .catch((err) => {
+          console.error("Error fetching number:", err);
+          this.input.number = "";
+        });
+    },
+
+    askConfirmation() {
+      this.showConfirmation = true; // Show the confirmation dialog
+    },
+    confirmProcess() {
+      this.showConfirmation = false; // Hide the dialog
+      this.runProcessFunction(); // Call the desired function
+    },
   },
 };
 </script>

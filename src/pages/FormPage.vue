@@ -26,7 +26,6 @@
                 outlined
                 dense
                 :rules="[(val) => !!val || 'This is required']"
-                required
                 style="margin: 0 12px"
               />
             </div>
@@ -79,7 +78,6 @@
                 outlined
                 dense
                 :rules="[(val) => !!val || 'Program is required']"
-                required
                 style="margin: 0 12px"
               />
             </div>
@@ -101,7 +99,6 @@
                 dense
                 multiple
                 :rules="[(val) => !!val || 'Program is required']"
-                required
                 style="margin: 0 12px"
                 clearable
               />
@@ -122,7 +119,6 @@
                 outlined
                 dense
                 :rules="[(val) => !!val || 'This is required']"
-                required
                 style="margin: 0 12px"
                 v-model="model"
                 use-input
@@ -266,7 +262,6 @@
                 multiple
                 dense
                 :rules="[(val) => !!val || 'Evidence is required']"
-                required
                 style="margin: 0 12px"
               />
             </div>
@@ -313,7 +308,6 @@
                   outlined
                   dense
                   :rules="[(val) => !!val || 'Name is required']"
-                  required
                   style="margin: 0 12px"
                 />
               </div>
@@ -338,7 +332,6 @@
                   outlined
                   dense
                   :rules="[(val) => !!val || 'Program is required']"
-                  required
                   style="margin: 0 12px"
                 />
               </div>
@@ -364,7 +357,6 @@
                   dense
                   multiple
                   :rules="[(val) => !!val || 'Program is required']"
-                  required
                   style="margin: 0 12px"
                   clearable
                 />
@@ -386,7 +378,6 @@
                   outlined
                   dense
                   :rules="[(val) => !!val || 'This is required']"
-                  required
                   style="margin: 0 12px"
                   v-model="model"
                   use-input
@@ -537,7 +528,6 @@
                   multiple
                   dense
                   :rules="[(val) => !!val || 'Evidence is required']"
-                  required
                   label=" Click to Upload"
                   style="margin: 0 12px"
                 />
@@ -562,7 +552,6 @@
                   outlined
                   dense
                   :rules="[(val) => !!val || 'Name is required']"
-                  required
                   style="margin: 0 12px"
                 />
               </div>
@@ -622,7 +611,6 @@
               outlined
               dense
               :rules="[(val) => !!val || 'This is required']"
-              required
               style="margin-right: 12px"
             />
           </div>
@@ -643,7 +631,6 @@
               outlined
               dense
               :rules="[(val) => !!val || 'Name is required']"
-              required
               style="margin-right: 12px"
             />
           </div>
@@ -676,7 +663,6 @@
               dense
               label="Single Dropdown"
               :rules="[(val) => !!val || 'Program is required']"
-              required
               style="margin-right: 12px"
             />
           </div>
@@ -699,7 +685,6 @@
               multiple
               label="Multiple Dropdown"
               :rules="[(val) => !!val || 'Program is required']"
-              required
               style="margin-right: 12px"
             />
           </div>
@@ -719,7 +704,6 @@
               outlined
               dense
               :rules="[(val) => !!val || 'This is required']"
-              required
               style="margin-right: 12px"
               v-model="model"
               use-input
@@ -874,7 +858,6 @@
                   multiple
                   dense
                   :rules="[(val) => !!val || 'Evidence is required']"
-                  required
                   label=" Click to Upload"
                   style="margin-left: 20px; margin: 4 12px"
                 />
@@ -938,7 +921,6 @@
                       outlined
                       dense
                       :rules="[(val) => !!val || 'Name is required']"
-                      required
                       style="margin: 0 12px"
                     />
                   </div>
@@ -964,7 +946,6 @@
                       outlined
                       dense
                       :rules="[(val) => !!val || 'Program is required']"
-                      required
                       style="margin: 0 12px"
                     />
                   </div>
@@ -991,7 +972,6 @@
                       dense
                       multiple
                       :rules="[(val) => !!val || 'Program is required']"
-                      required
                       style="margin: 0 12px"
                       clearable
                     />
@@ -1020,7 +1000,6 @@
                       outlined
                       dense
                       :rules="[(val) => !!val || 'This is required']"
-                      required
                       style="margin: 0 12px"
                       input-debounce="0"
                       clearable
@@ -1094,7 +1073,6 @@
                       outlined
                       dense
                       :rules="[(val) => !!val || 'Name is required']"
-                      required
                       style="margin: 0 12px"
                     />
                   </div>
@@ -1144,7 +1122,6 @@
                   multiple
                   dense
                   :rules="[(val) => !!val || 'Evidence is required']"
-                  required
                   style="margin: 0 12px"
                 />
               </div>
@@ -1212,7 +1189,13 @@ import { ref } from "vue";
 export default {
   setup() {
     const editor = ref([]);
-    const stringOptions = ["Google", "Facebook", "Twitter", "Apple", "Oracle"];
+    const stringOptions = [
+      "Option1",
+      "Option2",
+      "Option3",
+      "Option4",
+      "Option5",
+    ];
 
     const color = ref("cyan");
     const form = ref({
@@ -1345,7 +1328,7 @@ body {
   font-size: 16px;
   margin: 0 0 7px 0;
   font-weight: 500;
-  background-color: rgb(217, 226, 43);
+  background-color: rgb(78, 211, 235);
 }
 hr {
   margin-left: 14px;
