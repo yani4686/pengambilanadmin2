@@ -13,8 +13,8 @@ export const useRetPermohonanStore = defineStore("getmohon", {
         const response = await api.get("/retpermohonan"); // API endpoint
        // console.log("API Response:", response.data);
         if (response.data.status === "success") {
-          //this.MohonList = response.data.data; // Update store state
-          this.MohonList = Object.values(response.data);
+          this.MohonList = response.data.data; // Update store state
+          //this.MohonList = Object.values(response.data);
           
           console.log("Updated MohonList in Store:", this.MohonList);
           return response;

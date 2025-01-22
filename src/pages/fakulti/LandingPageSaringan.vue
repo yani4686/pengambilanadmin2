@@ -343,8 +343,8 @@ export default defineComponent({
    // Computed property for reactive state
    const MohonList = computed(() => {
       const list = storeGetMohon.MohonList;
-      // console.log("MohonList:", MohonList.value);
-      // console.log("List:", list.value);
+       console.log("MohonList:", MohonList.value);
+       console.log("List:", list.value);
 
       if (Array.isArray(list)) {
         return list;
@@ -377,7 +377,8 @@ export default defineComponent({
   try {
     // Fetch data for MohonList
     await storeGetMohon.fetchP();
-    console.log("MohonList fetched successfully");
+    //const list = storeGetMohon.MohonList;
+    //console.log(list);
 
     // Fetch data for bilstat
     await storeGetMohon.fetchbilstat();
