@@ -725,7 +725,7 @@
           </q-card-section>
           <q-separator inset></q-separator>
           <q-card-section class="q-pt-none">
-            <q-form class="q-gutter-md">
+            <q-form class="q-gutter-md" >
               <q-list>
                 <q-item>
                   <q-item-section>
@@ -742,18 +742,6 @@
                       :rules="[(val) => !!val || 'Catatan is required']" required style="margin-right: 12px" />
                   </q-item-section>
                 </q-item>
-                <!-- <q-item>
-                  <q-item-section>
-                    <q-item-label class="q-pb-xs">New Address Information</q-item-label>
-                    <q-input dense outlined label="New Address Information" />
-                  </q-item-section>
-                </q-item>
-                <q-item>
-                  <q-item-section>
-                    <q-item-label class="q-pb-xs">Status</q-item-label>
-                    <q-input dense outlined label="Status" />
-                  </q-item-section>
-                </q-item> -->
               </q-list>
             </q-form>
           </q-card-section>
@@ -842,9 +830,9 @@ export default defineComponent({
     });
 
     const singleDropdownOptions = [
-      "Permohonan Diluluskan",
-      "Permohonan Tidak Diluluskan",
-      "Pindah Fakulti",
+    { label: "Permohonan Diluluskan", value: "2" },
+    { label: "Permohonan Tidak Diluluskan", value: "3" },
+    { label: "Pindah Fakulti", value: "4" },
     ];
 
 
@@ -908,6 +896,7 @@ export default defineComponent({
     //   storeGetMohon.fetchDetail().then((response) => {
     //   });
     // }
+    
 
     return {
       tab: ref("mails"),

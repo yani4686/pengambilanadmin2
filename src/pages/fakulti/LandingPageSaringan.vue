@@ -5,7 +5,7 @@
         <div class="row q-col-gutter-lg" id="test">
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="Total('Baru')">
+            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('0')">
               <!-- :class="{ active: status == selectedStatus }"> -->
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
@@ -26,7 +26,7 @@
           </div>
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="Total('Pindah Fakulti')">
+            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('4')">
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
                   <q-item-section column justify-center class=""><q-item-label><span
@@ -38,7 +38,7 @@
                         background-color: rgb(255, 239, 226);
                         /* background-color: rgb(240, 225, 17); */
                       ">
-                      <span class="text-weight-medium title">1</span>
+                      <span class="text-weight-medium title"> {{ bilPF }}</span>
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -47,7 +47,7 @@
           </div>
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="Total('Lulus')">
+            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('2')">
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
                   <q-item-section column justify-center class=""><q-item-label><span
@@ -58,7 +58,7 @@
                         font-size: 45px;
                         background-color: rgb(225, 246, 232);
                       ">
-                      <span class="text-weight-medium title text-positive">1</span>
+                      <span class="text-weight-medium title text-positive"> {{ bilLF }}</span>
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -67,7 +67,7 @@
           </div>
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="Total('Gagal')">
+            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('3')">
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
                   <q-item-section column justify-center class=""><q-item-label><span
@@ -78,7 +78,7 @@
                         font-size: 45px;
                         background-color: rgb(253, 228, 227);
                       ">
-                      <span class="text-weight-medium title text-negative">1</span>
+                      <span class="text-weight-medium title text-negative"> {{ bilGF }}</span>
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -88,7 +88,7 @@
           <!-- end 4 kotak -->
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
-            <q-table flat bordered no-wrap :rows="MohonList || []" :columns="columns" row-key="p001nokp"
+            <q-table flat bordered no-wrap :rows="filteredRows" :columns="columns" row-key="p001nokp"
               :horizontal-separator="separator" style="padding: 2px; border: 1px solid lightgray"
               v-model:pagination.sync="pagination" :filter="filter" :options="options" ref="tableRef"
               @request="onRequest">
@@ -100,8 +100,8 @@
               </template>
               <template v-slot:body-cell-actions="props">
                 <q-td align="center">
-                  <q-btn dense flat color="black" icon="visibility" @click="goToDetails(props.row.p001nokp)" />
-                  <q-btn dense flat icon="edit" color="primary" @click="goToEditDetails(props.row.p001nokp)" />
+                  <q-btn dense flat color="black" icon="edit" @click="goToDetails(props.row.p001nokp)" />
+                  <!-- <q-btn dense flat icon="edit" color="primary" @click="goToEditDetails(props.row.p001nokp)" /> -->
                 </q-td>
               </template>
               <template v-slot:top-right>
@@ -126,21 +126,18 @@
                 </div>
               </template>
               <template v-slot:body-cell-status="props">
-                <q-td :props="props">
-                  <q-chip :color="props.row.status == '2'
-                    ? 'green'
-                    : props.row.status == '3'
-                      ? 'red'
-                      : props.row.status == '1'
-                        ? 'yellow'
-                        : props.row.status == '4'
-                        ? 'yellow'
-                        : 'grey'
-                    " text-color="white" dense class="text-weight-bolder" square style="width: 100px">{{
-    props.row.status }}
-                  </q-chip>
-                </q-td>
-              </template>
+    <q-chip
+      :color="statusColor(props.row.p001status)"
+      text-color="white"
+      dense
+      class="text-weight-bolder flex justify-center items-center"
+      square
+      style="width: 100px; height: 100%;"
+    >
+      <!-- {{ props.row.p001status }} -->
+      {{ statusDescription(props.row.p001status) }}
+    </q-chip>
+  </template>
             </q-table>
           </div>
         </div>
@@ -343,8 +340,8 @@ export default defineComponent({
    // Computed property for reactive state
    const MohonList = computed(() => {
       const list = storeGetMohon.MohonList;
-       console.log("MohonList:", MohonList.value);
-       console.log("List:", list.value);
+     //  console.log("MohonList:", MohonList.value);
+     //  console.log("List:", list.value);
 
       if (Array.isArray(list)) {
         return list;
@@ -355,10 +352,7 @@ export default defineComponent({
       }
 
     });
-
-   const setSesi = computed(() => {
-      return storeSetupP.displaySesi;
-   });
+    
 
     const tableRef = ref();
     const router = useRouter();
@@ -366,6 +360,58 @@ export default defineComponent({
     const filter = ref("");
     const statB = ref('');
     const bilB = ref('');
+    const bilD = ref('');
+    const bilPF = ref('');
+    const bilGF = ref('');
+    const bilLF = ref('');
+    const selectedStatus = ref("");
+
+    // Filters rows based on selected status
+    const filteredRows = computed(() => {
+   // console.log("Selected Status for Filter:", selectedStatus.value); // Debugging
+    const filtered = selectedStatus.value
+    ? MohonList.value.filter((row) => row.p001status === selectedStatus.value)
+    : MohonList.value;
+
+  //console.log("Filtered Rows:", filtered); // Debugging
+  return filtered;
+      });
+
+      const selectStatus = (status) => {
+  //console.log("Clicked Status:", status);
+  selectedStatus.value = status;
+};
+  
+
+  const statusColor = (status) => {
+  const colors = {
+    '1': 'green',
+    '2': 'yellow',
+    '3': 'red',
+    '4': 'yellow',
+    '5': 'yellow',
+    '6': 'red',
+    '0': 'blue',
+    '' : 'grey',
+  };
+  return colors[status] || 'grey'; // Default to grey if status is unknown
+};
+
+const statusDescription = (status) => {
+ // console.log('Status:', status); // Debugging
+  const descriptions = {
+    '1': 'Approved',
+    '2': 'Pending',
+    '3': 'Rejected',
+    '4': 'In Review',
+    '5': 'Under Processing',
+    '6': 'Requires Action',
+    '0': 'Baru',
+    '': 'Draft',
+  };
+  return descriptions[status] || 'Draft';
+};
+    
 
   // Fetch data on component mount
   onMounted(() => {
@@ -377,13 +423,14 @@ export default defineComponent({
   try {
     // Fetch data for MohonList
     await storeGetMohon.fetchP();
-    //const list = storeGetMohon.MohonList;
-    //console.log(list);
-
     // Fetch data for bilstat
     await storeGetMohon.fetchbilstat();
     bilB.value = storeGetMohon.Countbystat.bildraf || '';
-    console.log("Bilstat fetched successfully:", bilB.value);
+    bilD.value = storeGetMohon.Countbystat.bildraf1 || '';
+    bilPF.value = storeGetMohon.Countbystat.bilpindahf || '';
+    bilGF.value = storeGetMohon.Countbystat.bilgagalf || '';
+    bilLF.value = storeGetMohon.Countbystat.billulusf || '';
+    //console.log("Bilstat fetched successfully:", bilB.value);
   } catch (error) {
     console.error("Error fetching data:", error);
   }
@@ -419,16 +466,23 @@ export default defineComponent({
       filter,
       statB,
       bilB,
+      bilD,
+      bilGF,
+      bilLF,
+      bilPF,
+      filteredRows,
+      selectedStatus,
+      selectStatus,
       goToDetails,
       goToEditDetails,
       onRequest,
       Total,
+      statusColor,
+      statusDescription,
+      // color,
       pagination: {
         rowsPerPage: 5,
       },
-     // pagination,
-     // options,
-      //testFilter,
       options: {
         customFilters: [{
           name: 'statusFilter',
@@ -437,7 +491,7 @@ export default defineComponent({
           }
         }]
       }
-    };
+      };
   },
   });
 

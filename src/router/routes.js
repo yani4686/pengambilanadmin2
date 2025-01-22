@@ -282,6 +282,18 @@ const routes = [
         component: () =>
           import("pages/admin/EditPermohonanAdmin.vue"),
       },
+      {
+        path: "/landingpgoffer",
+        name: "LandingPageOffer",
+        component: () =>
+          import("pages/admin/ListPemohonOffer.vue"),
+      },
+      {
+        path: "/editoffer/:id",
+        name: "EditOffer",
+        component: () =>
+          import("pages/admin/EditPemohonOffer.vue"),
+      },
     ],
   },
  

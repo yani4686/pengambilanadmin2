@@ -82,6 +82,16 @@
                   </q-item-section>
                 </q-item>
               </q-list>
+
+              <q-list class="submenu">
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/landingpgoffer" style="color: white">Senarai Calon Jaya</a>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
             </q-expansion-item>
             
           </q-list>
