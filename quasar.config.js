@@ -90,7 +90,8 @@ module.exports = configure(function (/* ctx */) {
       open: true, // opens browser window automatically
       proxy: {
         "/api": {
-          target: "https://portal.unisza.edu.my/api-aims",
+         // target: "https://portal.unisza.edu.my/api-aims",
+          target: "http://localhost/pascav2/public",
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, ""),
         },
