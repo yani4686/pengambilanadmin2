@@ -7,11 +7,32 @@ import axios from "axios";
 // good idea to move this instance creation inside of the
 // "export default () => {}" function below (which runs individually
 // for each client)
+
 const api = axios.create({
   // baseURL: "https://portal.unisza.edu.my/api-aims/",
   baseURL: "http://localhost:9000/api",
 });
+
+// const api = axios.create({
+//   baseURL: 'http://localhost/pascav2/public',
+//   timeout: 10000, // 10 seconds
+//   });
+
+  axios.defaults.headers.common['Content-Type'] = 'application/json';
+
+// api.get("/retpermohonan")
+//   .then((response) => {
+//     console.log("API Response dr AXIOS:", response.data);
+//   })
+//   .catch((error) => {
+//     console.error("API Error:", error);
+//   });
+
 // const api = axios.create({ baseURL: "http://localhost/aims/public" });
+// const api = axios.create({
+//   baseURL: 'http://localhost/pascav2/public',
+//   timeout: 10000, // 10 seconds
+//   });
 
 export default boot(({ app }) => {
   // for use inside Vue files (Options API) through this.$axios and this.$api

@@ -147,7 +147,9 @@ const routes = [
           hideBreadcrumbs: false,
           hideRoleSelection: false,
         },
+        
       },
+    
       {
         path: "form",
         component: () => import("pages/FormPage.vue"),
@@ -226,6 +228,63 @@ const routes = [
       },
     ],
   },
+  //-------------- PENGAMBILAN ---------------------//
+  {
+    path: "/pengambilan",
+    component: () => import("layouts/MainLayoutPengambilan.vue"),
+    children: [
+      {
+        path: "/landingpgsaringan",
+        name: "LandingPageSaringan",
+        component: () =>
+          import("pages/fakulti/LandingPageSaringan.vue"),
+      },
+      {
+        path: "/detailspermohonan/:p001nokp",
+        name: "DetailsPermohonan",
+        props: true,
+        component: () =>
+          import("pages/fakulti/DetailsPermohonan.vue"),
+      },
+      {
+        path: "/editdetailspermohonan/:p001nokp",
+        name: "EditPermohonan",
+        component: () =>
+          import("pages/fakulti/EditPermohonan.vue"),
+      },
+      {
+        path: "/test",
+        name: "Test",
+        component: () => import("pages/fakulti/TestRet.vue"),
+        meta: {
+          hideDrawer: true,
+          hideBreadcrumbs: true,
+          hideRoleSelection: true,
+        },
+        // meta: { hideBreadcrumbs: true, hideRoleSelection: true }, // Index page, hide breadcrumbs and role selection
+      },
+      //page admin lulus
+      {
+        path: "/landingpgkelulusan",
+        name: "LandingPageKelulusan",
+        component: () =>
+          import("pages/admin/LandingPageKelulusan.vue"),
+      },
+      {
+        path: "/detailspermohonanadmin/:id",
+        name: "DetailsPermohonanAdmin",
+        component: () =>
+          import("pages/admin/DetailsPermohonanAdmin.vue"),
+      },
+      {
+        path: "/editdetailspermohonanadmin/:id",
+        name: "EditPermohonanAdmin",
+        component: () =>
+          import("pages/admin/EditPermohonanAdmin.vue"),
+      },
+    ],
+  },
+ 
 
   // Always leave this as last one,
   // but you can also remove it
