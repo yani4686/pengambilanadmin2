@@ -44,6 +44,19 @@ export default boot(({ app }) => {
   app.config.globalProperties.$api = api;
   // ^ ^ ^ this will allow you to use this.$api (for Vue Options API form)
   //       so you can easily perform requests against your app's API
+
+  // Retrieve CSRF token from the meta tag
+  //const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+  
+  // Make the token globally available (e.g., through Axios or app.config.globalProperties)
+  //app.config.globalProperties.$csrfToken = csrfToken;
+
+  // Set it as the default header for Axios
+  //app.config.globalProperties.$axios.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
+  //console.log(axios.defaults.headers.common);
+
+  
+  
 });
 
 api.interceptors.request.use(function (config) {
@@ -52,5 +65,11 @@ api.interceptors.request.use(function (config) {
   config.headers["Authorization"] = "bearer " + token;
   return config;
 });
+
+// Retrieve CSRF token from meta tag
+//const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+// Set CSRF token as default header
+//api.defaults.headers.common['X-CSRF-TOKEN'] = csrfToken;
 
 export { api };

@@ -17,7 +17,7 @@
                         font-size: 45px;
                         background-color: rgb(231 247 253);
                       ">
-                      <a><span class="text-weight-medium title text-primary">2</span></a>
+                      <a><span class="text-weight-medium title text-primary"> {{ bilB }}</span></a>
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -356,10 +356,16 @@ export default defineComponent({
 
     });
 
+   const setSesi = computed(() => {
+      return storeSetupP.displaySesi;
+   });
+
     const tableRef = ref();
     const router = useRouter();
     const route = useRoute();
     const filter = ref("");
+    const statB = ref('');
+    const bilB = ref('');
 
   // Fetch data on component mount
   onMounted(() => {
@@ -367,12 +373,19 @@ export default defineComponent({
     });
 
     // Load data from the store
-    function onLoad() {
-      storeGetMohon.fetchP().then(() => {
-        console.log(storeGetMohon.MohonList);
-      }).catch((error) => {
-        console.error("Error fetching data:", error);
-      });
+    async function onLoad() {
+  try {
+    // Fetch data for MohonList
+    await storeGetMohon.fetchP();
+    console.log("MohonList fetched successfully");
+
+    // Fetch data for bilstat
+    await storeGetMohon.fetchbilstat();
+    bilB.value = storeGetMohon.Countbystat.bildraf || '';
+    console.log("Bilstat fetched successfully:", bilB.value);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
     }
 
 
@@ -396,14 +409,15 @@ export default defineComponent({
     return {
       MohonList,
       tableRef,
-      columns:[ { name: "name", label: "NAMA PEMOHON", field: "p001nama" },
+      columns:[{ name: "name", label: "NAMA PEMOHON", field: "p001nama" },
                 { name: "nokp", label: "NO KP/PASSPORT", field: "p001nokp" },
                 { name: "tkhmohon", label: "TARIKH MOHON", field: "p001tkhpohon" },
                 { name: "program", label: "PROGRAM", field: "p001kprog" },
                 { name: "status", label: "STATUS", field: "p001status" },
                 { name: "actions", label: "TINDAKAN" },],
       filter,
-      //dataPemohon,
+      statB,
+      bilB,
       goToDetails,
       goToEditDetails,
       onRequest,
