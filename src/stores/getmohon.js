@@ -6,8 +6,24 @@ export const useRetPermohonanStore = defineStore("getmohon", {
     MohonList: [], // Reactive state for data
     Details: [], // Reactive state for data
     Countbystat: [], // Reactive state for data
+    KodProgram: [], // Reactive state for data
   }),
   actions: {
+    async fetchKodProgram() {
+      try {
+        const response = await api.get("/getkodprogram"); // API endpoint
+        console.log("API Response:", response.data);
+       // if (response.data.status === "success") {
+         // this.KodProgram = response.data; // Update store state
+          //this.MohonList = Object.values(response.data);
+          
+         // console.log("Updated KodProgram in Store:", this.KodProgram);
+          return response;
+      //  }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    },
     async fetchP() {
       try {
         const response = await api.get("/retpermohonan"); // API endpoint
@@ -16,7 +32,7 @@ export const useRetPermohonanStore = defineStore("getmohon", {
           this.MohonList = response.data.data; // Update store state
           //this.MohonList = Object.values(response.data);
           
-          console.log("Updated MohonList in Store:", this.MohonList);
+        //  console.log("Updated MohonList in Store:", this.MohonList);
           return response;
         }
       } catch (error) {
@@ -27,21 +43,7 @@ export const useRetPermohonanStore = defineStore("getmohon", {
     async fetchDetail(id) {
       try {
         const response = await api.get(`/retpermohonanbynokp/${id}`); // Correct URL endpoint
-       // Retrieve the CSRF token from the meta tag
-        // const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
-        // if (!csrfTokenElement) {
-        //   throw new Error("CSRF token meta tag not found");
-        // }
-        // const csrfToken = csrfTokenElement.getAttribute('content');
-
-        //console.log(csrfToken);
-
-        //Make the POST request with CSRF token included in headers
-        // const response = await axios.post(`/retpermohonanbynokp/${id}`, {}, {
-        //   headers: {
-        //     'X-CSRF-TOKEN': csrfToken,
-        //   },
-        // });
+      
        if (response.data.status === "success") {
          // this.Details = response.data.data; // Update store state with fetched data
         //  this.Details = Object.values(response.data);
@@ -68,7 +70,7 @@ export const useRetPermohonanStore = defineStore("getmohon", {
          // this.Countbystat = Object.values(response.data);
           this.Countbystat = response.data.data;
           
-          console.log("Updated Countbystat in Store:", this.Countbystat);
+       //   console.log("Updated Countbystat in Store:", this.Countbystat);
           return response;
         }
       } catch (error) {

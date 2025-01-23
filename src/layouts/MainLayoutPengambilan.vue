@@ -93,6 +93,21 @@
                 </q-item>
               </q-list>
             </q-expansion-item>
+
+            <!-- menu konfigurasi akses level -->
+            <q-expansion-item style="color: white" icon="settings" label="Konfigurasi Sistem" expand-separator :expanded="showSubmenu"
+              @mouseover="showSubmenu = true" @mouseleave="showSubmenu = false">
+  
+              <q-list class="submenu">
+                <q-item>
+                  <q-item-section>
+                    <q-item-label>
+                      <a href="#/" style="color: white">Akses Level</a>
+                    </q-item-label>
+                  </q-item-section>
+                </q-item>
+              </q-list>
+            </q-expansion-item>
             
           </q-list>
         </q-drawer>

@@ -1,7 +1,7 @@
 <template>
   <q-page class="q-pa-md flex-center" style="width: 1500px">
     <q-page-container style="padding-top: 10px; padding-bottom: 30px; padding-left: 50px">
-      <q-form @submit="submitForm">
+      <q-form class="q-gutter-md" @submit="submitForm">
         <div class="row q-col-gutter-sm q-ma-xs q-mr-sm">
           <q-card class="col-lg-8 col-md-4 col-sm-12 col-xs-12">
             <q-card-section class="card-title">
@@ -31,6 +31,7 @@
               </div>
             </div>
 
+
             <q-card-actions align="right" class="submit-button">
               <q-btn label="Simpan" type="submit" color="primary" class="q-mr-sm" v-close-popup @click="Submit()" />
               <q-btn label="Tutup" color="negative" outlined v-close-popup></q-btn>
@@ -44,12 +45,16 @@
 
 <script>
 import { ref } from "vue";
+import { useQuasar } from "quasar";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
 
 export default {
+  name: "EditPermohonan",
+
   setup() {
+
     const editor = ref([]);
     const form = ref({
       singleDropdown: "",
@@ -60,7 +65,7 @@ export default {
     const singleDropdownOptions = [
       "Permohonan Diluluskan",
       "Permohonan Tidak Diluluskan",
-
+      "Pindah Fakulti",
     ];
 
     const submitForm = () => {
@@ -88,6 +93,5 @@ export default {
   background-color: #b4dcfd97;
   padding: 10px;
   color: black;
-
 } */
 </style>

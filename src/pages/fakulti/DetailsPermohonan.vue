@@ -730,11 +730,42 @@
                 <q-item>
                   <q-item-section>
                     <q-item-label class="q-pb-xs">Tindakan Pengesahan</q-item-label>
-                    <q-select class="q-pb-xs" label="Tindakan Pengesahan" color="blue" :options="singleDropdownOptions"
-                      outlined dense required :rules="[(val) => !!val || 'Tindakan Pengesahan is required']"
+                    <q-select 
+                    class="q-pb-xs" 
+                    label="Tindakan Pengesahan" 
+                    color="blue" 
+                    v-model="selectedOption" 
+                    :options="singleDropdownOptions"
+                     @update:model-value="updateSelectedOption"
+                      outlined 
+                      dense 
+                      required 
+                      :rules="[(val) => !!val || 'Tindakan Pengesahan is required']"
                       style="margin-right: 12px" />
                   </q-item-section>
                 </q-item>
+                <!-- <div>Selected Option: {{ selectedOption }}</div> -->
+                <div :key="selectedOption">
+                <div v-if="selectedOption === '4'">
+                <!-- <div v-if="true"> -->
+                  <q-item>
+                  <q-item-section>
+                    <q-item-label class="q-pb-xs">Pilihan Program Baru</q-item-label>
+                    <q-select 
+                    class="q-pb-xs" 
+                     :options="programOptions"
+                    label="Program" 
+                    color="blue" 
+                      outlined 
+                      dense 
+                      required 
+                      :rules="[(val) => !!val || 'Program is required']"
+                       v-model="formData.kdprogrambaru"
+                      style="margin-right: 12px" />
+                  </q-item-section>
+                </q-item>
+              </div>
+            </div>
                 <q-item>
                   <q-item-section>
                     <q-item-label class="q-pb-xs">Catatan Pengesahan</q-item-label>
@@ -747,7 +778,7 @@
           </q-card-section>
 
           <q-card-actions align="right" class="submit-button">
-            <q-btn label="Simpan" type="submit" color="primary" class="q-mr-sm" v-close-popup @click="Submit()" />
+            <q-btn label="Simpan" type="submit" color="primary" class="q-mr-sm" v-close-popup @click="Submit" />
             <q-btn label="Tutup" color="negative" outlined v-close-popup></q-btn>
           </q-card-actions>
         </q-card>
@@ -759,7 +790,7 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, ref, computed } from "vue";
+import { defineComponent, onMounted, ref, computed,reactive,watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import updateTindakan from "./EditPermohonan.vue";
 import { useRetPermohonanStore } from "src/stores/getmohon";
@@ -807,7 +838,7 @@ export default defineComponent({
     const urlresit = ref('');
     const urlexp = ref('');
     const labelText = ref(''); // Reactive variable for label text (e.g., from API)
-    //const labelText1 = ref(''); // Reactive variable for label text (e.g., from API)
+    //const formData = ref(''); // Reactive variable for label text (e.g., from API)
     
 
     //const Details = computed(() => storeGetMohon.Details); // Computed value from the store
@@ -829,11 +860,41 @@ export default defineComponent({
       singleDropdown: "",
     });
 
+    const selectedOption = ref(""); // Tracks selected dropdown value
+    // watch(selectedOption, (newValue) => {console.log("Selected Option:", newValue);});
+
+const updateSelectedOption = (selected) => {
+      selectedOption.value = selected.value; // Extract only the value
+    };
+    
+    const formData = reactive({
+      kdprogrambaru: "",
+    });
+
     const singleDropdownOptions = [
     { label: "Permohonan Diluluskan", value: "2" },
     { label: "Permohonan Tidak Diluluskan", value: "3" },
     { label: "Pindah Fakulti", value: "4" },
     ];
+
+    const programOptions = [
+      { label: "Program A", value: "A" },
+      { label: "Program B", value: "B" },
+      { label: "Program C", value: "C" },
+    ];
+
+    // Submit handler
+    const Submit = () => {
+      console.log("Form Data Submitted:", {
+        selectedOption: selectedOption.value,
+        program: formData.kdprogrambaru,
+      });
+
+      if (selectedOption.value === "4" && !formData.kdprogrambaru) {
+        console.error("Program selection is required!");
+      }
+
+    };
 
 
     // Function to fetch data based on route ID
@@ -908,6 +969,11 @@ export default defineComponent({
       updateRow: () => (updateTindakanModal.value = true),
       updateRow1: () => (new_customer.value = true),
       singleDropdownOptions,
+      updateSelectedOption,
+      selectedOption,
+      programOptions,
+      formData,
+      Submit,
       form,
       new_customer,
       setDetails,

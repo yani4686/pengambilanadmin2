@@ -271,13 +271,13 @@ const routes = [
           import("pages/admin/LandingPageKelulusan.vue"),
       },
       {
-        path: "/detailspermohonanadmin/:id",
+        path: "/detailspermohonanadmin/:p001nokp",
         name: "DetailsPermohonanAdmin",
         component: () =>
-          import("pages/admin/DetailsPermohonanAdmin.vue"),
+          import("pages/admin/DetailPermohonanAdmin.vue"),
       },
       {
-        path: "/editdetailspermohonanadmin/:id",
+        path: "/editdetailspermohonanadmin/:p001nokp",
         name: "EditPermohonanAdmin",
         component: () =>
           import("pages/admin/EditPermohonanAdmin.vue"),
@@ -289,10 +289,10 @@ const routes = [
           import("pages/admin/ListPemohonOffer.vue"),
       },
       {
-        path: "/editoffer/:id",
+        path: "/editoffer/:p001nokp",
         name: "EditOffer",
         component: () =>
-          import("pages/admin/EditPemohonOffer.vue"),
+          import("pages/admin/DetailPemohonOffer.vue"),
       },
     ],
   },

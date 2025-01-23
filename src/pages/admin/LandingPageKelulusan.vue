@@ -2,11 +2,12 @@
   <q-card>
     <q-page-container style="padding-top: 10px; padding-bottom: 37px; padding-left: 80px">
       <q-page class="q-pa-lg q-mt-md">
-        <div class="row q-col-gutter-lg">
+        <div class="row q-col-gutter-lg" id="test">
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="Total('Baru')">
-              <q-card-section class="q-card__section--vert q-pa-sm" role="">
+            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('0')">
+              <!-- :class="{ active: status == selectedStatus }"> -->
+              <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
                   <q-item-section column justify-center class=""><q-item-label><span
                         class="text-weight-medium title text-grey-8">Permohonan Baru</span></q-item-label>
@@ -16,7 +17,7 @@
                         font-size: 45px;
                         background-color: rgb(231 247 253);
                       ">
-                      <a><span class="text-weight-medium title text-primary">2</span></a>
+                      <a><span class="text-weight-medium title text-primary"> {{ bilB }}</span></a>
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -25,8 +26,8 @@
           </div>
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="Total('Pindah Fakulti')">
-              <q-card-section class="q-card__section--vert q-pa-sm" role="">
+            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('4')">
+              <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
                   <q-item-section column justify-center class=""><q-item-label><span
                         class="text-weight-medium title text-grey-8">Permohonan Pindah Fakulti</span></q-item-label>
@@ -35,8 +36,9 @@
                       style="
                         font-size: 45px;
                         background-color: rgb(255, 239, 226);
+                        /* background-color: rgb(240, 225, 17); */
                       ">
-                      <span class="text-weight-medium title text-warning">1</span>
+                      <span class="text-weight-medium title"> {{ bilPF }}</span>
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -45,8 +47,8 @@
           </div>
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="Total('Lulus')">
-              <q-card-section class="q-card__section--vert q-pa-sm" role="">
+            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('2')">
+              <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
                   <q-item-section column justify-center class=""><q-item-label><span
                         class="text-weight-medium title text-grey-8">Permohonan Diluluskan</span></q-item-label>
@@ -56,7 +58,7 @@
                         font-size: 45px;
                         background-color: rgb(225, 246, 232);
                       ">
-                      <span class="text-weight-medium title text-positive">1</span>
+                      <span class="text-weight-medium title text-positive"> {{ bilLF }}</span>
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -65,8 +67,8 @@
           </div>
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="Total('Gagal')">
-              <q-card-section class="q-card__section--vert q-pa-sm" role="">
+            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('3')">
+              <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
                   <q-item-section column justify-center class=""><q-item-label><span
                         class="text-weight-medium title text-grey-8">Permohonan Tidak Diluluskan</span></q-item-label>
@@ -76,7 +78,7 @@
                         font-size: 45px;
                         background-color: rgb(253, 228, 227);
                       ">
-                      <span class="text-weight-medium title text-negative">1</span>
+                      <span class="text-weight-medium title text-negative"> {{ bilGF }}</span>
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -85,42 +87,11 @@
           </div>
           <!-- end 4 kotak -->
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <!-- <q-card bordered no-shadow shadow_custom class="">
-              <q-card-section class="q-card__section--vert row q-pa-none">
-                <div
-                  class="row full-width q-pa-lg"
-                  style="border-bottom: 1px solid lightgrey"
-                >
-                  <div
-                    class="text-grey-8 col-md-12 col-lg-8 col-xs-8 col-sm-8 q-mb-lg text-weight-medium title"
-                  >
-                    Search Filter
-                  </div>
-                  <div
-                    class="text-grey-8 col-md-4 col-lg-4 col-xs-12 col-sm-12 q-pr-md"
-                  >
-                    <span>Kategori Permohonan</span>
-                    <div class="row q-gutter-sm">
-                      <q-select
-                        clearable
-                        outlined
-                        style="width: 200px"
-                        :options="typeStudy"
-                        label="Sila Pilih"
-                        options-dense
-                        input-debounce="0"
-                        items-start
-                        class="row no-wrap q-field--outlined q-select q-field--auto-height q-select--without-input q-select--without-chips q-select--single q-field--dense"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </q-card-section>
-            </q-card> -->
 
-            <q-table flat bordered no-wrap :rows="dataPemohon" :columns="columns" row-key="id"
+            <q-table flat bordered no-wrap :rows="filteredRows" :columns="columns" row-key="p001nokp"
               :horizontal-separator="separator" style="padding: 2px; border: 1px solid lightgray"
-              v-model:pagination.sync="pagination" :filter="filter" ref="tableRef" @request="onRequestAdmin">
+              v-model:pagination.sync="pagination" :filter="filter" :options="options" ref="tableRef"
+              @request="onRequest">
               <template v-slot:top-left>
                 <div class="">
                   <span style="font-size: medium; font-weight: bold">Senarai Permohonan</span>
@@ -129,8 +100,8 @@
               </template>
               <template v-slot:body-cell-actions="props">
                 <q-td align="center">
-                  <q-btn dense flat color="black" icon="visibility" @click="goToDetailsAdmin(props.row.id)" />
-                  <q-btn dense flat icon="edit" color="primary" @click="goToEditDetailsAdmin(props.row.id)" />
+                  <q-btn dense flat color="black" icon="edit" @click="goToDetailsAdmin(props.row.p001nokp)" />
+                  <!-- <q-btn dense flat icon="edit" color="primary" @click="goToEditDetails(props.row.p001nokp)" /> -->
                 </q-td>
               </template>
               <template v-slot:top-right>
@@ -155,19 +126,18 @@
                 </div>
               </template>
               <template v-slot:body-cell-status="props">
-                <q-td :props="props">
-                  <q-chip :color="props.row.status == 'Lulus'
-                    ? 'green'
-                    : props.row.status == 'Gagal'
-                      ? 'red'
-                      : props.row.status == 'Pindah Fakulti'
-                        ? 'yellow'
-                        : 'blue'
-                    " text-color="white" dense class="text-weight-bolder" square style="width: 100px">{{
-    props.row.status }}
-                  </q-chip>
-                </q-td>
-              </template>
+    <q-chip
+      :color="statusColor(props.row.p001status)"
+      text-color="white"
+      dense
+      class="text-weight-bolder flex justify-center items-center"
+      square
+      style="width: 100px; height: 100%;"
+    >
+      <!-- {{ props.row.p001status }} -->
+      {{ statusDescription(props.row.p001status) }}
+    </q-chip>
+  </template>
             </q-table>
           </div>
         </div>
@@ -321,7 +291,8 @@ hr {
 }
 
 .text-warning {
-  color: var(--q-warning) !important;
+  /* color: var(--q-warning) !important; */
+  color: rgb(243, 243, 241);
 }
 
 .text-primary {
@@ -356,307 +327,173 @@ hr {
 </style>
 <script>
 import { useRoute, useRouter } from "vue-router";
-import { ref, onMounted } from "vue";
+import { defineComponent, onMounted, ref, computed,reactive } from "vue";
+import { useRetPermohonanStore } from "src/stores/getmohon";
 
-export default {
+
+export default defineComponent({
+  name: "PermohonanPage",
   setup() {
+
+    const storeGetMohon = useRetPermohonanStore(); // Pinia store
+
+   // Computed property for reactive state
+   const MohonList = computed(() => {
+      const list = storeGetMohon.MohonList;
+     //  console.log("MohonList:", MohonList.value);
+     //  console.log("List:", list.value);
+
+      if (Array.isArray(list)) {
+        return list;
+      } else if (list && typeof list === "object") {
+        return Object.values(list); // Convert object to array
+      } else {
+        return []; // Default to empty array
+      }
+
+    });
+    
+
     const tableRef = ref();
     const router = useRouter();
     const route = useRoute();
-    const type = ref(route.params.type);
     const filter = ref("");
+    const statB = ref('');
+    const bilB = ref('');
+    const bilD = ref('');
+    const bilPF = ref('');
+    const bilGF = ref('');
+    const bilLF = ref('');
+    const selectedStatus = ref("");
 
-    // lookup
-    // const typeStudy = ref([
-    //   { label: "Phd", value: "phd" },
-    //   { label: "Master", value: "master" },
-    // ]);
+    // Filters rows based on selected status
+    const filteredRows = computed(() => {
+   // console.log("Selected Status for Filter:", selectedStatus.value); // Debugging
+    const filtered = selectedStatus.value
+    ? MohonList.value.filter((row) => row.p001status === selectedStatus.value)
+    : MohonList.value;
 
-    //datatable
+  //console.log("Filtered Rows:", filtered); // Debugging
+  return filtered;
+      });
 
-    const columns = [
-      { name: "no", label: "NO", align: "center", field: "no", sortable: true },
-      {
-        name: "name",
-        label: "NAMA PEMOHON",
-        align: "left",
-        field: "name",
-        sortable: true,
-      },
-      {
-        name: "tkhmohon",
-        label: "TARIKH MOHON",
-        align: "left",
-        field: "tkhmohon",
-        sortable: true,
-      },
-      {
-        name: "program",
-        label: "PROGRAM",
-        align: "left",
-        field: "program",
-        sortable: true,
-      },
-      {
-        name: "status",
-        label: "STATUS",
-        align: "left",
-        field: "status",
-        sortable: true,
-      },
-      {
-        name: "actions",
-        label: "TINDAKAN",
-        align: "center",
-        field: "actions",
-        sortable: false,
-      },
-    ];
+      const selectStatus = (status) => {
+  //console.log("Clicked Status:", status);
+  selectedStatus.value = status;
+};
+  
 
-    const dataPemohon = [
-      {
-        id: 1,
-        no: 1,
-        name: "Yani",
-        program: "FST-Science Computer (FSTA05)",
-        tkhmohon: "01/10/2024",
-        status: "Baru",
-      },
-      {
-        id: 2,
-        no: 2,
-        name: "Ali",
-        program: "FSK-Medical Science (FSKA01)",
-        tkhmohon: "01/10/2024",
-        status: "Baru",
-      },
-      {
-        id: 3,
-        no: 3,
-        name: "Nur",
-        program: "FST-Science Computer (FSTA05)",
-        tkhmohon: "01/10/2024",
-        status: "Lulus",
-      },
-      {
-        id: 4,
-        no: 4,
-        name: "Md",
-        program: "FST-Science Computer (FSTA05)",
-        tkhmohon: "01/10/2024",
-        status: "Pindah Fakulti",
-      },
-      {
-        id: 5,
-        no: 5,
-        name: "AA",
-        program: "FST-Science Computer (FSTA05)",
-        tkhmohon: "01/10/2024",
-        status: "Gagal",
-      },
-      {
-        id: 6,
-        no: 6,
-        name: "BB",
-        program: "FST-Science Computer (FSTA05)",
-        tkhmohon: "01/10/2024",
-        status: "Lulus",
-      },
-    ];
+  const statusColor = (status) => {
+  const colors = {
+    '1': 'green',
+    '2': 'yellow',
+    '3': 'red',
+    '4': 'yellow',
+    '5': 'yellow',
+    '6': 'red',
+    '0': 'blue',
+    '' : 'grey',
+  };
+  return colors[status] || 'grey'; // Default to grey if status is unknown
+};
 
-    // const filteredApplications = ref([]);
+const statusDescription = (status) => {
+ // console.log('Status:', status); // Debugging
+  const descriptions = {
+    '1': 'Approved',
+    '2': 'Pending',
+    '3': 'Rejected',
+    '4': 'In Review',
+    '5': 'Under Processing',
+    '6': 'Requires Action',
+    '0': 'Baru',
+    '': 'Draft',
+  };
+  return descriptions[status] || 'Draft';
+};
+    
 
-    // const fetchApplications = () => {
-    // if (type.value === 'Baru') {
-    //   filteredApplications.value = dataPemohon;
-    // } else {
-    //   filteredApplications.value = dataPemohon.filter(app => app.status === type.value);
-    // }
-
-    // filteredApplications.value.length = dataPemohon.filter(app => app.status === type.value);
-
-    //console.log("check value:", filteredApplications.value.length)
-
-    //pagination.value.rowsNumber = filteredApplications.value.length; // Update rowsNumber for pagination
-    //};
-
-    onMounted(() => {
-      //filter();
+  // Fetch data on component mount
+  onMounted(() => {
+      onLoad();
     });
+
+    // Load data from the store
+    async function onLoad() {
+  try {
+    // Fetch data for MohonList
+    await storeGetMohon.fetchP();
+    // Fetch data for bilstat
+    await storeGetMohon.fetchbilstat();
+    bilB.value = storeGetMohon.Countbystat.bildraf || '';
+    bilD.value = storeGetMohon.Countbystat.bildraf1 || '';
+    bilPF.value = storeGetMohon.Countbystat.bilpindahf || '';
+    bilGF.value = storeGetMohon.Countbystat.bilgagalf || '';
+    bilLF.value = storeGetMohon.Countbystat.billulusf || '';
+    //console.log("Bilstat fetched successfully:", bilB.value);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+    }
 
 
     const Total = (type) => {
-      router.push({ name: 'LandingPageSaringan', params: { type } });
       console.log("Total:", type);
     }
 
-    const goToDetailsAdmin = (id) => {
-      router.push({ name: "DetailsPermohonanAdmin", params: { id } });
-      // console.log("check:", id);
+    const goToDetailsAdmin = (p001nokp) => {
+      router.push({ name: "DetailsPermohonanAdmin", params: { p001nokp } });
     };
-    const goToEditDetailsAdmin = (id) => {
-      router.push({ name: "EditPermohonanAdmin", params: { id } });
+
+    const goToEditDetailsAdmin = (p001nokp) => {
+      router.push({ name: "EditPermohonanAdmin", params: { p001nokp } });
     };
-    const onRequestAdmin = (props) => {
+
+    const onRequest = (props) => {
       // Handle request for pagination and sorting here if necessary
       console.log("Request:", props);
     };
 
-
-
-
     return {
+      MohonList,
       tableRef,
-      columns,
+      columns:[{ name: "name", label: "NAMA PEMOHON", field: "p001nama" },
+                { name: "nokp", label: "NO KP/PASSPORT", field: "p001nokp" },
+                { name: "tkhmohon", label: "TARIKH MOHON", field: "p001tkhpohon" },
+                { name: "program", label: "PROGRAM", field: "p001kprog" },
+                { name: "status", label: "STATUS", field: "p001status" },
+                { name: "actions", label: "TINDAKAN" },],
       filter,
-      dataPemohon,
+      statB,
+      bilB,
+      bilD,
+      bilGF,
+      bilLF,
+      bilPF,
+      filteredRows,
+      selectedStatus,
+      selectStatus,
       goToDetailsAdmin,
       goToEditDetailsAdmin,
-      onRequestAdmin,
+      onRequest,
       Total,
+      statusColor,
+      statusDescription,
+      // color,
       pagination: {
         rowsPerPage: 5,
       },
-      // filteredApplications,
-    };
+      options: {
+        customFilters: [{
+          name: 'statusFilter',
+          callback: function (row, props) {
+            return row.status[0] == props;
+          }
+        }]
+      }
+      };
   },
-};
+  });
 
-// datatable
-// const columns = [
-//   {
-//     name: "name",
-//     required: true,
-//     label: "NAMA PEMOHON",
-//     align: "left",
-//     field: (row) => row.name,
-//     format: (val) => `${val}`,
-//     sortable: true,
-//   },
-//   {
-//     name: "calories",
-//     align: "center",
-//     label: "TARIKH MOHON",
-//     field: "calories",
-//     sortable: true,
-//   },
 
-//   {
-//     name: "calcium",
-//     label: "STATUS",
-//     field: "calcium",
-//     sortable: true,
-//     sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
-//   },
-//   {
-//     name: "iron",
-//     label: "TINDAKAN",
-//     field: "iron",
-//     sortable: true,
-//     sort: (a, b) => parseInt(a, 10) - parseInt(b, 10),
-//   },
-// ];
-
-// const rows = [
-//   {
-//     name: "Frozen Yogurt",
-//     calories: 159,
-//     fat: 6.0,
-//     carbs: 24,
-//     protein: 4.0,
-//     sodium: 87,
-//     calcium: "14%",
-//     iron: "1%",
-//   },
-//   {
-//     name: "Ice cream sandwich",
-//     calories: 237,
-//     fat: 9.0,
-//     carbs: 37,
-//     protein: 4.3,
-//     sodium: 129,
-//     calcium: "8%",
-//     iron: "1%",
-//   },
-//   {
-//     name: "Eclair",
-//     calories: 262,
-//     fat: 16.0,
-//     carbs: 23,
-//     protein: 6.0,
-//     sodium: 337,
-//     calcium: "6%",
-//     iron: "7%",
-//   },
-//   {
-//     name: "Cupcake",
-//     calories: 305,
-//     fat: 3.7,
-//     carbs: 67,
-//     protein: 4.3,
-//     sodium: 413,
-//     calcium: "3%",
-//     iron: "8%",
-//   },
-//   {
-//     name: "Gingerbread",
-//     calories: 356,
-//     fat: 16.0,
-//     carbs: 49,
-//     protein: 3.9,
-//     sodium: 327,
-//     calcium: "7%",
-//     iron: "16%",
-//   },
-//   {
-//     name: "Jelly bean",
-//     calories: 375,
-//     fat: 0.0,
-//     carbs: 94,
-//     protein: 0.0,
-//     sodium: 50,
-//     calcium: "0%",
-//     iron: "0%",
-//   },
-//   {
-//     name: "Lollipop",
-//     calories: 392,
-//     fat: 0.2,
-//     carbs: 98,
-//     protein: 0,
-//     sodium: 38,
-//     calcium: "0%",
-//     iron: "2%",
-//   },
-//   {
-//     name: "Honeycomb",
-//     calories: 408,
-//     fat: 3.2,
-//     carbs: 87,
-//     protein: 6.5,
-//     sodium: 562,
-//     calcium: "0%",
-//     iron: "45%",
-//   },
-//   {
-//     name: "Donut",
-//     calories: 452,
-//     fat: 25.0,
-//     carbs: 51,
-//     protein: 4.9,
-//     sodium: 326,
-//     calcium: "2%",
-//     iron: "22%",
-//   },
-//   {
-//     name: "KitKat",
-//     calories: 518,
-//     fat: 26.0,
-//     carbs: 65,
-//     protein: 7,
-//     sodium: 54,
-//     calcium: "12%",
-//     iron: "6%",
-//   },
-// ];
 </script>

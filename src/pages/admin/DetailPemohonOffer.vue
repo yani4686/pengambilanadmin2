@@ -13,7 +13,7 @@
                     Tindakan Fakulti
                   </q-tooltip>
                 </q-btn> -->
-                <q-btn @click="updateRow1()" icon="edit" outline color="primary" label="Tindakan Fakulti" class="q-mr-xs" />
+                <q-btn @click="updateRow1()" icon="edit" outline color="primary" label="Tindakan PPS" class="q-mr-xs" />
               </div>
             </div>
   
@@ -614,6 +614,47 @@
           </div>
   
         </q-card>
+        <!-- tindakan fakukti -->
+        <q-card bordered no-shadow fit class="q-pa-md">
+          <q-card-section>
+            <div class="q-pa-lg q-mt-md">
+              <span style="font-size: medium; font-weight: bold">Maklumat Pengesahan Fakulti</span>
+              <hr />
+            </div>
+          </q-card-section>
+  
+          <div class="col-12 q-mt-sm">
+            <q-card bordered no-shadow class="card_style">
+              <q-card-section vert>
+                <div class="row q-col-gutter-lg">
+                  <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+  
+                    <q-card-section>
+                      <q-item type row no-wrap><q-item-section column side justify-center text-grey-8>
+                          <label class="col-form-label q-mb-none" style="margin-left: 10px">Status Pengesahan
+                            :</label>
+                        </q-item-section></q-item>
+                      <q-item type row no-wrap><q-item-section column side justify-center text-grey-8>
+                          <label class="col-form-label q-mb-none" style="margin-left: 10px">Catatan Pengesahan
+                            :</label>
+                        </q-item-section></q-item>
+                      <q-item type row no-wrap><q-item-section column side justify-center text-grey-8>
+                          <label class="col-form-label q-mb-none" style="margin-left: 10px">Pilihan Tawaran Program Baharu
+                            :</label>
+                        </q-item-section></q-item>
+                      <q-item type row no-wrap><q-item-section column side justify-center text-grey-8>
+                          <label class="col-form-label q-mb-none" style="margin-left: 10px">Fakulti
+                            :</label>
+                        </q-item-section></q-item>
+                    </q-card-section>
+  
+                  </div>
+                </div>
+              </q-card-section>
+            </q-card>
+          </div>
+  
+        </q-card>
         <!-- view file attach -->
          <!-- Modal Popup for Viewing Attachment -->
          <q-dialog v-model="showModal" persistent>
@@ -712,10 +753,10 @@
           </q-card>
         </q-dialog>
         <!-- Dialogs -->
-        <q-dialog v-model="updateTindakanModal">
-          <updateTindakan />
+        <q-dialog v-model="updateTindakanModal2">
+          <updateTindakan2 />
         </q-dialog>
-        <q-dialog v-model="new_customer">
+        <q-dialog v-model="new_customer2">
           <q-card style="width: 600px; max-width: 60vw;">
             <q-card-section>
               <div class="text-h6">
@@ -725,16 +766,55 @@
             </q-card-section>
             <q-separator inset></q-separator>
             <q-card-section class="q-pt-none">
-              <q-form class="q-gutter-md">
+              <q-form class="q-gutter-md" >
                 <q-list>
                   <q-item>
                     <q-item-section>
                       <q-item-label class="q-pb-xs">Tindakan Pengesahan</q-item-label>
-                      <q-select class="q-pb-xs" label="Tindakan Pengesahan" color="blue" :options="singleDropdownOptions"
-                        outlined dense required :rules="[(val) => !!val || 'Tindakan Pengesahan is required']"
+                      <q-select 
+                      class="q-pb-xs" 
+                      label="Tindakan Pengesahan" 
+                      color="blue" 
+                      v-model="selectedOption" 
+                      :options="singleDropdownOptions"
+                       @update:model-value="updateSelectedOption"
+                        outlined 
+                        dense 
+                        required 
+                        :rules="[(val) => !!val || 'Tindakan Pengesahan is required']"
                         style="margin-right: 12px" />
                     </q-item-section>
                   </q-item>
+                  <q-item>
+                  <q-item-section>
+                      <q-item-label class="q-pb-xs">Jenis Tawaran (Pass PPS only)</q-item-label>
+                      <q-select class="q-pb-xs" label="Jenis Tawaran" color="blue" :options="singleDropdownOptionsJT"
+                        outlined dense required :rules="[(val) => !!val || 'Jenis Tawaran is required']"
+                        style="margin-right: 12px" />
+                    </q-item-section>
+                  </q-item>
+                  <!-- <div>Selected Option: {{ selectedOption }}</div> -->
+                  <div :key="selectedOption">
+                  <div v-if="selectedOption === '4'">
+                  <!-- <div v-if="true"> -->
+                    <q-item>
+                    <q-item-section>
+                      <q-item-label class="q-pb-xs">Pilihan Program Baru</q-item-label>
+                      <q-select 
+                      class="q-pb-xs" 
+                       :options="programOptions"
+                      label="Program" 
+                      color="blue" 
+                        outlined 
+                        dense 
+                        required 
+                        :rules="[(val) => !!val || 'Program is required']"
+                         v-model="formData.kdprogrambaru"
+                        style="margin-right: 12px" />
+                    </q-item-section>
+                  </q-item>
+                </div>
+              </div>
                   <q-item>
                     <q-item-section>
                       <q-item-label class="q-pb-xs">Catatan Pengesahan</q-item-label>
@@ -747,7 +827,7 @@
             </q-card-section>
   
             <q-card-actions align="right" class="submit-button">
-              <q-btn label="Simpan" type="submit" color="primary" class="q-mr-sm" v-close-popup @click="Submit()" />
+              <q-btn label="Simpan" type="submit" color="primary" class="q-mr-sm" v-close-popup @click="Submit" />
               <q-btn label="Tutup" color="negative" outlined v-close-popup></q-btn>
             </q-card-actions>
           </q-card>
@@ -759,15 +839,15 @@
   </template>
   
   <script>
-  import { defineComponent, onMounted, ref, computed } from "vue";
+  import { defineComponent, onMounted, ref, computed,reactive,watch } from "vue";
   import { useRouter, useRoute } from "vue-router";
-  import updateTindakan from "./EditPermohonanOffer.vue";
+  import updateTindakan2 from "./EditPermohonanOffer.vue";
   import { useRetPermohonanStore } from "src/stores/getmohon";
   
   export default defineComponent({
-    name: "DetailPermohonan",
+    name: "DetailPermohonanOffer",
     components: {
-      updateTindakan,
+      updateTindakan2,
     },
   
     setup() {
@@ -807,7 +887,7 @@
       const urlresit = ref('');
       const urlexp = ref('');
       const labelText = ref(''); // Reactive variable for label text (e.g., from API)
-      //const labelText1 = ref(''); // Reactive variable for label text (e.g., from API)
+      //const formData = ref(''); // Reactive variable for label text (e.g., from API)
       
   
       //const Details = computed(() => storeGetMohon.Details); // Computed value from the store
@@ -816,24 +896,61 @@
       });
   
   
-      const updateTindakanModal = ref(false);
+      const updateTindakanModal2 = ref(false);
       const showModal = ref(false);
       const showModalcert = ref(false);
       const showModalpro = ref(false);
       const showModalbi = ref(false);
       const showModalresit = ref(false);
       const showModalexp = ref(false);
-      const new_customer = ref(false);
+      const new_customer2 = ref(false);
   
       const form = ref({
         singleDropdown: "",
       });
   
+      const selectedOption = ref(""); // Tracks selected dropdown value
+      // watch(selectedOption, (newValue) => {console.log("Selected Option:", newValue);});
+  
+  const updateSelectedOption = (selected) => {
+        selectedOption.value = selected.value; // Extract only the value
+      };
+      
+      const formData = reactive({
+        kdprogrambaru: "",
+      });
+  
       const singleDropdownOptions = [
       { label: "Permohonan Diluluskan", value: "2" },
       { label: "Permohonan Tidak Diluluskan", value: "3" },
-      { label: "Pindah Fakulti", value: "4" },
+      // { label: "Pindah Fakulti", value: "4" },
       ];
+  
+      const singleDropdownOptionsJT = [
+      { label: "Tawaran Penuh", value: "A" },
+      { label: "Tawaran Bersyarat : Tidak memenuhi syarat kemasukkan Bahasa English", value: "B" },
+      { label: "Tawaran Bersyarat : Fast Track", value: "C" },
+      ];
+  
+  
+      const programOptions = [
+        { label: "Program A", value: "A" },
+        { label: "Program B", value: "B" },
+        { label: "Program C", value: "C" },
+      ];
+  
+      // Submit handler
+      const Submit = () => {
+        console.log("Form Data Submitted:", {
+          selectedOption: selectedOption.value,
+          program: formData.kdprogrambaru,
+        });
+  
+        if (selectedOption.value === "4" && !formData.kdprogrambaru) {
+          console.error("Program selection is required!");
+        }
+  
+      };
   
   
       // Function to fetch data based on route ID
@@ -896,6 +1013,7 @@
       //   storeGetMohon.fetchDetail().then((response) => {
       //   });
       // }
+      
   
       return {
         tab: ref("mails"),
@@ -903,12 +1021,18 @@
         horizontalTab: "", // Set a valid default tab name
         splitterModel: 20,
   
-        updateTindakanModal,
-        updateRow: () => (updateTindakanModal.value = true),
-        updateRow1: () => (new_customer.value = true),
+        updateTindakanModal2,
+        updateRow: () => (updateTindakanModal1.value = true),
+        updateRow1: () => (new_customer2.value = true),
         singleDropdownOptions,
+        singleDropdownOptionsJT,
+        updateSelectedOption,
+        selectedOption,
+        programOptions,
+        formData,
+        Submit,
         form,
-        new_customer,
+        new_customer2,
         setDetails,
         nama,
         nokp,
