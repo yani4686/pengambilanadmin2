@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { api } from "boot/axios"; // Assuming Quasar's Axios setup
 
-export const useRetPermohonanStore = defineStore("getmohon", {
+export const useRetPermohonanStorePps = defineStore("getmohonpps", {
   state: () => ({
     MohonList: [], // Reactive state for data
     Details: [], // Reactive state for data
@@ -19,7 +19,7 @@ export const useRetPermohonanStore = defineStore("getmohon", {
     async fetchKodProgram() {
       try {
         const response = await api.get("/getkodprogram"); // API endpoint
-        console.log("API Response kodprogram:", response.data);
+        console.log("API Response:", response.data);
        // if (response.data.status === "success") {
          // this.KodProgram = response.data; // Update store state
           //this.MohonList = Object.values(response.data);
@@ -33,7 +33,7 @@ export const useRetPermohonanStore = defineStore("getmohon", {
     },
     async fetchP() {
       try {
-        const response = await api.get("/retpermohonan"); // API endpoint
+        const response = await api.get("/retpermohonansaring"); // API endpoint
        // console.log("API Response:", response.data);
         if (response.data.status === "success") {
           this.MohonList = response.data.data; // Update store state

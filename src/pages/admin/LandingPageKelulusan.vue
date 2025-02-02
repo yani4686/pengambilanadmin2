@@ -328,14 +328,14 @@ hr {
 <script>
 import { useRoute, useRouter } from "vue-router";
 import { defineComponent, onMounted, ref, computed,reactive } from "vue";
-import { useRetPermohonanStore } from "src/stores/getmohon";
+import { useRetPermohonanStorePps } from "src/stores/getmohonpps";
 
 
 export default defineComponent({
-  name: "PermohonanPage",
+  name: "PermohonanPagePPS",
   setup() {
 
-    const storeGetMohon = useRetPermohonanStore(); // Pinia store
+    const storeGetMohon = useRetPermohonanStorePps(); // Pinia store
 
    // Computed property for reactive state
    const MohonList = computed(() => {
@@ -386,7 +386,7 @@ export default defineComponent({
   const statusColor = (status) => {
   const colors = {
     '1': 'green',
-    '2': 'yellow',
+    '2': 'green',
     '3': 'red',
     '4': 'yellow',
     '5': 'yellow',
@@ -400,8 +400,8 @@ export default defineComponent({
 const statusDescription = (status) => {
  // console.log('Status:', status); // Debugging
   const descriptions = {
-    '1': 'Approved',
-    '2': 'Pending',
+    '1': 'Approved(PPS)',
+    '2': 'Approved(F)',
     '3': 'Rejected',
     '4': 'In Review',
     '5': 'Under Processing',

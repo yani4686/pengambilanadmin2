@@ -842,7 +842,7 @@
 import { defineComponent, onMounted, ref, computed,reactive,watch } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import updateTindakan1 from "./EditPermohonanAdmin.vue";
-import { useRetPermohonanStore } from "src/stores/getmohon";
+import { useRetPermohonanStorePps } from "src/stores/getmohonpps";
 
 export default defineComponent({
   name: "DetailPermohonanAdmin",
@@ -853,7 +853,7 @@ export default defineComponent({
   setup() {
     const route = useRoute(); // Access route parameters
     const router = useRouter(); // For navigation if needed
-    const storeGetMohon = useRetPermohonanStore(); // Pinia store
+    const storeGetMohon = useRetPermohonanStorePps(); // Pinia store
     const nama = ref(''); // Reactive variable for dynamic label or data
     const nokp = ref(''); // Reactive variable for dynamic label or data
     const tkhlahir = ref(''); // Reactive variable for dynamic label or data

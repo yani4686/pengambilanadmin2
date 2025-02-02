@@ -572,7 +572,7 @@
                             </div>
                             <hr />
                             <div class="row">
-                              <div class="col-8 q-px-xs">
+                              <div class="col-6 q-px-xs">
                                 <q-input :readonly="true" dense outlined class="bg-grey-4"
                                   label="Sokongan Kewangan"></q-input>
                               </div>
@@ -725,8 +725,20 @@
           </q-card-section>
           <q-separator inset></q-separator>
           <q-card-section class="q-pt-none">
-            <q-form class="q-gutter-md" >
+            <!-- <q-form @submit.prevent="submitForm" class="q-gutter-md" > -->
+              <q-form @submit="submitForm" class="q-gutter-md" justify-center
+    >
               <q-list>
+                <q-item>
+                  <q-item-section>
+                    <q-item-label class="q-pb-xs"> No KP/Passport</q-item-label>       
+                    <q-input color="blue" type="text" readonly
+                    outlined 
+                    dense 
+                    label="NoKp/Passport"
+                    v-model="formData.nokpform"/>
+                  </q-item-section>
+                </q-item>
                 <q-item>
                   <q-item-section>
                     <q-item-label class="q-pb-xs">Tindakan Pengesahan</q-item-label>
@@ -769,18 +781,25 @@
                 <q-item>
                   <q-item-section>
                     <q-item-label class="q-pb-xs">Catatan Pengesahan</q-item-label>
-                    <q-input color="blue" type="textarea" outlined dense label="Catatan Pengesahan"
-                      :rules="[(val) => !!val || 'Catatan is required']" required style="margin-right: 12px" />
+                    <q-input color="blue" type="textarea" 
+                    outlined 
+                    dense 
+                    label="Catatan Pengesahan"
+                    v-model="formData.catatanPengesahan"
+                      :rules="[(val) => !!val || 'Catatan is required']" 
+                      required style="margin-right: 12px" />
                   </q-item-section>
                 </q-item>
               </q-list>
+              <q-btn type="submit" @click="submitForm" label="Submit" color="primary" class="q-mr-sm" />
+              <!-- <q-btn label="Tutup" color="negative" outlined v-close-popup></q-btn> -->
             </q-form>
           </q-card-section>
 
-          <q-card-actions align="right" class="submit-button">
+          <!-- <q-card-actions align="right" class="submit-button">
             <q-btn label="Simpan" type="submit" color="primary" class="q-mr-sm" v-close-popup @click="Submit" />
             <q-btn label="Tutup" color="negative" outlined v-close-popup></q-btn>
-          </q-card-actions>
+          </q-card-actions> -->
         </q-card>
       </q-dialog>
 
@@ -838,7 +857,7 @@ export default defineComponent({
     const urlresit = ref('');
     const urlexp = ref('');
     const labelText = ref(''); // Reactive variable for label text (e.g., from API)
-    //const formData = ref(''); // Reactive variable for label text (e.g., from API)
+    const nokpform = ref(''); 
     
 
     //const Details = computed(() => storeGetMohon.Details); // Computed value from the store
@@ -867,8 +886,10 @@ const updateSelectedOption = (selected) => {
       selectedOption.value = selected.value; // Extract only the value
     };
     
-    const formData = reactive({
+    const formData = ref({
       kdprogrambaru: "",
+      catatanPengesahan: '',
+      nokpform: '',
     });
 
     const singleDropdownOptions = [
@@ -883,19 +904,39 @@ const updateSelectedOption = (selected) => {
       { label: "Program C", value: "C" },
     ];
 
-    // Submit handler
-    const Submit = () => {
-      console.log("Form Data Submitted:", {
-        selectedOption: selectedOption.value,
-        program: formData.kdprogrambaru,
-      });
+   const submitForm = async () => {
+  const payload = {
+    tindakanPengesahan: selectedOption.value,
+    kdprogrambaru: selectedOption.value === '4' ? formData.value.kdprogrambaru : null,
+    catatanPengesahan: formData.value.catatanPengesahan,
+    nokpform: formData.value.nokpform,
+  };
 
-      if (selectedOption.value === "4" && !formData.kdprogrambaru) {
-        console.error("Program selection is required!");
+  try {
+    const response = await storeGetMohon.createupdtindakanf(payload);
+   // console.log("API Response:", response.status); // Debugging
+    //console.log('Form submitted successfully');
+    if (response.status === 'success') {
+      //console.log("Success response received");
+      new_customer.value = false;
+     // console.log("Modal closed");
+
+      setTimeout(() => {
+        router.push({ name: "LandingPageSaringan" });
+      //  console.log("Redirecting to LandingPageSaringan");
+      }, 200);
+
+      // new_customer.value = false; 
+      // console.log(new_customer.value)
+    //  router.push('/landingpgsaringan');
+      router.push({ name: "LandingPageSaringan"});
+     // this.$router.push('/landingpgsaringan'); // Redirect
+      
       }
-
-    };
-
+  } catch (error) {
+    console.error('Form submission failed:', error);
+  }
+};
 
     // Function to fetch data based on route ID
     const fetchDetails = async () => {
@@ -905,6 +946,7 @@ const updateSelectedOption = (selected) => {
           await storeGetMohon.fetchDetail(id); // Fetch details using Pinia store action
           nama.value = storeGetMohon.Details.p001nama || ''; // Example: bind the fetched name to the variable
           nokp.value = storeGetMohon.Details.p001nokp || ''; // Example: bind the fetched name to the variable
+          formData.value.nokpform = storeGetMohon.Details.p001nokp || ''; // Example: bind the fetched name to the variable
           tkhlahir.value = storeGetMohon.Details.p001tkhlahir || ''; // Example: bind the fetched name to the variable
           statwarga.value = storeGetMohon.Details.ktrgnstatwarga || ''; // Example: bind the fetched name to the variable
           statoku.value = storeGetMohon.Details.z013jenkcctn || ''; // Example: bind the fetched name to the variable
@@ -973,12 +1015,13 @@ const updateSelectedOption = (selected) => {
       selectedOption,
       programOptions,
       formData,
-      Submit,
+      submitForm,
       form,
       new_customer,
       setDetails,
       nama,
       nokp,
+      nokpform,
       tkhlahir,
       statwarga,
       statoku,

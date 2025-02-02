@@ -386,7 +386,7 @@ export default defineComponent({
   const statusColor = (status) => {
   const colors = {
     '1': 'green',
-    '2': 'yellow',
+    '2': 'green',
     '3': 'red',
     '4': 'yellow',
     '5': 'yellow',
@@ -401,7 +401,7 @@ const statusDescription = (status) => {
  // console.log('Status:', status); // Debugging
   const descriptions = {
     '1': 'Approved',
-    '2': 'Pending',
+    '2': 'Approved',
     '3': 'Rejected',
     '4': 'In Review',
     '5': 'Under Processing',
