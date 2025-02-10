@@ -5,7 +5,7 @@
         <q-card-section>
           <div class="row q-col-gutter-sm">
             <div class="">
-              <span style="font-size: medium; font-weight: bold">Maklumat Permohonan</span>
+              <span style="font-size: medium; font-weight: bold">Fakulti/Maklumat Permohonan</span>
             </div>
             <div class="">
               <!-- <q-btn dense flat icon="edit" color="negative" @click="updateRow()">
@@ -17,19 +17,75 @@
             </div>
           </div>
 
-          <hr />
+          <!-- <hr /> -->
 
           <q-item type row no-wrap>
-            <q-item-section column side justify-center text-grey-8><label class="col-form-label q-mb-none"
-                style="margin-left: 10px">Status Permohonan
-                : Baru</label>
-              <label class="col-form-label q-mb-none" style="margin-left: 10px">Jenis Permohonan : {{ laluan }}</label>
-              <label class="col-form-label q-mb-none" style="margin-left: 10px">Catatan
-                : {{ transfer }}</label>
+            <q-item-section column side text-grey-8>
+              <div class="q-pa-md">
+                <div class="row">
+                  <div class="col col-md-6">
+                    <label class="col-form-label q-mb-none" style="margin-left: 10px">Status Mohon: {{ statdesc }} </label>
+                  </div>
+                  <div class="col col-md-6">
+                    <label class="col-form-label q-mb-none" style="margin-left: 10px">Jenis Permohonan : {{ laluan }}</label>
+                  </div>
+                </div>  
+                  <label class="col-form-label q-mb-none" style="margin-left: 10px">Catatan : {{ transfer }}</label>
+              </div>                          
             </q-item-section>
           </q-item>
-
+          <hr />
         </q-card-section>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+<q-card bordered no-shadow fit>
+<q-card-section vert text-grey-8>
+  <q-item type row no-wrap>
+            <q-item-section column side text-grey-8>
+              <label class="col-form-label q-mb-none" style="margin-left: 10px">Program: xx</label>           
+              <label class="col-form-label q-mb-none" style="margin-left: 10px">Fakulti: xx</label>
+            </q-item-section>
+          </q-item>
+</q-card-section>
+<q-card-section vert q-px-lg>
+  <div class="row q-col-gutter-lg">
+    <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+      <q-card bordered no-shadow>
+        <q-list dense role="list">
+        <q-item header q-mt-none text-grey-6>(A)</q-item>
+        <q-item type row no-wrap role="listitem">
+            <q-item-section column side text-grey-8>
+              <label class="col-form-label q-mb-none" style="margin-left: 10px">Tindakan: {{ statdesc }} </label>
+            </q-item-section>
+          </q-item>
+          <q-item type row no-wrap role="listitem">
+            <q-item-section column side text-grey-8>
+              <label class="col-form-label q-mb-none" style="margin-left: 10px">Catatan: {{ cttnsah }}</label>
+            </q-item-section>
+          </q-item>
+        </q-list>       
+      </q-card>
+    </div>
+    <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+      <q-card bordered no-shadow>
+        <q-list dense role="list">
+        <q-item header q-mt-none text-grey-6>(B)</q-item>
+        <q-item type row no-wrap role="listitem">
+            <q-item-section column side text-grey-8>
+              <label class="col-form-label q-mb-none" style="margin-left: 10px">Tindakan: xx</label>
+            </q-item-section>
+          </q-item>
+          <q-item type row no-wrap role="listitem">
+            <q-item-section column side text-grey-8>
+              <label class="col-form-label q-mb-none" style="margin-left: 10px">Catatan: xx</label>
+            </q-item-section>
+          </q-item>
+        </q-list>        
+      </q-card>
+    </div>
+  </div>
+</q-card-section>
+</q-card>
+        </div>
         <q-tabs v-model="tab" align="justify" narrow-indicator class="q-mb-lg">
           <q-tab class="text-blue" name="mails" label="Profil Pemohon" />
           <q-tab class="text-blue" name="alarms" label="Program Pilihan" />
@@ -858,6 +914,8 @@ export default defineComponent({
     const urlexp = ref('');
     const labelText = ref(''); // Reactive variable for label text (e.g., from API)
     const nokpform = ref(''); 
+    const statdesc = ref(''); 
+    const cttnsah = ref(''); 
     
 
     //const Details = computed(() => storeGetMohon.Details); // Computed value from the store
@@ -903,6 +961,11 @@ const updateSelectedOption = (selected) => {
       { label: "Program B", value: "B" },
       { label: "Program C", value: "C" },
     ];
+
+    const listprogram = computed(() => {
+       // belum jadi lg ret kod program;
+        return storeGetMohon.KodProgram;
+    });
 
    const submitForm = async () => {
   const payload = {
@@ -978,7 +1041,8 @@ const updateSelectedOption = (selected) => {
           urlresit.value = storeGetMohon.Details.urlpro || ''; // Example: bind the fetched name to the variable
           urlexp.value = storeGetMohon.Details.urlpro || ''; // Example: bind the fetched name to the variable
           labelText.value = storeGetMohon.Details.label || 'Default Label'; // Example: bind label text if available
-        //  labelText1.value = storeGetMohon.Details.label; // Example: bind label text if available
+          statdesc.value = storeGetMohon.Details.statdesc || 'N/A'; 
+          cttnsah.value = storeGetMohon.Details.p001catatan || 'N/A'; 
         //  console.log("Details fetched nokp", nokp.value);
         //  console.log("Details fetched successfully", storeGetMohon.Details);
         } catch (error) {
@@ -1014,6 +1078,7 @@ const updateSelectedOption = (selected) => {
       updateSelectedOption,
       selectedOption,
       programOptions,
+      listprogram,
       formData,
       submitForm,
       form,
@@ -1059,6 +1124,8 @@ const updateSelectedOption = (selected) => {
       showModalbi,
       showModalresit,
       showModalexp,
+      statdesc,
+      cttnsah,
      // labelText1,
     };
   },
@@ -1079,7 +1146,6 @@ const updateSelectedOption = (selected) => {
   margin: 0 0 7px 0;
   font-weight: 500;
 }
-
 
 /* .card-title {
   font-size: 16px;

@@ -21,7 +21,7 @@ export const useRetPermohonanStore = defineStore("getmohon", {
         const response = await api.get("/getkodprogram"); // API endpoint
         console.log("API Response kodprogram:", response.data);
        // if (response.data.status === "success") {
-         // this.KodProgram = response.data; // Update store state
+          this.KodProgram = response.data; // Update store state
           //this.MohonList = Object.values(response.data);
           
          // console.log("Updated KodProgram in Store:", this.KodProgram);
