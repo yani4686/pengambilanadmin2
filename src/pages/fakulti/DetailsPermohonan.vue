@@ -1,11 +1,15 @@
 <template>
   <q-page class="q-pa-md flex-center">
-    <q-page-container style="padding-top: 10px; padding-bottom: 37px; padding-left: 80px">
+    <q-page-container
+      style="padding-top: 10px; padding-bottom: 37px; padding-left: 80px"
+    >
       <q-card bordered no-shadow fit class="q-pa-md">
         <q-card-section>
           <div class="row q-col-gutter-sm">
             <div class="">
-              <span style="font-size: medium; font-weight: bold">Fakulti/Maklumat Permohonan</span>
+              <span style="font-size: medium; font-weight: bold"
+                >Fakulti/Maklumat Permohonan</span
+              >
             </div>
             <div class="">
               <!-- <q-btn dense flat icon="edit" color="negative" @click="updateRow()">
@@ -13,7 +17,14 @@
                   Tindakan Fakulti
                 </q-tooltip>
               </q-btn> -->
-              <q-btn @click="updateRow1()" icon="edit" outline color="primary" label="Tindakan Fakulti" class="q-mr-xs" />
+              <q-btn
+                @click="updateRow1()"
+                icon="edit"
+                outline
+                color="primary"
+                label="Tindakan Fakulti"
+                class="q-mr-xs"
+              />
             </div>
           </div>
 
@@ -24,67 +35,123 @@
               <div class="q-pa-md">
                 <div class="row">
                   <div class="col col-md-6">
-                    <label class="col-form-label q-mb-none" style="margin-left: 10px">Status Mohon: {{ statdesc }} </label>
+                    <label
+                      class="col-form-label q-mb-none"
+                      style="margin-left: 5px"
+                      >Status Mohon: {{ statdesc }}
+                    </label>
                   </div>
                   <div class="col col-md-6">
-                    <label class="col-form-label q-mb-none" style="margin-left: 10px">Jenis Permohonan : {{ laluan }}</label>
+                    <label
+                      class="col-form-label q-mb-none"
+                      style="margin-left: 5px"
+                      >Jenis Permohonan : {{ laluan }}</label
+                    >
                   </div>
-                </div>  
-                  <label class="col-form-label q-mb-none" style="margin-left: 10px">Catatan : {{ transfer }}</label>
-              </div>                          
+                </div>
+                <label class="col-form-label q-mb-none" style="margin-left: 5px"
+                  >Catatan : {{ transfer }}</label
+                >
+              </div>
             </q-item-section>
           </q-item>
           <hr />
         </q-card-section>
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-<q-card bordered no-shadow fit>
-<q-card-section vert text-grey-8>
-  <q-item type row no-wrap>
-            <q-item-section column side text-grey-8>
-              <label class="col-form-label q-mb-none" style="margin-left: 10px">Program: xx</label>           
-              <label class="col-form-label q-mb-none" style="margin-left: 10px">Fakulti: xx</label>
-            </q-item-section>
-          </q-item>
-</q-card-section>
-<q-card-section vert q-px-lg>
-  <div class="row q-col-gutter-lg">
-    <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
-      <q-card bordered no-shadow>
-        <q-list dense role="list">
-        <q-item header q-mt-none text-grey-6>(A)</q-item>
-        <q-item type row no-wrap role="listitem">
-            <q-item-section column side text-grey-8>
-              <label class="col-form-label q-mb-none" style="margin-left: 10px">Tindakan: {{ statdesc }} </label>
-            </q-item-section>
-          </q-item>
-          <q-item type row no-wrap role="listitem">
-            <q-item-section column side text-grey-8>
-              <label class="col-form-label q-mb-none" style="margin-left: 10px">Catatan: {{ cttnsah }}</label>
-            </q-item-section>
-          </q-item>
-        </q-list>       
-      </q-card>
-    </div>
-    <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
-      <q-card bordered no-shadow>
-        <q-list dense role="list">
-        <q-item header q-mt-none text-grey-6>(B)</q-item>
-        <q-item type row no-wrap role="listitem">
-            <q-item-section column side text-grey-8>
-              <label class="col-form-label q-mb-none" style="margin-left: 10px">Tindakan: xx</label>
-            </q-item-section>
-          </q-item>
-          <q-item type row no-wrap role="listitem">
-            <q-item-section column side text-grey-8>
-              <label class="col-form-label q-mb-none" style="margin-left: 10px">Catatan: xx</label>
-            </q-item-section>
-          </q-item>
-        </q-list>        
-      </q-card>
-    </div>
-  </div>
-</q-card-section>
-</q-card>
+          <q-card bordered no-shadow fit>
+            <q-card-section vert text-grey-8>
+              <span style="font-size: medium; font-weight: bold"
+                >Maklumat Pengesahan Fakulti</span
+              >
+              <hr />
+              <q-item type row no-wrap>
+                <q-item-section column side text-grey-8>
+                  <label
+                    class="col-form-label q-mb-none"
+                    style="margin-left: 10px"
+                    >Program: {{ kdprogram }}</label
+                  >
+                  <label
+                    class="col-form-label q-mb-none"
+                    style="margin-left: 10px"
+                    >Fakulti: xx</label
+                  >
+                </q-item-section>
+              </q-item>
+            </q-card-section>
+            <q-card-section vert q-px-lg>
+              <div class="row q-col-gutter-lg">
+                <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+                  <q-card bordered no-shadow>
+                    <q-list dense role="list">
+                      <q-item header q-mt-none text-grey-6>(A)</q-item>
+                      <q-item type row no-wrap role="listitem">
+                        <q-item-section column side text-grey-8>
+                          <label
+                            class="col-form-label q-mb-none"
+                            style="margin-left: 10px"
+                            >Fakulti: xx</label
+                          >
+                        </q-item-section>
+                      </q-item>
+                      <q-item type row no-wrap role="listitem">
+                        <q-item-section column side text-grey-8>
+                          <label
+                            class="col-form-label q-mb-none"
+                            style="margin-left: 10px"
+                            >Tindakan: {{ statdesc }}
+                          </label>
+                        </q-item-section>
+                      </q-item>
+                      <q-item type row no-wrap role="listitem">
+                        <q-item-section column side text-grey-8>
+                          <label
+                            class="col-form-label q-mb-none"
+                            style="margin-left: 10px"
+                            >Catatan: {{ cttnsah }}</label
+                          >
+                        </q-item-section>
+                      </q-item>
+                    </q-list>
+                  </q-card>
+                </div>
+                <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+                  <q-card bordered no-shadow>
+                    <q-list dense role="list">
+                      <q-item header q-mt-none text-grey-6>(B)</q-item>
+                      <q-item type row no-wrap role="listitem">
+                        <q-item-section column side text-grey-8>
+                          <label
+                            class="col-form-label q-mb-none"
+                            style="margin-left: 10px"
+                            >Fakulti: xx</label
+                          >
+                        </q-item-section>
+                      </q-item>
+                      <q-item type row no-wrap role="listitem">
+                        <q-item-section column side text-grey-8>
+                          <label
+                            class="col-form-label q-mb-none"
+                            style="margin-left: 10px"
+                            >Tindakan: xx</label
+                          >
+                        </q-item-section>
+                      </q-item>
+                      <q-item type row no-wrap role="listitem">
+                        <q-item-section column side text-grey-8>
+                          <label
+                            class="col-form-label q-mb-none"
+                            style="margin-left: 10px"
+                            >Catatan: xx</label
+                          >
+                        </q-item-section>
+                      </q-item>
+                    </q-list>
+                  </q-card>
+                </div>
+              </div>
+            </q-card-section>
+          </q-card>
         </div>
         <q-tabs v-model="tab" align="justify" narrow-indicator class="q-mb-lg">
           <q-tab class="text-blue" name="mails" label="Profil Pemohon" />
@@ -94,7 +161,13 @@
           <!-- <q-tab class="text-blue" name="agree" label="Setuju/Disclaimer" /> -->
         </q-tabs>
         <div class="q-gutter-y-xl">
-          <q-tab-panels v-model="tab" animated transition-prev="scale" transition-next="scale" class="text-left">
+          <q-tab-panels
+            v-model="tab"
+            animated
+            transition-prev="scale"
+            transition-next="scale"
+            class="text-left"
+          >
             <q-tab-panel name="mails">
               <div class="col-12 q-mt-sm">
                 <q-card bordered no-shadow class="card_style">
@@ -103,50 +176,101 @@
                       <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                         <q-card bordered no-shadow class="card_style">
                           <q-card-section vert text-center class="image-center">
-                            <q-avatar square size="100px"><img :src="urlpic" alt="Avatar"/>
-                              </q-avatar>
-                            </q-card-section>
+                            <q-avatar square size="100px"
+                              ><img :src="urlpic" alt="Avatar" />
+                            </q-avatar>
+                          </q-card-section>
                           <q-card-section>
                             <div class="row">
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="No KP/Passport"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="No KP/Passport"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="nokp" :label="'No KP'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="nokp"
+                                  :label="'No KP'"
+                                ></q-input>
                               </div>
 
+                              <div class="col-4 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Nama"
+                                ></q-input>
+                              </div>
+                              <div class="col-8 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="nama"
+                                  :label="labelText"
+                                ></q-input>
+                              </div>
 
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Nama"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Tarikh Lahir"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="nama" :label="labelText"></q-input>
-                              </div>
-
-                              <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Tarikh Lahir"></q-input>
-                              </div>
-                              <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="tkhlahir" :label="'Tarikh Lahir'"></q-input>
-                              </div>
-                              <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Status
-                                    Warganegara"></q-input>
-                              </div>
-                              <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="statwarga" :label="'Status Warganegara'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="tkhlahir"
+                                  :label="'Tarikh Lahir'"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Status Kecatatan"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Status
+                                    Warganegara"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="statoku" :label="'Status Kecacatan'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="statwarga"
+                                  :label="'Status Warganegara'"
+                                ></q-input>
+                              </div>
+                              <div class="col-4 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Status Kecatatan"
+                                ></q-input>
+                              </div>
+                              <div class="col-8 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="statoku"
+                                  :label="'Status Kecacatan'"
+                                ></q-input>
                               </div>
                             </div>
-
-
                           </q-card-section>
                         </q-card>
                       </div>
@@ -167,79 +291,179 @@
                             </q-item> -->
                             <div class="row">
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Alamat Semasa"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Alamat Semasa"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="almtsemasa" :label="'Alamat Semasa'"></q-input>
-                              </div>
-
-
-                              <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="No Tel(HP)"></q-input>
-                              </div>
-                              <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense v-model="telHPS" :label="'No Tel(HP)'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="almtsemasa"
+                                  :label="'Alamat Semasa'"
+                                ></q-input>
                               </div>
 
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="No Tel(R)"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="No Tel(HP)"
+                                ></q-input>
                               </div>
                               <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense v-model="telRS" :label="'No Tel(R)'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="telHPS"
+                                  :label="'No Tel(HP)'"
+                                ></q-input>
+                              </div>
+
+                              <div class="col-4 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="No Tel(R)"
+                                ></q-input>
+                              </div>
+                              <div class="col-2 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="telRS"
+                                  :label="'No Tel(R)'"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="No Tel(P)"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="No Tel(P)"
+                                ></q-input>
                               </div>
                               <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense v-model="offS" :label="'No Tel(P)'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="offS"
+                                  :label="'No Tel(P)'"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Fax No"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Fax No"
+                                ></q-input>
                               </div>
                               <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense v-model="faxS" :label="'Fax No'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="faxS"
+                                  :label="'Fax No'"
+                                ></q-input>
                               </div>
                             </div>
                             <hr />
                             <div class="row">
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Alamat Tetap"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Alamat Tetap"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="almtT" :label="'Alamat Tetap'"></q-input>
-                              </div>
-
-
-                              <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="No Tel (HP)"></q-input>
-                              </div>
-                              <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense label="0162321111"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="almtT"
+                                  :label="'Alamat Tetap'"
+                                ></q-input>
                               </div>
 
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="No Tel (Rumah)"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="No Tel (HP)"
+                                ></q-input>
                               </div>
                               <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense label="095332222"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="0162321111"
+                                ></q-input>
+                              </div>
+
+                              <div class="col-4 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="No Tel (Rumah)"
+                                ></q-input>
+                              </div>
+                              <div class="col-2 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="095332222"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="No Tel (Pej)"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="No Tel (Pej)"
+                                ></q-input>
                               </div>
                               <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense label="Tiada"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="Tiada"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Fax No"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Fax No"
+                                ></q-input>
                               </div>
                               <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense label="Tiada"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="Tiada"
+                                ></q-input>
                               </div>
                             </div>
-
                           </q-card-section>
                         </q-card>
                       </div>
@@ -284,60 +508,130 @@
                               </q-item-section></q-item> -->
                             <div class="row">
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Mod Pengajian"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Mod Pengajian"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense v-model="modest" :label="'Mode'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="modest"
+                                  :label="'Mode'"
+                                ></q-input>
                               </div>
 
+                              <div class="col-8 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Kaedah"
+                                ></q-input>
+                              </div>
+                              <div class="col-6 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="kaedah"
+                                  :label="'Kaedah'"
+                                ></q-input>
+                              </div>
 
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Kaedah"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Program"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense v-model="kaedah" :label="'Kaedah'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="kdprogram"
+                                  :label="'Program'"
+                                ></q-input>
                               </div>
-
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Program"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Specialization"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense v-model="kdprogram" :label="'Program'"></q-input>
-                              </div>
-                              <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Specialization"></q-input>
-                              </div>
-                              <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense label="Tiada"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="Tiada"
+                                ></q-input>
                               </div>
                               <div class="col-10 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Cadangan Tajuk
-                                  Penyelidikan"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Cadangan Tajuk
+                                  Penyelidikan"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input textarea :readonly="true" dense v-model="tajuk" :label="'Tajuk Penyelidikan'"></q-input>
-                                  
+                                <q-input
+                                  textarea
+                                  :readonly="true"
+                                  dense
+                                  v-model="tajuk"
+                                  :label="'Tajuk Penyelidikan'"
+                                ></q-input>
                               </div>
                             </div>
 
                             <div class="row">
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Cadangan Penyelia"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Cadangan Penyelia"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense v-model="sv" :label="'Penyelia'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="sv"
+                                  :label="'Penyelia'"
+                                ></q-input>
                               </div>
-
 
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Pengalaman Bekerja"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Pengalaman Bekerja"
+                                ></q-input>
                               </div>
                               <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense v-model="expr" :label="'Pengalaman Bekerja'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="expr"
+                                  :label="'Pengalaman Bekerja'"
+                                ></q-input>
                               </div>
 
                               <!-- <div class="col-4 q-px-xs">
@@ -383,53 +677,117 @@
                               </q-item-section></q-item> -->
                             <div class="row">
                               <div class="col-12 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Kelayakan Akdemik
-                                  Tertinggi"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Kelayakan Akdemik
+                                  Tertinggi"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="akadtggi" :label="'Kelayakan Akdemik'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="akadtggi"
+                                  :label="'Kelayakan Akdemik'"
+                                ></q-input>
                               </div>
 
                               <div class="col-12 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Universiti Anugerah
-                                  (Bachelor/Setara)"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Universiti Anugerah
+                                  (Bachelor/Setara)"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="unilama" :label="'Universiti Anugerah'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="unilama"
+                                  :label="'Universiti Anugerah'"
+                                ></q-input>
                               </div>
 
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Negara Anugerah"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Negara Anugerah"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="negunilama" :label="'Negara Anugerah'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="negunilama"
+                                  :label="'Negara Anugerah'"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="CGPA"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="CGPA"
+                                ></q-input>
                               </div>
 
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="cgpa" :label="'CGPA'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="cgpa"
+                                  :label="'CGPA'"
+                                ></q-input>
                               </div>
                               <!-- <hr /> -->
                             </div>
                             <div class="row">
                               <div class="col-12 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Universiti Anugerah
-                                  (Master/Setara)"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Universiti Anugerah
+                                  (Master/Setara)"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="unilama2" :label="'Universiti Anugerah (Master/Setara)'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="unilama2"
+                                  :label="'Universiti Anugerah (Master/Setara)'"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="CGPA"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="CGPA"
+                                ></q-input>
                               </div>
 
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense v-model="cgpa2" :label="'CGPA'"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  v-model="cgpa2"
+                                  :label="'CGPA'"
+                                ></q-input>
                               </div>
-
                             </div>
                           </q-card-section>
                         </q-card>
@@ -446,33 +804,71 @@
                               </q-item-section></q-item> -->
                             <div class="row">
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Kelayakan Bahasa Inggeris"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Kelayakan Bahasa Inggeris"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense label="Ada"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="Ada"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Jenis Exam"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Jenis Exam"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense label="MUET"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="MUET"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Markah"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Markah"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense label="Band 3"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="Band 3"
+                                ></q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Tarikh Peperiksaan"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Tarikh Peperiksaan"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense label="02/02/2024"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="02/02/2024"
+                                ></q-input>
                               </div>
-                            </div>
-                          </q-card-section></q-card>
+                            </div> </q-card-section
+                        ></q-card>
                       </div>
                     </div>
                   </q-card-section>
@@ -505,86 +901,163 @@
                               </q-item-section></q-item> -->
                             <div class="row">
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Salinan No KP/Passport">
-                                </q-input>                                
-                              </div>
-
-                              <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense > 
-                                  <template v-slot:append>
-                                  <q-btn flat dense icon="visibility" @click="showModal = true" label="View" />
-                                </template>
-                              </q-input>
-                              </div>
-
-                              <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Academic Certificates">                                
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Salinan No KP/Passport"
+                                >
                                 </q-input>
-
                               </div>
+
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense label="">
+                                <q-input :readonly="true" dense>
                                   <template v-slot:append>
-                                  <q-btn flat dense icon="visibility" @click="showModalcert = true" label="View" />
-                                </template>
+                                    <q-btn
+                                      flat
+                                      dense
+                                      icon="visibility"
+                                      @click="showModal = true"
+                                      label="View"
+                                    />
+                                  </template>
                                 </q-input>
                               </div>
 
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Transkrip Akademik"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Academic Certificates"
+                                >
+                                </q-input>
                               </div>
                               <div class="col-4 q-px-xs">
                                 <q-input :readonly="true" dense label="">
                                   <template v-slot:append>
-                                  <q-btn flat dense icon="visibility" @click="showModalcert = true" label="View" />
-                                </template>
+                                    <q-btn
+                                      flat
+                                      dense
+                                      icon="visibility"
+                                      @click="showModalcert = true"
+                                      label="View"
+                                    />
+                                  </template>
+                                </q-input>
+                              </div>
+
+                              <div class="col-8 q-px-xs">
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Transkrip Akademik"
+                                ></q-input>
+                              </div>
+                              <div class="col-4 q-px-xs">
+                                <q-input :readonly="true" dense label="">
+                                  <template v-slot:append>
+                                    <q-btn
+                                      flat
+                                      dense
+                                      icon="visibility"
+                                      @click="showModalcert = true"
+                                      label="View"
+                                    />
+                                  </template>
                                 </q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Kelayakan Bahasa Inggeris"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Kelayakan Bahasa Inggeris"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
                                 <q-input :readonly="true" dense label="">
                                   <template v-slot:append>
-                                  <q-btn flat dense icon="visibility" @click="showModalbi = true" label="View" />
-                                </template>
+                                    <q-btn
+                                      flat
+                                      dense
+                                      icon="visibility"
+                                      @click="showModalbi = true"
+                                      label="View"
+                                    />
+                                  </template>
                                 </q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Kertas Kerja
-                                  Penyelidikan"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Kertas Kerja
+                                  Penyelidikan"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
                                 <q-input :readonly="true" dense label="">
                                   <template v-slot:append>
-                                  <q-btn flat dense icon="visibility" @click="showModalpro = true" label="View" />
-                                </template>
+                                    <q-btn
+                                      flat
+                                      dense
+                                      icon="visibility"
+                                      @click="showModalpro = true"
+                                      label="View"
+                                    />
+                                  </template>
                                 </q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Resit Pembayaran"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Resit Pembayaran"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
                                 <q-input :readonly="true" dense label="">
                                   <template v-slot:append>
-                                  <q-btn flat dense icon="visibility" @click="showModalresit = true" label="View" />
-                                </template>
+                                    <q-btn
+                                      flat
+                                      dense
+                                      icon="visibility"
+                                      @click="showModalresit = true"
+                                      label="View"
+                                    />
+                                  </template>
                                 </q-input>
                               </div>
                               <div class="col-8 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Pengalaman Bekerja"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Pengalaman Bekerja"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
                                 <q-input :readonly="true" dense label="">
                                   <template v-slot:append>
-                                  <q-btn flat dense icon="visibility" @click="showModalexp = true" label="View" />
-                                </template>
+                                    <q-btn
+                                      flat
+                                      dense
+                                      icon="visibility"
+                                      @click="showModalexp = true"
+                                      label="View"
+                                    />
+                                  </template>
                                 </q-input>
                               </div>
                             </div>
@@ -614,33 +1087,71 @@
                               </q-item-section></q-item> -->
                             <div class="row">
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Nama Agent"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Nama Agent"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense label="Mr ALI"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="Mr ALI"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Emel Agent"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Emel Agent"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense label="test@gmail.com"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="test@gmail.com"
+                                ></q-input>
                               </div>
                             </div>
                             <hr />
                             <div class="row">
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Sokongan Kewangan"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Sokongan Kewangan"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense label="Biasisiwa"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="Biasisiwa"
+                                ></q-input>
                               </div>
                               <div class="col-6 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="Jenis Biasiswa"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  outlined
+                                  class="bg-grey-4"
+                                  label="Jenis Biasiswa"
+                                ></q-input>
                               </div>
                               <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense label="JPA"></q-input>
+                                <q-input
+                                  :readonly="true"
+                                  dense
+                                  label="JPA"
+                                ></q-input>
                               </div>
                               <!-- <div class="col-4 q-px-xs">
                                 <q-input :readonly="true" dense outlined class="bg-grey-4" label="Kertas Kerja
@@ -665,105 +1176,157 @@
                 </q-card>
               </div>
             </q-tab-panel>
-
           </q-tab-panels>
         </div>
-
       </q-card>
       <!-- view file attach -->
-       <!-- Modal Popup for Viewing Attachment -->
-       <q-dialog v-model="showModal" persistent>
-        <q-card style="width: 90vw; max-width: 600px;">
+      <!-- Modal Popup for Viewing Attachment -->
+      <q-dialog v-model="showModal" persistent>
+        <q-card style="width: 90vw; max-width: 600px">
           <q-card-section>
             <div class="text-h6">Attachment Viewer</div>
           </q-card-section>
 
           <q-card-section>
-            <iframe :src="urlic" style="width: 100%; height: 400px;" frameborder="0"></iframe>
+            <iframe
+              :src="urlic"
+              style="width: 100%; height: 400px"
+              frameborder="0"
+            ></iframe>
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Close" color="primary" @click="showModal = false" />
+            <q-btn
+              flat
+              label="Close"
+              color="primary"
+              @click="showModal = false"
+            />
           </q-card-actions>
         </q-card>
       </q-dialog>
 
       <q-dialog v-model="showModalcert" persistent>
-        <q-card style="width: 90vw; max-width: 600px;">
+        <q-card style="width: 90vw; max-width: 600px">
           <q-card-section>
             <div class="text-h6">Attachment Viewer</div>
           </q-card-section>
 
           <q-card-section>
-            <iframe :src="urlcert" style="width: 100%; height: 400px;" frameborder="0"></iframe>
+            <iframe
+              :src="urlcert"
+              style="width: 100%; height: 400px"
+              frameborder="0"
+            ></iframe>
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Close" color="primary" @click="showModalcert = false" />
+            <q-btn
+              flat
+              label="Close"
+              color="primary"
+              @click="showModalcert = false"
+            />
           </q-card-actions>
         </q-card>
       </q-dialog>
 
       <q-dialog v-model="showModalresit" persistent>
-        <q-card style="width: 90vw; max-width: 600px;">
+        <q-card style="width: 90vw; max-width: 600px">
           <q-card-section>
             <div class="text-h6">Attachment Viewer</div>
           </q-card-section>
 
           <q-card-section>
-            <iframe :src="urlresit" style="width: 100%; height: 400px;" frameborder="0"></iframe>
+            <iframe
+              :src="urlresit"
+              style="width: 100%; height: 400px"
+              frameborder="0"
+            ></iframe>
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Close" color="primary" @click="showModalresit = false" />
+            <q-btn
+              flat
+              label="Close"
+              color="primary"
+              @click="showModalresit = false"
+            />
           </q-card-actions>
         </q-card>
       </q-dialog>
 
       <q-dialog v-model="showModalbi" persistent>
-        <q-card style="width: 90vw; max-width: 600px;">
+        <q-card style="width: 90vw; max-width: 600px">
           <q-card-section>
             <div class="text-h6">Attachment Viewer</div>
           </q-card-section>
 
           <q-card-section>
-            <iframe :src="urlbi" style="width: 100%; height: 400px;" frameborder="0"></iframe>
+            <iframe
+              :src="urlbi"
+              style="width: 100%; height: 400px"
+              frameborder="0"
+            ></iframe>
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Close" color="primary" @click="showModalbi = false" />
+            <q-btn
+              flat
+              label="Close"
+              color="primary"
+              @click="showModalbi = false"
+            />
           </q-card-actions>
         </q-card>
       </q-dialog>
 
       <q-dialog v-model="showModalpro" persistent>
-        <q-card style="width: 90vw; max-width: 600px;">
+        <q-card style="width: 90vw; max-width: 600px">
           <q-card-section>
             <div class="text-h6">Attachment Viewer</div>
           </q-card-section>
 
           <q-card-section>
-            <iframe :src="urlpro" style="width: 100%; height: 400px;" frameborder="0"></iframe>
+            <iframe
+              :src="urlpro"
+              style="width: 100%; height: 400px"
+              frameborder="0"
+            ></iframe>
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Close" color="primary" @click="showModalpro = false" />
+            <q-btn
+              flat
+              label="Close"
+              color="primary"
+              @click="showModalpro = false"
+            />
           </q-card-actions>
         </q-card>
       </q-dialog>
 
       <q-dialog v-model="showModalexp" persistent>
-        <q-card style="width: 90vw; max-width: 600px;">
+        <q-card style="width: 90vw; max-width: 600px">
           <q-card-section>
             <div class="text-h6">Attachment Viewer</div>
           </q-card-section>
 
           <q-card-section>
-            <iframe :src="urlexp" style="width: 100%; height: 400px;" frameborder="0"></iframe>
+            <iframe
+              :src="urlexp"
+              style="width: 100%; height: 400px"
+              frameborder="0"
+            ></iframe>
           </q-card-section>
 
           <q-card-actions align="right">
-            <q-btn flat label="Close" color="primary" @click="showModalexp = false" />
+            <q-btn
+              flat
+              label="Close"
+              color="primary"
+              @click="showModalexp = false"
+            />
           </q-card-actions>
         </q-card>
       </q-dialog>
@@ -772,82 +1335,113 @@
         <updateTindakan />
       </q-dialog>
       <q-dialog v-model="new_customer">
-        <q-card style="width: 600px; max-width: 60vw;">
+        <q-card style="width: 600px; max-width: 60vw">
           <q-card-section>
             <div class="text-h6">
               Proses Permohonan
-              <q-btn round flat dense icon="close" class="float-right" color="grey-8" v-close-popup></q-btn>
+              <q-btn
+                round
+                flat
+                dense
+                icon="close"
+                class="float-right"
+                color="grey-8"
+                v-close-popup
+              ></q-btn>
             </div>
           </q-card-section>
           <q-separator inset></q-separator>
           <q-card-section class="q-pt-none">
             <!-- <q-form @submit.prevent="submitForm" class="q-gutter-md" > -->
-              <q-form @submit="submitForm" class="q-gutter-md" justify-center
-    >
+            <q-form @submit="submitForm" class="q-gutter-md" justify-center>
               <q-list>
                 <q-item>
                   <q-item-section>
-                    <q-item-label class="q-pb-xs"> No KP/Passport</q-item-label>       
-                    <q-input color="blue" type="text" readonly
-                    outlined 
-                    dense 
-                    label="NoKp/Passport"
-                    v-model="formData.nokpform"/>
+                    <q-item-label class="q-pb-xs"> No KP/Passport</q-item-label>
+                    <q-input
+                      color="blue"
+                      type="text"
+                      readonly
+                      outlined
+                      dense
+                      label="NoKp/Passport"
+                      v-model="formData.nokpform"
+                    />
                   </q-item-section>
                 </q-item>
                 <q-item>
                   <q-item-section>
-                    <q-item-label class="q-pb-xs">Tindakan Pengesahan</q-item-label>
-                    <q-select 
-                    class="q-pb-xs" 
-                    label="Tindakan Pengesahan" 
-                    color="blue" 
-                    v-model="selectedOption" 
-                    :options="singleDropdownOptions"
-                     @update:model-value="updateSelectedOption"
-                      outlined 
-                      dense 
-                      required 
-                      :rules="[(val) => !!val || 'Tindakan Pengesahan is required']"
-                      style="margin-right: 12px" />
+                    <q-item-label class="q-pb-xs"
+                      >Tindakan Pengesahan</q-item-label
+                    >
+                    <q-select
+                      class="q-pb-xs"
+                      label="Tindakan Pengesahan"
+                      color="blue"
+                      v-model="selectedOption"
+                      :options="singleDropdownOptions"
+                      @update:model-value="updateSelectedOption"
+                      outlined
+                      dense
+                      required
+                      :rules="[
+                        (val) => !!val || 'Tindakan Pengesahan is required',
+                      ]"
+                      style="margin-right: 12px"
+                    />
                   </q-item-section>
                 </q-item>
                 <!-- <div>Selected Option: {{ selectedOption }}</div> -->
                 <div :key="selectedOption">
-                <div v-if="selectedOption === '4'">
-                <!-- <div v-if="true"> -->
-                  <q-item>
-                  <q-item-section>
-                    <q-item-label class="q-pb-xs">Pilihan Program Baru</q-item-label>
-                    <q-select 
-                    class="q-pb-xs" 
-                     :options="programOptions"
-                    label="Program" 
-                    color="blue" 
-                      outlined 
-                      dense 
-                      required 
-                      :rules="[(val) => !!val || 'Program is required']"
-                       v-model="formData.kdprogrambaru"
-                      style="margin-right: 12px" />
-                  </q-item-section>
-                </q-item>
-              </div>
-            </div>
+                  <div v-if="selectedOption === '4'">
+                    <!-- <div v-if="true"> -->
+                    <q-item>
+                      <q-item-section>
+                        <q-item-label class="q-pb-xs"
+                          >Pilihan Program Baru</q-item-label
+                        >
+                        <q-select
+                          class="q-pb-xs"
+                          :options="programOptions"
+                          label="Program"
+                          color="blue"
+                          outlined
+                          dense
+                          required
+                          :rules="[(val) => !!val || 'Program is required']"
+                          v-model="formData.kdprogrambaru"
+                          style="margin-right: 12px"
+                        />
+                      </q-item-section>
+                    </q-item>
+                  </div>
+                </div>
                 <q-item>
                   <q-item-section>
-                    <q-item-label class="q-pb-xs">Catatan Pengesahan</q-item-label>
-                    <q-input color="blue" type="textarea" 
-                    outlined 
-                    dense 
-                    label="Catatan Pengesahan"
-                    v-model="formData.catatanPengesahan"
-                      :rules="[(val) => !!val || 'Catatan is required']" 
-                      required style="margin-right: 12px" />
+                    <q-item-label class="q-pb-xs"
+                      >Catatan Pengesahan</q-item-label
+                    >
+                    <q-input
+                      color="blue"
+                      type="textarea"
+                      outlined
+                      dense
+                      label="Catatan Pengesahan"
+                      v-model="formData.catatanPengesahan"
+                      :rules="[(val) => !!val || 'Catatan is required']"
+                      required
+                      style="margin-right: 12px"
+                    />
                   </q-item-section>
                 </q-item>
               </q-list>
-              <q-btn type="submit" @click="submitForm" label="Submit" color="primary" class="q-mr-sm" />
+              <q-btn
+                type="submit"
+                @click="submitForm"
+                label="Submit"
+                color="primary"
+                class="q-mr-sm"
+              />
               <!-- <q-btn label="Tutup" color="negative" outlined v-close-popup></q-btn> -->
             </q-form>
           </q-card-section>
@@ -858,14 +1452,19 @@
           </q-card-actions> -->
         </q-card>
       </q-dialog>
-
-
     </q-page-container>
   </q-page>
 </template>
 
 <script>
-import { defineComponent, onMounted, ref, computed,reactive,watch } from "vue";
+import {
+  defineComponent,
+  onMounted,
+  ref,
+  computed,
+  reactive,
+  watch,
+} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import updateTindakan from "./EditPermohonan.vue";
 import { useRetPermohonanStore } from "src/stores/getmohon";
@@ -880,49 +1479,47 @@ export default defineComponent({
     const route = useRoute(); // Access route parameters
     const router = useRouter(); // For navigation if needed
     const storeGetMohon = useRetPermohonanStore(); // Pinia store
-    const nama = ref(''); // Reactive variable for dynamic label or data
-    const nokp = ref(''); // Reactive variable for dynamic label or data
-    const tkhlahir = ref(''); // Reactive variable for dynamic label or data
-    const statwarga = ref(''); // Reactive variable for dynamic label or data
-    const statoku = ref(''); // Reactive variable for dynamic label or data
-    const almtsemasa = ref(''); // Reactive variable for dynamic label or data
-    const telRS = ref(''); // Reactive variable for dynamic label or data
-    const telHPS = ref(''); // Reactive variable for dynamic label or data
-    const offS = ref(''); // Reactive variable for dynamic label or data
-    const faxS = ref(''); // Reactive variable for dynamic label or data
-    const almtT = ref(''); // Reactive variable for dynamic label or data
-    const kaedah = ref(''); // Reactive variable for dynamic label or data
-    const modest = ref(''); // Reactive variable for dynamic label or data
-    const kdprogram = ref(''); // Reactive variable for dynamic label or data
-    const tajuk = ref(''); // Reactive variable for dynamic label or data
-    const sv = ref(''); // Reactive variable for dynamic label or data
-    const expr = ref(''); // Reactive variable for dynamic label or data
-    const akadtggi = ref('');
-    const unilama = ref('');
-    const negunilama = ref('');
-    const cgpa = ref('');
-    const cgpa2 = ref('');
-    const unilama2 = ref('');
-    const urlpic = ref('');
-    const laluan = ref('');
-    const transfer = ref('');
-    const urlic = ref('');
-    const urlcert = ref('');
-    const urlpro = ref('');
-    const urlbi = ref('');
-    const urlresit = ref('');
-    const urlexp = ref('');
-    const labelText = ref(''); // Reactive variable for label text (e.g., from API)
-    const nokpform = ref(''); 
-    const statdesc = ref(''); 
-    const cttnsah = ref(''); 
-    
+    const nama = ref(""); // Reactive variable for dynamic label or data
+    const nokp = ref(""); // Reactive variable for dynamic label or data
+    const tkhlahir = ref(""); // Reactive variable for dynamic label or data
+    const statwarga = ref(""); // Reactive variable for dynamic label or data
+    const statoku = ref(""); // Reactive variable for dynamic label or data
+    const almtsemasa = ref(""); // Reactive variable for dynamic label or data
+    const telRS = ref(""); // Reactive variable for dynamic label or data
+    const telHPS = ref(""); // Reactive variable for dynamic label or data
+    const offS = ref(""); // Reactive variable for dynamic label or data
+    const faxS = ref(""); // Reactive variable for dynamic label or data
+    const almtT = ref(""); // Reactive variable for dynamic label or data
+    const kaedah = ref(""); // Reactive variable for dynamic label or data
+    const modest = ref(""); // Reactive variable for dynamic label or data
+    const kdprogram = ref(""); // Reactive variable for dynamic label or data
+    const tajuk = ref(""); // Reactive variable for dynamic label or data
+    const sv = ref(""); // Reactive variable for dynamic label or data
+    const expr = ref(""); // Reactive variable for dynamic label or data
+    const akadtggi = ref("");
+    const unilama = ref("");
+    const negunilama = ref("");
+    const cgpa = ref("");
+    const cgpa2 = ref("");
+    const unilama2 = ref("");
+    const urlpic = ref("");
+    const laluan = ref("");
+    const transfer = ref("");
+    const urlic = ref("");
+    const urlcert = ref("");
+    const urlpro = ref("");
+    const urlbi = ref("");
+    const urlresit = ref("");
+    const urlexp = ref("");
+    const labelText = ref(""); // Reactive variable for label text (e.g., from API)
+    const nokpform = ref("");
+    const statdesc = ref("");
+    const cttnsah = ref("");
 
     //const Details = computed(() => storeGetMohon.Details); // Computed value from the store
     const setDetails = computed(() => {
       return storeGetMohon.Details;
     });
-
 
     const updateTindakanModal = ref(false);
     const showModal = ref(false);
@@ -940,20 +1537,20 @@ export default defineComponent({
     const selectedOption = ref(""); // Tracks selected dropdown value
     // watch(selectedOption, (newValue) => {console.log("Selected Option:", newValue);});
 
-const updateSelectedOption = (selected) => {
+    const updateSelectedOption = (selected) => {
       selectedOption.value = selected.value; // Extract only the value
     };
-    
+
     const formData = ref({
       kdprogrambaru: "",
-      catatanPengesahan: '',
-      nokpform: '',
+      catatanPengesahan: "",
+      nokpform: "",
     });
 
     const singleDropdownOptions = [
-    { label: "Permohonan Diluluskan", value: "2" },
-    { label: "Permohonan Tidak Diluluskan", value: "3" },
-    { label: "Pindah Fakulti", value: "4" },
+      { label: "Permohonan Diluluskan", value: "2" },
+      { label: "Permohonan Tidak Diluluskan", value: "3" },
+      { label: "Pindah Fakulti", value: "4" },
     ];
 
     const programOptions = [
@@ -963,43 +1560,43 @@ const updateSelectedOption = (selected) => {
     ];
 
     const listprogram = computed(() => {
-       // belum jadi lg ret kod program;
-        return storeGetMohon.KodProgram;
+      // belum jadi lg ret kod program;
+      return storeGetMohon.KodProgram;
     });
 
-   const submitForm = async () => {
-  const payload = {
-    tindakanPengesahan: selectedOption.value,
-    kdprogrambaru: selectedOption.value === '4' ? formData.value.kdprogrambaru : null,
-    catatanPengesahan: formData.value.catatanPengesahan,
-    nokpform: formData.value.nokpform,
-  };
+    const submitForm = async () => {
+      const payload = {
+        tindakanPengesahan: selectedOption.value,
+        kdprogrambaru:
+          selectedOption.value === "4" ? formData.value.kdprogrambaru : null,
+        catatanPengesahan: formData.value.catatanPengesahan,
+        nokpform: formData.value.nokpform,
+      };
 
-  try {
-    const response = await storeGetMohon.createupdtindakanf(payload);
-   // console.log("API Response:", response.status); // Debugging
-    //console.log('Form submitted successfully');
-    if (response.status === 'success') {
-      //console.log("Success response received");
-      new_customer.value = false;
-     // console.log("Modal closed");
+      try {
+        const response = await storeGetMohon.createupdtindakanf(payload);
+        // console.log("API Response:", response.status); // Debugging
+        //console.log('Form submitted successfully');
+        if (response.status === "success") {
+          //console.log("Success response received");
+          new_customer.value = false;
+          // console.log("Modal closed");
 
-      setTimeout(() => {
-        router.push({ name: "LandingPageSaringan" });
-      //  console.log("Redirecting to LandingPageSaringan");
-      }, 200);
+          setTimeout(() => {
+            router.push({ name: "LandingPageSaringan" });
+            //  console.log("Redirecting to LandingPageSaringan");
+          }, 200);
 
-      // new_customer.value = false; 
-      // console.log(new_customer.value)
-    //  router.push('/landingpgsaringan');
-      router.push({ name: "LandingPageSaringan"});
-     // this.$router.push('/landingpgsaringan'); // Redirect
-      
+          // new_customer.value = false;
+          // console.log(new_customer.value)
+          //  router.push('/landingpgsaringan');
+          router.push({ name: "LandingPageSaringan" });
+          // this.$router.push('/landingpgsaringan'); // Redirect
+        }
+      } catch (error) {
+        console.error("Form submission failed:", error);
       }
-  } catch (error) {
-    console.error('Form submission failed:', error);
-  }
-};
+    };
 
     // Function to fetch data based on route ID
     const fetchDetails = async () => {
@@ -1007,44 +1604,44 @@ const updateSelectedOption = (selected) => {
       if (id) {
         try {
           await storeGetMohon.fetchDetail(id); // Fetch details using Pinia store action
-          nama.value = storeGetMohon.Details.p001nama || ''; // Example: bind the fetched name to the variable
-          nokp.value = storeGetMohon.Details.p001nokp || ''; // Example: bind the fetched name to the variable
-          formData.value.nokpform = storeGetMohon.Details.p001nokp || ''; // Example: bind the fetched name to the variable
-          tkhlahir.value = storeGetMohon.Details.p001tkhlahir || ''; // Example: bind the fetched name to the variable
-          statwarga.value = storeGetMohon.Details.ktrgnstatwarga || ''; // Example: bind the fetched name to the variable
-          statoku.value = storeGetMohon.Details.z013jenkcctn || ''; // Example: bind the fetched name to the variable
-          almtsemasa.value = storeGetMohon.Details.almtsemasa || ''; // Example: bind the fetched name to the variable
-          telRS.value = storeGetMohon.Details.p001notel || ''; // Example: bind the fetched name to the variable
-          telHPS.value = storeGetMohon.Details.p001nohp || ''; // Example: bind the fetched name to the variable
-          offS.value = storeGetMohon.Details.p001offno || ''; // Example: bind the fetched name to the variable
-          faxS.value = storeGetMohon.Details.p001faxno || ''; // Example: bind the fetched name to the variable
-          almtT.value = storeGetMohon.Details.almttetap || ''; // Example: bind the fetched name to the variable
-          kaedah.value = storeGetMohon.Details.kaedah || ''; // Example: bind the fetched name to the variable
-          modest.value = storeGetMohon.Details.modebelajar || ''; // Example: bind the fetched name to the variable
-          kdprogram.value = storeGetMohon.Details.p001kprog || ''; // Example: bind the fetched name to the variable
-          tajuk.value = storeGetMohon.Details.p001tajuk || ''; // Example: bind the fetched name to the variable
-          sv.value = storeGetMohon.Details.p001penyelia || ''; // Example: bind the fetched name to the variable
-          expr.value = storeGetMohon.Details.p001bilexp || ''; // Example: bind the fetched name to the variable
-          akadtggi.value = storeGetMohon.Details.akadtggi || ''; // Example: bind the fetched name to the variable
-          unilama.value = storeGetMohon.Details.p001unilama || ''; // Example: bind the fetched name to the variable
-          negunilama.value = storeGetMohon.Details.negunilama || ''; // Example: bind the fetched name to the variable
-          cgpa.value = storeGetMohon.Details.p001cgpa || ''; // Example: bind the fetched name to the variable
-          cgpa2.value = storeGetMohon.Details.p001cgpa2 || ''; // Example: bind the fetched name to the variable
-          unilama2.value = storeGetMohon.Details.p001unilama2 || ''; // Example: bind the fetched name to the variable
-          urlpic.value = storeGetMohon.Details.urlgmbr || ''; // Example: bind the fetched name to the variable
-          laluan.value = storeGetMohon.Details.laluan || ''; // Example: bind the fetched name to the variable
-          transfer.value = storeGetMohon.Details.setujutransfer || ''; // Example: bind the fetched name to the variable
-          urlic.value = storeGetMohon.Details.urlnokppass || ''; // Example: bind the fetched name to the variable
-          urlcert.value = storeGetMohon.Details.urlcert || ''; // Example: bind the fetched name to the variable
-          urlpro.value = storeGetMohon.Details.urlpro || ''; // Example: bind the fetched name to the variable
-          urlbi.value = storeGetMohon.Details.urlpro || ''; // Example: bind the fetched name to the variable
-          urlresit.value = storeGetMohon.Details.urlpro || ''; // Example: bind the fetched name to the variable
-          urlexp.value = storeGetMohon.Details.urlpro || ''; // Example: bind the fetched name to the variable
-          labelText.value = storeGetMohon.Details.label || 'Default Label'; // Example: bind label text if available
-          statdesc.value = storeGetMohon.Details.statdesc || 'N/A'; 
-          cttnsah.value = storeGetMohon.Details.p001catatan || 'N/A'; 
-        //  console.log("Details fetched nokp", nokp.value);
-        //  console.log("Details fetched successfully", storeGetMohon.Details);
+          nama.value = storeGetMohon.Details.p001nama || ""; // Example: bind the fetched name to the variable
+          nokp.value = storeGetMohon.Details.p001nokp || ""; // Example: bind the fetched name to the variable
+          formData.value.nokpform = storeGetMohon.Details.p001nokp || ""; // Example: bind the fetched name to the variable
+          tkhlahir.value = storeGetMohon.Details.p001tkhlahir || ""; // Example: bind the fetched name to the variable
+          statwarga.value = storeGetMohon.Details.ktrgnstatwarga || ""; // Example: bind the fetched name to the variable
+          statoku.value = storeGetMohon.Details.z013jenkcctn || ""; // Example: bind the fetched name to the variable
+          almtsemasa.value = storeGetMohon.Details.almtsemasa || ""; // Example: bind the fetched name to the variable
+          telRS.value = storeGetMohon.Details.p001notel || ""; // Example: bind the fetched name to the variable
+          telHPS.value = storeGetMohon.Details.p001nohp || ""; // Example: bind the fetched name to the variable
+          offS.value = storeGetMohon.Details.p001offno || ""; // Example: bind the fetched name to the variable
+          faxS.value = storeGetMohon.Details.p001faxno || ""; // Example: bind the fetched name to the variable
+          almtT.value = storeGetMohon.Details.almttetap || ""; // Example: bind the fetched name to the variable
+          kaedah.value = storeGetMohon.Details.kaedah || ""; // Example: bind the fetched name to the variable
+          modest.value = storeGetMohon.Details.modebelajar || ""; // Example: bind the fetched name to the variable
+          kdprogram.value = storeGetMohon.Details.p001kprog || ""; // Example: bind the fetched name to the variable
+          tajuk.value = storeGetMohon.Details.p001tajuk || ""; // Example: bind the fetched name to the variable
+          sv.value = storeGetMohon.Details.p001penyelia || ""; // Example: bind the fetched name to the variable
+          expr.value = storeGetMohon.Details.p001bilexp || ""; // Example: bind the fetched name to the variable
+          akadtggi.value = storeGetMohon.Details.akadtggi || ""; // Example: bind the fetched name to the variable
+          unilama.value = storeGetMohon.Details.p001unilama || ""; // Example: bind the fetched name to the variable
+          negunilama.value = storeGetMohon.Details.negunilama || ""; // Example: bind the fetched name to the variable
+          cgpa.value = storeGetMohon.Details.p001cgpa || ""; // Example: bind the fetched name to the variable
+          cgpa2.value = storeGetMohon.Details.p001cgpa2 || ""; // Example: bind the fetched name to the variable
+          unilama2.value = storeGetMohon.Details.p001unilama2 || ""; // Example: bind the fetched name to the variable
+          urlpic.value = storeGetMohon.Details.urlgmbr || ""; // Example: bind the fetched name to the variable
+          laluan.value = storeGetMohon.Details.laluan || ""; // Example: bind the fetched name to the variable
+          transfer.value = storeGetMohon.Details.setujutransfer || ""; // Example: bind the fetched name to the variable
+          urlic.value = storeGetMohon.Details.urlnokppass || ""; // Example: bind the fetched name to the variable
+          urlcert.value = storeGetMohon.Details.urlcert || ""; // Example: bind the fetched name to the variable
+          urlpro.value = storeGetMohon.Details.urlpro || ""; // Example: bind the fetched name to the variable
+          urlbi.value = storeGetMohon.Details.urlpro || ""; // Example: bind the fetched name to the variable
+          urlresit.value = storeGetMohon.Details.urlpro || ""; // Example: bind the fetched name to the variable
+          urlexp.value = storeGetMohon.Details.urlpro || ""; // Example: bind the fetched name to the variable
+          labelText.value = storeGetMohon.Details.label || "Default Label"; // Example: bind label text if available
+          statdesc.value = storeGetMohon.Details.statdesc || "N/A";
+          cttnsah.value = storeGetMohon.Details.p001catatan || "N/A";
+          //  console.log("Details fetched nokp", nokp.value);
+          //  console.log("Details fetched successfully", storeGetMohon.Details);
         } catch (error) {
           console.error("Error fetching details frontend:", error);
         }
@@ -1056,14 +1653,13 @@ const updateSelectedOption = (selected) => {
     // Fetch data when the component is mounted
     onMounted(() => {
       fetchDetails();
-     // onLoad();
+      // onLoad();
     });
 
     // function onLoad() {
     //   storeGetMohon.fetchDetail().then((response) => {
     //   });
     // }
-    
 
     return {
       tab: ref("mails"),
@@ -1091,7 +1687,7 @@ const updateSelectedOption = (selected) => {
       statwarga,
       statoku,
       almtsemasa,
-      telRS, 
+      telRS,
       telHPS,
       offS,
       faxS,
@@ -1126,7 +1722,7 @@ const updateSelectedOption = (selected) => {
       showModalexp,
       statdesc,
       cttnsah,
-     // labelText1,
+      // labelText1,
     };
   },
 });
@@ -1152,8 +1748,6 @@ const updateSelectedOption = (selected) => {
   margin: 0 0 7px 0;
   font-weight: 500;
 } */
-
-
 
 /* .shadow_custom {
   box-shadow: 0 2px 6px #4359711f !important;

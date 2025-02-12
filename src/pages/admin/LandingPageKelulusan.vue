@@ -1,23 +1,41 @@
 <template>
   <q-card>
-    <q-page-container style="padding-top: 10px; padding-bottom: 37px; padding-left: 80px">
+    <q-page-container
+      style="padding-top: 10px; padding-bottom: 37px; padding-left: 80px"
+    >
       <q-page class="q-pa-lg q-mt-md">
         <div class="row q-col-gutter-lg" id="test">
-
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('0')">
+            <q-card
+              no-shadow
+              fit
+              bordered
+              class="cursor-pointer"
+              @click="selectStatus(['2', '5'])"
+            >
               <!-- :class="{ active: status == selectedStatus }"> -->
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
-                  <q-item-section column justify-center class=""><q-item-label><span
-                        class="text-weight-medium title text-grey-8">Permohonan Baru</span></q-item-label>
+                  <q-item-section column justify-center class=""
+                    ><q-item-label
+                      ><span class="text-weight-medium title text-grey-8"
+                        >Permohonan Baru</span
+                      ></q-item-label
+                    >
                   </q-item-section>
-                  <q-item-section side justify-center class=""><q-avatar class="text-warning q-chip--colored q-ml-none"
+                  <q-item-section side justify-center class=""
+                    ><q-avatar
+                      class="text-warning q-chip--colored q-ml-none"
                       style="
                         font-size: 45px;
                         background-color: rgb(231 247 253);
-                      ">
-                      <a><span class="text-weight-medium title text-primary"> {{ bilB }}</span></a>
+                      "
+                    >
+                      <a
+                        ><span class="text-weight-medium title text-primary">
+                          {{ bilLF }}</span
+                        ></a
+                      >
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -26,18 +44,31 @@
           </div>
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('4')">
+            <q-card
+              no-shadow
+              fit
+              bordered
+              class="cursor-pointer"
+              @click="selectStatus('4')"
+            >
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
-                  <q-item-section column justify-center class=""><q-item-label><span
-                        class="text-weight-medium title text-grey-8">Permohonan Pindah Fakulti</span></q-item-label>
+                  <q-item-section column justify-center class=""
+                    ><q-item-label
+                      ><span class="text-weight-medium title text-grey-8"
+                        >Permohonan Pindah Fakulti</span
+                      ></q-item-label
+                    >
                   </q-item-section>
-                  <q-item-section side justify-center class=""><q-avatar class="text-warning q-chip--colored q-ml-none"
+                  <q-item-section side justify-center class=""
+                    ><q-avatar
+                      class="text-warning q-chip--colored q-ml-none"
                       style="
                         font-size: 45px;
                         background-color: rgb(255, 239, 226);
                         /* background-color: rgb(240, 225, 17); */
-                      ">
+                      "
+                    >
                       <span class="text-weight-medium title"> {{ bilPF }}</span>
                     </q-avatar>
                   </q-item-section>
@@ -47,18 +78,33 @@
           </div>
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('2')">
+            <q-card
+              no-shadow
+              fit
+              bordered
+              class="cursor-pointer"
+              @click="selectStatus('1')"
+            >
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
-                  <q-item-section column justify-center class=""><q-item-label><span
-                        class="text-weight-medium title text-grey-8">Permohonan Diluluskan</span></q-item-label>
+                  <q-item-section column justify-center class=""
+                    ><q-item-label
+                      ><span class="text-weight-medium title text-grey-8"
+                        >Permohonan Diluluskan</span
+                      ></q-item-label
+                    >
                   </q-item-section>
-                  <q-item-section side justify-center class=""><q-avatar class="text-positive q-chip--colored q-ml-none"
+                  <q-item-section side justify-center class=""
+                    ><q-avatar
+                      class="text-positive q-chip--colored q-ml-none"
                       style="
                         font-size: 45px;
                         background-color: rgb(225, 246, 232);
-                      ">
-                      <span class="text-weight-medium title text-positive"> {{ bilLF }}</span>
+                      "
+                    >
+                      <span class="text-weight-medium title text-positive">
+                        {{ bilLPPS }}</span
+                      >
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -67,18 +113,33 @@
           </div>
 
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card no-shadow fit bordered class="cursor-pointer" @click="selectStatus('3')">
+            <q-card
+              no-shadow
+              fit
+              bordered
+              class="cursor-pointer"
+              @click="selectStatus(['3', '6'])"
+            >
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
-                  <q-item-section column justify-center class=""><q-item-label><span
-                        class="text-weight-medium title text-grey-8">Permohonan Tidak Diluluskan</span></q-item-label>
+                  <q-item-section column justify-center class=""
+                    ><q-item-label
+                      ><span class="text-weight-medium title text-grey-8"
+                        >Permohonan Tidak Diluluskan</span
+                      ></q-item-label
+                    >
                   </q-item-section>
-                  <q-item-section side justify-center class=""><q-avatar class="text-negative q-chip--colored q-ml-none"
+                  <q-item-section side justify-center class=""
+                    ><q-avatar
+                      class="text-negative q-chip--colored q-ml-none"
                       style="
                         font-size: 45px;
                         background-color: rgb(253, 228, 227);
-                      ">
-                      <span class="text-weight-medium title text-negative"> {{ bilGF }}</span>
+                      "
+                    >
+                      <span class="text-weight-medium title text-negative">
+                        {{ bilGF }}</span
+                      >
                     </q-avatar>
                   </q-item-section>
                 </q-item>
@@ -87,20 +148,38 @@
           </div>
           <!-- end 4 kotak -->
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-
-            <q-table flat bordered no-wrap :rows="filteredRows" :columns="columns" row-key="p001nokp"
-              :horizontal-separator="separator" style="padding: 2px; border: 1px solid lightgray"
-              v-model:pagination.sync="pagination" :filter="filter" :options="options" ref="tableRef"
-              @request="onRequest">
+            <q-table
+              flat
+              bordered
+              no-wrap
+              :rows="filteredRows"
+              :columns="columns"
+              row-key="p001nokp"
+              :horizontal-separator="separator"
+              style="padding: 2px; border: 1px solid lightgray"
+              v-model:pagination.sync="pagination"
+              :filter="filter"
+              :options="options"
+              ref="tableRef"
+              @request="onRequest"
+            >
               <template v-slot:top-left>
                 <div class="">
-                  <span style="font-size: medium; font-weight: bold">Senarai Permohonan</span>
+                  <span style="font-size: medium; font-weight: bold"
+                    >Senarai Permohonan</span
+                  >
                   <hr />
                 </div>
               </template>
               <template v-slot:body-cell-actions="props">
                 <q-td align="center">
-                  <q-btn dense flat color="black" icon="edit" @click="goToDetailsAdmin(props.row.p001nokp)" />
+                  <q-btn
+                    dense
+                    flat
+                    color="black"
+                    icon="edit"
+                    @click="goToDetailsAdmin(props.row.p001nokp)"
+                  />
                   <!-- <q-btn dense flat icon="edit" color="primary" @click="goToEditDetails(props.row.p001nokp)" /> -->
                 </q-td>
               </template>
@@ -108,36 +187,54 @@
                 <div class="row q-gutter-sm">
                   <q-col auto>
                     <q-btn flat round>
-                      <img src="src/assets/pdf.svg" alt="PDF Icon" class="pdf" />
+                      <img
+                        src="src/assets/pdf.svg"
+                        alt="PDF Icon"
+                        class="pdf"
+                      />
                       <q-tooltip class="bg-no-color" :offset="[5, 5]">
                         Export PDF
                       </q-tooltip>
-                    </q-btn></q-col>
+                    </q-btn></q-col
+                  >
                   <q-col auto>
                     <q-btn flat round>
-                      <img src="src/assets/Excel.png" alt="Excel Icon" class="excel" />
+                      <img
+                        src="src/assets/Excel.png"
+                        alt="Excel Icon"
+                        class="excel"
+                      />
                       <q-tooltip class="bg-no-color" :offset="[5, 5]">
                         Export Excel
                       </q-tooltip>
                     </q-btn>
                   </q-col>
-                  <q-input outlined dense debounce="300" v-model="filter" placeholder="Search" items-start class="">
-                    <template v-slot:append> <q-icon name="search" /> </template></q-input>
+                  <q-input
+                    outlined
+                    dense
+                    debounce="300"
+                    v-model="filter"
+                    placeholder="Search"
+                    items-start
+                    class=""
+                  >
+                    <template v-slot:append> <q-icon name="search" /> </template
+                  ></q-input>
                 </div>
               </template>
               <template v-slot:body-cell-status="props">
-    <q-chip
-      :color="statusColor(props.row.p001status)"
-      text-color="white"
-      dense
-      class="text-weight-bolder flex justify-center items-center"
-      square
-      style="width: 100px; height: 100%;"
-    >
-      <!-- {{ props.row.p001status }} -->
-      {{ statusDescription(props.row.p001status) }}
-    </q-chip>
-  </template>
+                <q-chip
+                  :color="statusColor(props.row.p001status)"
+                  text-color="white"
+                  dense
+                  class="text-weight-bolder flex justify-center items-center"
+                  square
+                  style="width: 100px; height: 100%"
+                >
+                  <!-- {{ props.row.p001status }} -->
+                  {{ statusDescription(props.row.p001status) }}
+                </q-chip>
+              </template>
             </q-table>
           </div>
         </div>
@@ -203,7 +300,7 @@ hr {
   }
 }
 
-.row>.col-md-12 {
+.row > .col-md-12 {
   height: auto;
   width: 100%;
 }
@@ -327,21 +424,19 @@ hr {
 </style>
 <script>
 import { useRoute, useRouter } from "vue-router";
-import { defineComponent, onMounted, ref, computed,reactive } from "vue";
+import { defineComponent, onMounted, ref, computed, reactive } from "vue";
 import { useRetPermohonanStorePps } from "src/stores/getmohonpps";
-
 
 export default defineComponent({
   name: "PermohonanPagePPS",
   setup() {
-
     const storeGetMohon = useRetPermohonanStorePps(); // Pinia store
 
-   // Computed property for reactive state
-   const MohonList = computed(() => {
+    // Computed property for reactive state
+    const MohonList = computed(() => {
       const list = storeGetMohon.MohonList;
-     //  console.log("MohonList:", MohonList.value);
-     //  console.log("List:", list.value);
+      //  console.log("MohonList:", MohonList.value);
+      //  console.log("List:", list.value);
 
       if (Array.isArray(list)) {
         return list;
@@ -350,96 +445,112 @@ export default defineComponent({
       } else {
         return []; // Default to empty array
       }
-
     });
-    
 
     const tableRef = ref();
     const router = useRouter();
     const route = useRoute();
     const filter = ref("");
-    const statB = ref('');
-    const bilB = ref('');
-    const bilD = ref('');
-    const bilPF = ref('');
-    const bilGF = ref('');
-    const bilLF = ref('');
+    const statB = ref("");
+    const bilB = ref("");
+    const bilD = ref("");
+    const bilPF = ref("");
+    const bilGF = ref("");
+    const bilLF = ref("");
+    const bilLPPS = ref("");
     const selectedStatus = ref("");
 
     // Filters rows based on selected status
     const filteredRows = computed(() => {
-   // console.log("Selected Status for Filter:", selectedStatus.value); // Debugging
-    const filtered = selectedStatus.value
-    ? MohonList.value.filter((row) => row.p001status === selectedStatus.value)
-    : MohonList.value;
+      if (selectedStatus.value.length === 0) {
+        return MohonList.value; // Return all if no filter is applied
+      }
 
-  //console.log("Filtered Rows:", filtered); // Debugging
-  return filtered;
-      });
+      return MohonList.value.filter((row) =>
+        selectedStatus.value.includes(row.p001status)
+      );
 
-      const selectStatus = (status) => {
-  //console.log("Clicked Status:", status);
-  selectedStatus.value = status;
-};
-  
+      // const filtered = selectedStatus.value
+      //   ? MohonList.value.filter(
+      //       (row) => row.p001status === selectedStatus.value
+      //     )
+      //   : MohonList.value;
 
-  const statusColor = (status) => {
-  const colors = {
-    '1': 'green',
-    '2': 'green',
-    '3': 'red',
-    '4': 'yellow',
-    '5': 'yellow',
-    '6': 'red',
-    '0': 'blue',
-    '' : 'grey',
-  };
-  return colors[status] || 'grey'; // Default to grey if status is unknown
-};
+      // //console.log("Filtered Rows:", filtered); // Debugging
+      // return filtered;
+    });
 
-const statusDescription = (status) => {
- // console.log('Status:', status); // Debugging
-  const descriptions = {
-    '1': 'Approved(PPS)',
-    '2': 'Approved(F)',
-    '3': 'Rejected',
-    '4': 'In Review',
-    '5': 'Under Processing',
-    '6': 'Requires Action',
-    '0': 'Baru',
-    '': 'Draft',
-  };
-  return descriptions[status] || 'Draft';
-};
-    
+    // const selectStatus = (status) => {
+    //   //console.log("Clicked Status:", status);
+    //   selectedStatus.value = status;
+    // };
 
-  // Fetch data on component mount
-  onMounted(() => {
+    const selectStatus = (status) => {
+      if (Array.isArray(status)) {
+        selectedStatus.value = status;
+        console.log("Filtering for multiple statuses:", status);
+      } else {
+        selectedStatus.value = [status];
+        console.log("Filtering for single status:", status);
+      }
+    };
+
+    const statusColor = (status) => {
+      const colors = {
+        1: "green",
+        2: "green",
+        3: "red",
+        4: "yellow",
+        5: "green",
+        6: "red",
+        0: "blue",
+        "": "grey",
+      };
+      return colors[status] || "grey"; // Default to grey if status is unknown
+    };
+
+    const statusDescription = (status) => {
+      // console.log('Status:', status); // Debugging
+      const descriptions = {
+        1: "Approved(PPS)",
+        2: "Approved(Faculty1)",
+        3: "Rejected (Faculty1)",
+        4: "Transfer Faculty",
+        5: "Approved(Faculty2)",
+        6: "Rejected (Faculty2)",
+        0: "New",
+        "": "Draft",
+      };
+      return descriptions[status] || "Draft";
+    };
+
+    // Fetch data on component mount
+    onMounted(() => {
       onLoad();
     });
 
     // Load data from the store
     async function onLoad() {
-  try {
-    // Fetch data for MohonList
-    await storeGetMohon.fetchP();
-    // Fetch data for bilstat
-    await storeGetMohon.fetchbilstat();
-    bilB.value = storeGetMohon.Countbystat.bildraf || '';
-    bilD.value = storeGetMohon.Countbystat.bildraf1 || '';
-    bilPF.value = storeGetMohon.Countbystat.bilpindahf || '';
-    bilGF.value = storeGetMohon.Countbystat.bilgagalf || '';
-    bilLF.value = storeGetMohon.Countbystat.billulusf || '';
-    //console.log("Bilstat fetched successfully:", bilB.value);
-  } catch (error) {
-    console.error("Error fetching data:", error);
-  }
+      try {
+        // Fetch data for MohonList
+        await storeGetMohon.fetchP();
+        // Fetch data for bilstat
+        await storeGetMohon.fetchbilstat();
+        bilB.value = storeGetMohon.Countbystat.bildraf || "";
+        bilD.value = storeGetMohon.Countbystat.bildraf1 || "";
+        bilPF.value = storeGetMohon.Countbystat.bilpindahf || "";
+        bilGF.value = storeGetMohon.Countbystat.bilgagalf || "";
+        bilLF.value = storeGetMohon.Countbystat.billulusf || "";
+        bilLPPS.value = storeGetMohon.Countbystat.billuluspps || "";
+        //console.log("Bilstat fetched successfully:", bilB.value);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
     }
-
 
     const Total = (type) => {
       console.log("Total:", type);
-    }
+    };
 
     const goToDetailsAdmin = (p001nokp) => {
       router.push({ name: "DetailsPermohonanAdmin", params: { p001nokp } });
@@ -457,18 +568,21 @@ const statusDescription = (status) => {
     return {
       MohonList,
       tableRef,
-      columns:[{ name: "name", label: "NAMA PEMOHON", field: "p001nama" },
-                { name: "nokp", label: "NO KP/PASSPORT", field: "p001nokp" },
-                { name: "tkhmohon", label: "TARIKH MOHON", field: "p001tkhpohon" },
-                { name: "program", label: "PROGRAM", field: "p001kprog" },
-                { name: "status", label: "STATUS", field: "p001status" },
-                { name: "actions", label: "TINDAKAN" },],
+      columns: [
+        { name: "name", label: "NAMA PEMOHON", field: "p001nama" },
+        { name: "nokp", label: "NO KP/PASSPORT", field: "p001nokp" },
+        { name: "tkhmohon", label: "TARIKH MOHON", field: "p001tkhpohon" },
+        { name: "program", label: "PROGRAM", field: "p001kprog" },
+        { name: "status", label: "STATUS", field: "p001status" },
+        { name: "actions", label: "TINDAKAN" },
+      ],
       filter,
       statB,
       bilB,
       bilD,
       bilGF,
       bilLF,
+      bilLPPS,
       bilPF,
       filteredRows,
       selectedStatus,
@@ -484,16 +598,16 @@ const statusDescription = (status) => {
         rowsPerPage: 5,
       },
       options: {
-        customFilters: [{
-          name: 'statusFilter',
-          callback: function (row, props) {
-            return row.status[0] == props;
-          }
-        }]
-      }
-      };
+        customFilters: [
+          {
+            name: "statusFilter",
+            callback: function (row, props) {
+              return row.status[0] == props;
+            },
+          },
+        ],
+      },
+    };
   },
-  });
-
-
+});
 </script>
