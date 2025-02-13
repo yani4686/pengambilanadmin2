@@ -135,7 +135,7 @@
                   <label
                     class="col-form-label q-mb-none"
                     style="margin-left: 10px"
-                    >Program: {{ namaprogram }}</label
+                    >Program: {{ namaprogram }} ({{ necprogram }})</label
                   >
                   <label
                     class="col-form-label q-mb-none"
@@ -1468,14 +1468,24 @@
                         >
                         <q-select
                           class="q-pb-xs"
+                          v-model="formData.kdprogrambaru"
                           :options="programOptions"
-                          label="Program"
+                          label="Search and Select a Program"
+                          option-label="label"
+                          option-value="value"
+                          emit-value
+                          map-options
+                          filled
+                          use-input
+                          fill-input
+                          v-model:input-value="searchTerm"
+                          @filter="filterPrograms"
+                          @update:model-value="onOptionSelect"
                           color="blue"
                           outlined
                           dense
                           required
                           :rules="[(val) => !!val || 'Program is required']"
-                          v-model="formData.kdprogrambaru"
                           style="margin-right: 12px"
                         />
                       </q-item-section>
@@ -1585,6 +1595,12 @@ export default defineComponent({
     const kodprogram = ref("");
     const fakultiprogram = ref("");
     const program = ref("");
+    const necprogram = ref("");
+    const groupedPrograms = ref("");
+    const facultyMap = ref("");
+    const searchTerm = ref("");
+    const term = ref("");
+    const allPrograms = ref([]);
 
     //const Details = computed(() => storeGetMohon.Details); // Computed value from the store
     const setDetails = computed(() => {
@@ -1623,14 +1639,17 @@ export default defineComponent({
       { label: "Pindah Fakulti", value: "4" },
     ];
 
-    const programOptions = [
-      { label: "Program A", value: "A" },
-      { label: "Program B", value: "B" },
-      { label: "Program C", value: "C" },
-    ];
+    const programOptions = ref([]);
+    const filteredPrograms = ref([]);
+    const filteredWithHeaders = ref([]);
+    const addedFaculties = ref([]);
+
+    // const programOptions = storeGetMohon.KodProgram.map((program) => ({
+    //   label: program.p020namaprogbi, // Program name
+    //   value: program.p020kprog, // Program unique identifier
+    // }));
 
     const listprogram = computed(() => {
-      // belum jadi lg ret kod program;
       return storeGetMohon.KodProgram;
     });
 
@@ -1679,7 +1698,7 @@ export default defineComponent({
           formData.value.nokpform = storeGetMohon.Details.p001nokp || ""; // Example: bind the fetched name to the variable
           tkhlahir.value = storeGetMohon.Details.p001tkhlahir || ""; // Example: bind the fetched name to the variable
           statwarga.value = storeGetMohon.Details.ktrgnstatwarga || ""; // Example: bind the fetched name to the variable
-          statoku.value = storeGetMohon.Details.z013jenkcctn || ""; // Example: bind the fetched name to the variable
+          statoku.value = storeGetMohon.Details.z013aketerangan || ""; // Example: bind the fetched name to the variable
           almtsemasa.value = storeGetMohon.Details.almtsemasa || ""; // Example: bind the fetched name to the variable
           telRS.value = storeGetMohon.Details.p001notel || ""; // Example: bind the fetched name to the variable
           telHPS.value = storeGetMohon.Details.p001nohp || ""; // Example: bind the fetched name to the variable
@@ -1697,10 +1716,12 @@ export default defineComponent({
             // Display namaprogram if program is found
             namaprogram.value = program.p020namaprogbi || "";
             fakultiprogram.value = program.a019bi || "";
-            console.log("Program found, namaprogram:", namaprogram.value);
+            necprogram.value = program.z054bnecdetail || "";
+            // console.log("Program found, namaprogram:", namaprogram.value);
           } else {
-            console.log("Program not found");
+            // console.log("Program not found");
             namaprogram.value = ""; // Reset if not found
+            fakultiprogram.value = ""; // Reset if not found
           }
 
           tajuk.value = storeGetMohon.Details.p001tajuk || ""; // Example: bind the fetched name to the variable
@@ -1744,14 +1765,83 @@ export default defineComponent({
       try {
         // Fetch data for kodprogram
         await storeGetMohon.fetchKodProgram();
+
+        // Group programs by faculty
+        const groupedPrograms = [];
+        const facultyMap = new Map();
+
+        storeGetMohon.KodProgram.forEach((program) => {
+          const faculty = program.a019bi; // Faculty Name
+          if (!facultyMap.has(faculty)) {
+            facultyMap.set(faculty, {
+              label: faculty.toUpperCase(), // Faculty Title (Uppercase for header style)
+              disable: true, // Makes it a non-selectable header
+            });
+            groupedPrograms.push(facultyMap.get(faculty));
+          }
+
+          groupedPrograms.push({
+            label: program.p020namaprogbi + " (" + program.z054bnecdetail + ")", // Program Name
+            value: program.p020kprog, // Unique identifier
+            faculty: faculty,
+          });
+        });
+
+        programOptions.value = groupedPrograms;
+        allPrograms.value = groupedPrograms;
+
+        //display on label
         namaprogram.value = storeGetMohon.KodProgram[0].p020namaprogbi || "";
         kodprogram.value = storeGetMohon.KodProgram[0].p020kprog || "";
         fakultiprogram.value = storeGetMohon.KodProgram[0].a019bi || "";
+        necprogram.value = storeGetMohon.KodProgram[0].z054bnecdetail || "";
         // console.log("namaprogram fetched successfully:", namaprogram.value);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     }
+
+    // Auto-filter function
+    const filterPrograms = (val, update) => {
+      update(() => {
+        if (!val) {
+          // ✅ Show all options when search is empty
+          programOptions.value = allPrograms.value;
+        } else {
+          const term = val.toLowerCase();
+          searchTerm.value = val; // ✅ Update input field
+
+          const filteredPrograms = allPrograms.value.filter(
+            (option) =>
+              !option.disable && option.label.toLowerCase().includes(term)
+          );
+
+          // ✅ Re-add faculty headers if at least one program from that faculty matches
+          const filteredWithHeaders = [];
+          const addedFaculties = new Set();
+
+          allPrograms.value.forEach((option) => {
+            if (option.disable) {
+              // ✅ Always add faculty headers
+              addedFaculties.add(option.label);
+              filteredWithHeaders.push(option);
+            } else if (
+              filteredPrograms.some((prog) => prog.faculty === option.faculty)
+            ) {
+              // ✅ Only add programs that match the search
+              filteredWithHeaders.push(option);
+            }
+          });
+
+          programOptions.value = filteredWithHeaders;
+        }
+      });
+    };
+
+    const onOptionSelect = (selectedValue) => {
+      if (!selectedValue) return;
+      formData.value.kdprogrambaru = selectedValue;
+    };
 
     return {
       tab: ref("mails"),
@@ -1766,6 +1856,14 @@ export default defineComponent({
       updateSelectedOption,
       selectedOption,
       programOptions,
+      filterPrograms,
+      filteredPrograms,
+      filteredWithHeaders,
+      addedFaculties,
+      onOptionSelect,
+      searchTerm,
+      term,
+      //allPrograms,
       listprogram,
       formData,
       submitForm,
@@ -1818,6 +1916,9 @@ export default defineComponent({
       kodprogram,
       fakultiprogram,
       program,
+      necprogram,
+      groupedPrograms,
+      facultyMap,
       // labelText1,
     };
   },

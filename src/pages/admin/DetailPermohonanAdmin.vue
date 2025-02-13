@@ -133,7 +133,7 @@
                   <label
                     class="col-form-label q-mb-none"
                     style="margin-left: 10px"
-                    >Program: {{ namaprogram }}</label
+                    >Program: {{ namaprogram }} ({{ necprogram }})</label
                   >
                   <label
                     class="col-form-label q-mb-none"
@@ -207,6 +207,40 @@
                             class="col-form-label q-mb-none"
                             style="margin-left: 10px"
                             >Catatan: xx</label
+                          >
+                        </q-item-section>
+                      </q-item>
+                    </q-list>
+                  </q-card>
+                </div>
+                <div class="col-lg-6 col-md-4 col-sm-12 col-xs-12">
+                  <q-card bordered no-shadow>
+                    <q-list dense role="list">
+                      <q-item header q-mt-none text-grey-6>(A)</q-item>
+                      <q-item type row no-wrap role="listitem">
+                        <q-item-section column side text-grey-8>
+                          <label
+                            class="col-form-label q-mb-none"
+                            style="margin-left: 10px"
+                            >PPS</label
+                          >
+                        </q-item-section>
+                      </q-item>
+                      <q-item type row no-wrap role="listitem">
+                        <q-item-section column side text-grey-8>
+                          <label
+                            class="col-form-label q-mb-none"
+                            style="margin-left: 10px"
+                            >Tindakan: {{ statdesc }}
+                          </label>
+                        </q-item-section>
+                      </q-item>
+                      <q-item type row no-wrap role="listitem">
+                        <q-item-section column side text-grey-8>
+                          <label
+                            class="col-form-label q-mb-none"
+                            style="margin-left: 10px"
+                            >Catatan PPS: {{ cttnlulus }}</label
                           >
                         </q-item-section>
                       </q-item>
@@ -1675,6 +1709,8 @@ export default defineComponent({
     const kodprogram = ref("");
     const fakultiprogram = ref("");
     const program = ref("");
+    const necprogram = ref("");
+    const cttnlulus = ref("");
 
     //const Details = computed(() => storeGetMohon.Details); // Computed value from the store
     const setDetails = computed(() => {
@@ -1797,7 +1833,7 @@ export default defineComponent({
           formData.value.nokpform = storeGetMohon.Details.p001nokp || ""; // Example: bind the fetched name to the variable
           tkhlahir.value = storeGetMohon.Details.p001tkhlahir || ""; // Example: bind the fetched name to the variable
           statwarga.value = storeGetMohon.Details.ktrgnstatwarga || ""; // Example: bind the fetched name to the variable
-          statoku.value = storeGetMohon.Details.z013jenkcctn || ""; // Example: bind the fetched name to the variable
+          statoku.value = storeGetMohon.Details.z013aketerangan || ""; // Example: bind the fetched name to the variable
           almtsemasa.value = storeGetMohon.Details.almtsemasa || ""; // Example: bind the fetched name to the variable
           telRS.value = storeGetMohon.Details.p001notel || ""; // Example: bind the fetched name to the variable
           telHPS.value = storeGetMohon.Details.p001nohp || ""; // Example: bind the fetched name to the variable
@@ -1815,10 +1851,12 @@ export default defineComponent({
             // Display namaprogram if program is found
             namaprogram.value = program.p020namaprogbi || "";
             fakultiprogram.value = program.a019bi || "";
+            necprogram.value = program.z054bnecdetail || "";
             console.log("Program found, namaprogram:", namaprogram.value);
           } else {
             console.log("Program not found");
             namaprogram.value = ""; // Reset if not found
+            fakultiprogram.value = ""; // Reset if not found
           }
 
           tajuk.value = storeGetMohon.Details.p001tajuk || ""; // Example: bind the fetched name to the variable
@@ -1841,6 +1879,7 @@ export default defineComponent({
           urlexp.value = storeGetMohon.Details.urlpro || ""; // Example: bind the fetched name to the variable
           labelText.value = storeGetMohon.Details.label || "Default Label"; // Example: bind label text if available
           cttnsah.value = storeGetMohon.Details.p001catatan || "N/A";
+          cttnlulus.value = storeGetMohon.Details.p001cttnlulus || "N/A";
           statdesc.value = storeGetMohon.Details.statdesc || "N/A";
 
           //  console.log("Details fetched nokp", nokp.value);
@@ -1870,7 +1909,7 @@ export default defineComponent({
         await storeGetMohon.fetchKodProgram();
         namaprogram.value = storeGetMohon.KodProgram[0].p020namaprogbi || "";
         kodprogram.value = storeGetMohon.KodProgram[0].p020kprog || "";
-        fakultiprogram.value = storeGetMohon.KodProgram[0].a019bi || "";
+        necprogram.value = storeGetMohon.KodProgram[0].z054bnecdetail || "";
         // console.log("namaprogram fetched successfully:", namaprogram.value);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -1945,6 +1984,8 @@ export default defineComponent({
       kodprogram,
       fakultiprogram,
       program,
+      necprogram,
+      cttnlulus,
       // labelText1,
     };
   },
