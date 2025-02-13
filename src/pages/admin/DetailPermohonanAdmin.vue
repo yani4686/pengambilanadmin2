@@ -133,12 +133,12 @@
                   <label
                     class="col-form-label q-mb-none"
                     style="margin-left: 10px"
-                    >Program: {{ kdprogram }}</label
+                    >Program: {{ namaprogram }}</label
                   >
                   <label
                     class="col-form-label q-mb-none"
                     style="margin-left: 10px"
-                    >Fakulti: xx</label
+                    >Fakulti: {{ fakultiprogram }}</label
                   >
                 </q-item-section>
               </q-item>
@@ -1672,6 +1672,9 @@ export default defineComponent({
     const cttnsah = ref("");
     const statdesc = ref("");
     const namaprogram = ref("");
+    const kodprogram = ref("");
+    const fakultiprogram = ref("");
+    const program = ref("");
 
     //const Details = computed(() => storeGetMohon.Details); // Computed value from the store
     const setDetails = computed(() => {
@@ -1804,6 +1807,20 @@ export default defineComponent({
           kaedah.value = storeGetMohon.Details.kaedah || ""; // Example: bind the fetched name to the variable
           modest.value = storeGetMohon.Details.modebelajar || ""; // Example: bind the fetched name to the variable
           kdprogram.value = storeGetMohon.Details.p001kprog || ""; // Example: bind the fetched name to the variable
+
+          const program = storeGetMohon.KodProgram.find(
+            (item) => item.p020kprog === kdprogram.value
+          );
+          if (program) {
+            // Display namaprogram if program is found
+            namaprogram.value = program.p020namaprogbi || "";
+            fakultiprogram.value = program.a019bi || "";
+            console.log("Program found, namaprogram:", namaprogram.value);
+          } else {
+            console.log("Program not found");
+            namaprogram.value = ""; // Reset if not found
+          }
+
           tajuk.value = storeGetMohon.Details.p001tajuk || ""; // Example: bind the fetched name to the variable
           sv.value = storeGetMohon.Details.p001penyelia || ""; // Example: bind the fetched name to the variable
           expr.value = storeGetMohon.Details.p001bilexp || ""; // Example: bind the fetched name to the variable
@@ -1825,6 +1842,7 @@ export default defineComponent({
           labelText.value = storeGetMohon.Details.label || "Default Label"; // Example: bind label text if available
           cttnsah.value = storeGetMohon.Details.p001catatan || "N/A";
           statdesc.value = storeGetMohon.Details.statdesc || "N/A";
+
           //  console.log("Details fetched nokp", nokp.value);
           //  console.log("Details fetched successfully", storeGetMohon.Details);
         } catch (error) {
@@ -1850,8 +1868,10 @@ export default defineComponent({
       try {
         // Fetch data for kodprogram
         await storeGetMohon.fetchKodProgram();
-        namaprogram.value = storeGetMohon.KodProgram.p020namaprogbi || "";
-        console.log("namaprogram fetched successfully:", namaprogram.value);
+        namaprogram.value = storeGetMohon.KodProgram[0].p020namaprogbi || "";
+        kodprogram.value = storeGetMohon.KodProgram[0].p020kprog || "";
+        fakultiprogram.value = storeGetMohon.KodProgram[0].a019bi || "";
+        // console.log("namaprogram fetched successfully:", namaprogram.value);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -1922,6 +1942,9 @@ export default defineComponent({
       cttnsah,
       statdesc,
       namaprogram,
+      kodprogram,
+      fakultiprogram,
+      program,
       // labelText1,
     };
   },

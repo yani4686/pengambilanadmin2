@@ -27,36 +27,102 @@
               />
             </div>
           </div>
+        </q-card-section>
 
-          <!-- <hr /> -->
+        <!-- <hr /> -->
 
+        <q-card-section>
           <q-item type row no-wrap>
-            <q-item-section column side text-grey-8>
-              <div class="q-pa-md">
-                <div class="row">
-                  <div class="col col-md-6">
-                    <label
-                      class="col-form-label q-mb-none"
-                      style="margin-left: 5px"
+            <div class="q-pa-md">
+              <div class="row">
+                <q-item-section column side text-grey-8>
+                  <div class="row items-center">
+                    <!-- SVG Icon -->
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="24"
+                      height="24"
+                      stroke-width="2"
+                    >
+                      <path
+                        d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"
+                      ></path>
+                      <path d="M9 12l2 2l4 -4"></path>
+                    </svg>
+                    <label class="q-ml-sm" style="margin-left: 5px"
                       >Status Mohon: {{ statdesc }}
                     </label>
                   </div>
-                  <div class="col col-md-6">
-                    <label
-                      class="col-form-label q-mb-none"
-                      style="margin-left: 5px"
+                </q-item-section>
+                <q-item-section column side text-grey-8>
+                  <div class="row items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      width="24"
+                      height="24"
+                      stroke-width="2"
+                    >
+                      <path d="M14 3v4a1 1 0 0 0 1 1h4"></path>
+                      <path
+                        d="M5 8v-3a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2h-5"
+                      ></path>
+                      <path d="M6 14m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
+                      <path d="M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5"></path>
+                    </svg>
+                    <label class="q-ml-sm" style="margin-left: 5px"
                       >Jenis Permohonan : {{ laluan }}</label
                     >
                   </div>
-                </div>
-                <label class="col-form-label q-mb-none" style="margin-left: 5px"
-                  >Catatan : {{ transfer }}</label
-                >
+                </q-item-section>
               </div>
-            </q-item-section>
+              <br />
+              <q-item-section column side text-grey-8>
+                <div class="row items-center">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    width="24"
+                    height="24"
+                    stroke-width="2"
+                  >
+                    <path
+                      d="M8 5h-2a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h5.697"
+                    ></path>
+                    <path d="M18 12v-5a2 2 0 0 0 -2 -2h-2"></path>
+                    <path
+                      d="M8 3m0 2a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-2a2 2 0 0 1 -2 -2z"
+                    ></path>
+                    <path d="M8 11h4"></path>
+                    <path d="M8 15h3"></path>
+                    <path
+                      d="M16.5 17.5m-2.5 0a2.5 2.5 0 1 0 5 0a2.5 2.5 0 1 0 -5 0"
+                    ></path>
+                    <path d="M18.5 19.5l2.5 2.5"></path>
+                  </svg>
+                  <label class="q-ml-sm" style="margin-left: 5px"
+                    >Catatan : {{ transfer }}</label
+                  >
+                </div>
+              </q-item-section>
+            </div>
           </q-item>
           <hr />
         </q-card-section>
+
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <q-card bordered no-shadow fit>
             <q-card-section vert text-grey-8>
@@ -69,13 +135,13 @@
                   <label
                     class="col-form-label q-mb-none"
                     style="margin-left: 10px"
-                    >Program: {{ kdprogram }}</label
+                    >Program: {{ namaprogram }}</label
                   >
                   <label
                     class="col-form-label q-mb-none"
                     style="margin-left: 10px"
-                    >Fakulti: xx</label
-                  >
+                    >Fakulti: {{ fakultiprogram }}
+                  </label>
                 </q-item-section>
               </q-item>
             </q-card-section>
@@ -1515,6 +1581,10 @@ export default defineComponent({
     const nokpform = ref("");
     const statdesc = ref("");
     const cttnsah = ref("");
+    const namaprogram = ref("");
+    const kodprogram = ref("");
+    const fakultiprogram = ref("");
+    const program = ref("");
 
     //const Details = computed(() => storeGetMohon.Details); // Computed value from the store
     const setDetails = computed(() => {
@@ -1619,6 +1689,20 @@ export default defineComponent({
           kaedah.value = storeGetMohon.Details.kaedah || ""; // Example: bind the fetched name to the variable
           modest.value = storeGetMohon.Details.modebelajar || ""; // Example: bind the fetched name to the variable
           kdprogram.value = storeGetMohon.Details.p001kprog || ""; // Example: bind the fetched name to the variable
+
+          const program = storeGetMohon.KodProgram.find(
+            (item) => item.p020kprog === kdprogram.value
+          );
+          if (program) {
+            // Display namaprogram if program is found
+            namaprogram.value = program.p020namaprogbi || "";
+            fakultiprogram.value = program.a019bi || "";
+            console.log("Program found, namaprogram:", namaprogram.value);
+          } else {
+            console.log("Program not found");
+            namaprogram.value = ""; // Reset if not found
+          }
+
           tajuk.value = storeGetMohon.Details.p001tajuk || ""; // Example: bind the fetched name to the variable
           sv.value = storeGetMohon.Details.p001penyelia || ""; // Example: bind the fetched name to the variable
           expr.value = storeGetMohon.Details.p001bilexp || ""; // Example: bind the fetched name to the variable
@@ -1653,13 +1737,21 @@ export default defineComponent({
     // Fetch data when the component is mounted
     onMounted(() => {
       fetchDetails();
-      // onLoad();
+      onLoad();
     });
 
-    // function onLoad() {
-    //   storeGetMohon.fetchDetail().then((response) => {
-    //   });
-    // }
+    async function onLoad() {
+      try {
+        // Fetch data for kodprogram
+        await storeGetMohon.fetchKodProgram();
+        namaprogram.value = storeGetMohon.KodProgram[0].p020namaprogbi || "";
+        kodprogram.value = storeGetMohon.KodProgram[0].p020kprog || "";
+        fakultiprogram.value = storeGetMohon.KodProgram[0].a019bi || "";
+        // console.log("namaprogram fetched successfully:", namaprogram.value);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
 
     return {
       tab: ref("mails"),
@@ -1722,6 +1814,10 @@ export default defineComponent({
       showModalexp,
       statdesc,
       cttnsah,
+      namaprogram,
+      kodprogram,
+      fakultiprogram,
+      program,
       // labelText1,
     };
   },

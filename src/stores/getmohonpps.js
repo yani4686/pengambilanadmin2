@@ -20,15 +20,20 @@ export const useRetPermohonanStorePps = defineStore("getmohonpps", {
     async fetchKodProgram() {
       try {
         const response = await api.get("/getkodprogram"); // API endpoint
-        // console.log("API Response:", response.data);
-        if (response.data.status === "success") {
-          this.KodProgram = response.data; // Update store state
-          var program = this.KodProgram.p020namaprogbi;
-          console.log(program);
+        //  console.log("API Response:", response.data);
+        this.KodProgram = Object.values(response.data); // Update store state
+        //var program = this.KodProgram.p020namaprogbi;
+        //  console.log("Updated KodProgram in Store:", this.KodProgram);
+        // var program = this.KodProgram[0].p020namaprogbi;
+        // console.log("Updated program in Store:", program);
 
-          // console.log("Updated KodProgram in Store:", this.KodProgram);
-          return response;
-        }
+        return response;
+        // if (response.data.status === "success") {
+        //   this.KodProgram = response.data; // Update store state
+        //   var program = this.KodProgram.p020namaprogbi;
+        //   console.log(program);
+        //   return response;
+        // }
       } catch (error) {
         console.error("Error fetching data:", error);
       }
