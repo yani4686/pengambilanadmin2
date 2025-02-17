@@ -1,6 +1,7 @@
 <template>
-    <div class="q-pa-sm full-height-layout">
-      <q-layout view="lHh Lpr lFf" class="layout-no-scroll full-height-layout">
+    <div class="q-pa-sm">
+      <q-layout view="lHh Lpr fFf" class="rounded-borders">
+
         <q-header elevated style="height: 75px; background-color: #343331">
           <q-toolbar>
             <q-toolbar-title>
@@ -35,7 +36,7 @@
             </q-item-section>
           </q-toolbar>
         </q-header>
-  
+   <!-------------------------------------- Sidebar (Drawer) ------------------------------------------>
         <q-drawer v-if="!$route.meta.hideDrawer" v-model="drawer" :mini="miniState" mini-to-overlay show-if-above bordered
           style="background: #343331; width: 250px" @mouseover="miniState = false" @mouseout="miniState = true"
           class="full-height-drawer">
@@ -107,9 +108,23 @@
                   </q-item-section>
                 </q-item>
               </q-list>
-            </q-expansion-item>
-            
+            </q-expansion-item>          
           </q-list>
+
+          <!-- Dashboard Menu -->
+          <!-- <q-item style="color: white" clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="dashboard" />
+              </q-item-section>
+              <q-item-section>
+                <q-item-label>
+                  <a href="#/dashboard/othermenu" style="color: white"
+                    >Dashboard</a
+                  >
+                </q-item-label>
+              </q-item-section>
+            </q-item> -->
+
         </q-drawer>
   
         <q-page-container class="q-mt-none full-height-page-container">

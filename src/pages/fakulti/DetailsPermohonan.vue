@@ -3,8 +3,8 @@
     <q-page-container
       style="padding-top: 10px; padding-bottom: 37px; padding-left: 80px"
     >
-      <q-card bordered no-shadow fit class="q-pa-md">
-        <q-card-section>
+      <!-- <q-card bordered no-shadow fit class="q-pa-md"> -->
+        <!-- <q-card-section> -->
           <div class="row q-col-gutter-sm">
             <div class="">
               <span style="font-size: medium; font-weight: bold"
@@ -27,7 +27,7 @@
               />
             </div>
           </div>
-        </q-card-section>
+        <!-- </q-card-section> -->
 
         <!-- <hr /> -->
 
@@ -55,7 +55,7 @@
                       <path d="M9 12l2 2l4 -4"></path>
                     </svg>
                     <label class="q-ml-sm" style="margin-left: 5px"
-                      >Status Mohon: {{ statdesc }}
+                      ><span style="font-weight: bold">Status Mohon :</span> {{ statdesc }}
                     </label>
                   </div>
                 </q-item-section>
@@ -80,7 +80,7 @@
                       <path d="M4.5 17l-1.5 5l3 -1.5l3 1.5l-1.5 -5"></path>
                     </svg>
                     <label class="q-ml-sm" style="margin-left: 5px"
-                      >Jenis Permohonan : {{ laluan }}</label
+                      ><span style="font-weight: bold">Jenis Permohonan :</span> {{ laluan }}</label
                     >
                   </div>
                 </q-item-section>
@@ -114,7 +114,7 @@
                     <path d="M18.5 19.5l2.5 2.5"></path>
                   </svg>
                   <label class="q-ml-sm" style="margin-left: 5px"
-                    >Catatan : {{ transfer }}</label
+                    ><span style="font-weight: bold">Catatan :</span> {{ transfer }}</label
                   >
                 </div>
               </q-item-section>
@@ -135,12 +135,12 @@
                   <label
                     class="col-form-label q-mb-none"
                     style="margin-left: 10px"
-                    >Program: {{ namaprogram }} ({{ necprogram }})</label
+                    ><span style="font-weight: bold">Program :</span> {{ namaprogram }} ({{ necprogram }})</label
                   >
                   <label
                     class="col-form-label q-mb-none"
                     style="margin-left: 10px"
-                    >Fakulti: {{ fakultiprogram }}
+                    ><span style="font-weight: bold">Fakulti:</span> {{ fakultiprogram }}
                   </label>
                 </q-item-section>
               </q-item>
@@ -156,7 +156,7 @@
                           <label
                             class="col-form-label q-mb-none"
                             style="margin-left: 10px"
-                            >Fakulti: xx</label
+                            ><span style="font-weight: bold">Fakulti :</span> xx</label
                           >
                         </q-item-section>
                       </q-item>
@@ -165,7 +165,7 @@
                           <label
                             class="col-form-label q-mb-none"
                             style="margin-left: 10px"
-                            >Tindakan: {{ statdesc }}
+                            ><span style="font-weight: bold">Tindakan :</span> {{ statdesc }}
                           </label>
                         </q-item-section>
                       </q-item>
@@ -174,7 +174,7 @@
                           <label
                             class="col-form-label q-mb-none"
                             style="margin-left: 10px"
-                            >Catatan: {{ cttnsah }}</label
+                            ><span style="font-weight: bold">Catatan :</span> {{ cttnsah }}</label
                           >
                         </q-item-section>
                       </q-item>
@@ -190,7 +190,7 @@
                           <label
                             class="col-form-label q-mb-none"
                             style="margin-left: 10px"
-                            >Fakulti: xx</label
+                            ><span style="font-weight: bold">Fakulti :</span> xx</label
                           >
                         </q-item-section>
                       </q-item>
@@ -199,7 +199,7 @@
                           <label
                             class="col-form-label q-mb-none"
                             style="margin-left: 10px"
-                            >Tindakan: xx</label
+                            ><span style="font-weight: bold">Tindakan :</span> xx</label
                           >
                         </q-item-section>
                       </q-item>
@@ -208,7 +208,7 @@
                           <label
                             class="col-form-label q-mb-none"
                             style="margin-left: 10px"
-                            >Catatan: xx</label
+                            ><span style="font-weight: bold">Catatan :</span>xx</label
                           >
                         </q-item-section>
                       </q-item>
@@ -1244,7 +1244,7 @@
             </q-tab-panel>
           </q-tab-panels>
         </div>
-      </q-card>
+      <!-- </q-card> -->
       <!-- view file attach -->
       <!-- Modal Popup for Viewing Attachment -->
       <q-dialog v-model="showModal" persistent>
@@ -1423,7 +1423,12 @@
               <q-list>
                 <q-item>
                   <q-item-section>
-                    <q-item-label class="q-pb-xs"> No KP/Passport</q-item-label>
+                    <q-item-label class="q-pb-xs">
+                      Nama & NoKP/Passport</q-item-label
+                    >
+                    <q-item-label class="text-grey-8"
+                      >{{ nama }} ({{ nokp }})</q-item-label
+                    >
                     <q-input
                       color="blue"
                       type="text"
@@ -1432,6 +1437,7 @@
                       dense
                       label="NoKp/Passport"
                       v-model="formData.nokpform"
+                      style="display: none"
                     />
                   </q-item-section>
                 </q-item>

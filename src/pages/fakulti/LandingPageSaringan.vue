@@ -3,6 +3,7 @@
     <q-page-container
       style="padding-top: 10px; padding-bottom: 37px; padding-left: 80px"
     >
+    <div class="text-bold text-h6 col-12">Senarai Permohonan</div>
       <q-page class="q-pa-lg q-mt-md">
         <div class="row q-col-gutter-lg" id="test">
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -11,7 +12,17 @@
               fit
               bordered
               class="cursor-pointer"
-              @click="selectStatus('0')"
+              :style="{
+                backgroundColor: isClicked
+                  ? '#68d8f7'
+                  : isHovered
+                  ? '#68d8f7'
+                  : '#ffffff',
+              }"
+              :class="{ hovered: isHovered, clicked: isClicked }"
+              @mouseover="isHovered = true"
+              @mouseleave="isHovered = false"
+              @click="handleClick"
             >
               <!-- :class="{ active: status == selectedStatus }"> -->
               <q-card-section vert class="q-pa-sm" role="">
@@ -49,7 +60,17 @@
               fit
               bordered
               class="cursor-pointer"
-              @click="selectStatus('4')"
+              :style="{
+                backgroundColor: isClicked1
+                  ? '#FFFF8F'
+                  : isHovered1
+                  ? '#FFFF8F'
+                  : '#ffffff',
+              }"
+              :class="{ hovered: isHovered1, clicked: isClicked1 }"
+              @mouseover="isHovered1 = true"
+              @mouseleave="isHovered1 = false"
+              @click="handleClick1"
             >
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
@@ -83,7 +104,17 @@
               fit
               bordered
               class="cursor-pointer"
-              @click="selectStatus(['2', '5', '1'])"
+              :style="{
+                backgroundColor: isClicked2
+                  ? '#22e08e'
+                  : isHovered2
+                  ? '#22e08e'
+                  : '#ffffff',
+              }"
+              :class="{ hovered: isHovered2, clicked: isClicked2 }"
+              @mouseover="isHovered2 = true"
+              @mouseleave="isHovered2 = false"
+              @click="handleClick2"
             >
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
@@ -118,7 +149,17 @@
               fit
               bordered
               class="cursor-pointer"
-              @click="selectStatus('3')"
+              :style="{
+                backgroundColor: isClicked3
+                  ? '#e66c5c'
+                  : isHovered3
+                  ? '#e66c5c'
+                  : '#ffffff',
+              }"
+              :class="{ hovered: isHovered3, clicked: isClicked3 }"
+              @mouseover="isHovered3 = true"
+              @mouseleave="isHovered3 = false"
+              @click="handleClick3"
             >
               <q-card-section vert class="q-pa-sm" role="">
                 <q-item row no-wrap class="">
@@ -185,6 +226,17 @@
               </template>
               <template v-slot:top-right>
                 <div class="row q-gutter-sm">
+                  <q-input
+                    outlined
+                    dense
+                    debounce="300"
+                    v-model="filter"
+                    placeholder="Search"
+                    items-start
+                    class=""
+                  >
+                    <template v-slot:append> <q-icon name="search" /> </template
+                  ></q-input>
                   <q-col auto>
                     <q-btn flat round>
                       <img
@@ -209,17 +261,7 @@
                       </q-tooltip>
                     </q-btn>
                   </q-col>
-                  <q-input
-                    outlined
-                    dense
-                    debounce="300"
-                    v-model="filter"
-                    placeholder="Search"
-                    items-start
-                    class=""
-                  >
-                    <template v-slot:append> <q-icon name="search" /> </template
-                  ></q-input>
+                  
                 </div>
               </template>
               <template v-slot:body-cell-status="props">
@@ -227,7 +269,7 @@
                   :color="statusColor(props.row.p001status)"
                   text-color="white"
                   dense
-                  class="text-weight-bolder flex justify-center items-center"
+                  class="text-weight-bolder"
                   square
                   style="width: 100px; height: 100%"
                 >
@@ -458,6 +500,34 @@ export default defineComponent({
     const bilGF = ref("");
     const bilLF = ref("");
     const selectedStatus = ref("");
+    const isHovered = ref(false);
+    const isHovered1 = ref(false);
+    const isHovered2 = ref(false);
+    const isHovered3 = ref(false);
+    const isClicked = ref(false);
+    const isClicked1 = ref(false);
+    const isClicked2 = ref(false);
+    const isClicked3 = ref(false);
+
+    const handleClick = () => {
+      isClicked.value = !isClicked.value;
+      selectStatus("0");
+    };
+
+    const handleClick1 = () => {
+      isClicked1.value = !isClicked1.value;
+      selectStatus("4");
+    };
+
+    const handleClick2 = () => {
+      isClicked2.value = !isClicked2.value;
+      selectStatus(["1","2","5"]);
+    };
+
+    const handleClick3 = () => {
+      isClicked3.value = !isClicked3.value;
+      selectStatus("3");
+    };
 
     // Filters rows based on selected status
     const filteredRows = computed(() => {
@@ -565,15 +635,27 @@ export default defineComponent({
     };
 
     return {
+      isHovered,
+      isHovered1,
+      isHovered2,
+      isHovered3,
+      isClicked,
+      isClicked1,
+      isClicked2,
+      isClicked3,
+      handleClick,
+      handleClick1,
+      handleClick2,
+      handleClick3,
       MohonList,
       tableRef,
       columns: [
-        { name: "name", label: "NAMA PEMOHON", field: "p001nama" },
-        { name: "nokp", label: "NO KP/PASSPORT", field: "p001nokp" },
-        { name: "tkhmohon", label: "TARIKH MOHON", field: "p001tkhpohon" },
-        { name: "program", label: "PROGRAM", field: "p001kprog" },
-        { name: "status", label: "STATUS", field: "p001status" },
-        { name: "actions", label: "TINDAKAN" },
+        { name: "name", label: "NAMA PEMOHON", field: "p001nama", align: "center" },
+        { name: "nokp", label: "NO KP/PASSPORT", field: "p001nokp", align: "center" },
+        { name: "tkhmohon", label: "TARIKH MOHON", field: "p001tkhpohon", align: "center" },
+        { name: "program", label: "PROGRAM", field: "p001kprog" , align: "center"},
+        { name: "status", label: "STATUS", field: "p001status", align: "center" },
+        { name: "actions", label: "TINDAKAN", align: "center" },
       ],
       filter,
       statB,
