@@ -16,19 +16,19 @@
                 <img src="/images/idfiw.png" style="margin-left: 20px" class="adjusted-image" />
               </q-item-label>
             </q-toolbar-title>
-  
+
             <q-item-section side class="q-pa-none q-ma-none">
               <div class="row items-center justify-end no-wrap header-icons">
                 <q-item>
                   <q-avatar square size="28px">
                     <img src="/images/person.png" />
                   </q-avatar>
-  
+
                   <div class="user-info">
                     <span>{{ user.username }}</span>
                     <small>{{ user.role }}</small>
                   </div>
-  
+
                   <q-btn flat icon="arrow_drop_down" size="sm" />
                 </q-item>
                 <!-- </div> -->
@@ -69,11 +69,11 @@
               </q-list>
 
             </q-expansion-item>
-  
+
             <!-- Submenu Admin PPS -->
             <q-expansion-item style="color: white" icon="group" label="PPS Admin" expand-separator :expanded="showSubmenu"
               @mouseover="showSubmenu = true" @mouseleave="showSubmenu = false">
-  
+
               <q-list class="submenu">
                 <q-item>
                   <q-item-section>
@@ -98,7 +98,7 @@
             <!-- menu konfigurasi akses level -->
             <q-expansion-item style="color: white" icon="settings" label="Konfigurasi Sistem" expand-separator :expanded="showSubmenu"
               @mouseover="showSubmenu = true" @mouseleave="showSubmenu = false">
-  
+
               <q-list class="submenu">
                 <q-item>
                   <q-item-section>
@@ -108,7 +108,7 @@
                   </q-item-section>
                 </q-item>
               </q-list>
-            </q-expansion-item>          
+            </q-expansion-item>
           </q-list>
 
           <!-- Dashboard Menu -->
@@ -126,7 +126,7 @@
             </q-item> -->
 
         </q-drawer>
-  
+
         <q-page-container class="q-mt-none full-height-page-container">
           <!-- Image in the corner corner-image-->
           <div class="corner-image"></div>
@@ -149,7 +149,7 @@
           /> -->
           <router-view />
         </q-page-container>
-  
+
         <q-footer class="bg-dark text-white">
           <div class="q-pa-md text-center">
             Copyright © 2024 Pusat Pengurusan Infostruktur & Rangkaian (PPIR) |
@@ -159,20 +159,20 @@
       </q-layout>
     </div>
   </template>
-  
+
   <script>
   import { useQuasar } from "quasar";
   import { ref, computed } from "vue";
   import { useRoute, useRouter } from "vue-router";
   import NavLink from "../components/NavLink.vue";
-  
+
   export default {
     components: {},
     setup() {
       const $q = useQuasar();
       const router = useRouter();
       const route = useRoute();
-  
+
       const drawer = ref(false);
       const miniState = ref(true); // Mini sidebar initially active
       const showSubmenu = ref(false); // Control submenu visibility
@@ -197,9 +197,9 @@
           };
         });
       });
-  
+
       //------------------------------------------------- Sidebar Menu ---------------------------------------------
-  
+
       return {
         user: {
           username: "alifamiry",
@@ -211,6 +211,7 @@
         roles: [
           { label: "Academic Administrator", value: "admin" },
           { label: "Faculty", value: "fakulti" },
+          { label: "Teknikal PPIR", value: "teknikal" },
         ],
         drawer,
         miniState,
@@ -232,7 +233,7 @@
     },
   };
   </script>
-  
+
   <style scoped>
   .full-height-layout {
     display: flex;
@@ -242,7 +243,7 @@
     overflow: hidden;
     /* Prevent scrolling */
   }
-  
+
   .q-page-container {
     flex-grow: 1;
     /* Take remaining space */
@@ -253,35 +254,35 @@
     max-width: 100vw;
     /* Ensure no content exceeds viewport width */
   }
-  
+
   .q-drawer {
     height: 100%;
   }
-  
+
   .q-header {
     flex-shrink: 0;
   }
-  
+
   .q-footer {
     flex-shrink: 0;
     /* Ensures footer stays at the bottom */
     margin-top: auto;
     /* Push footer to the bottom */
   }
-  
+
   .submenu {
     margin-left: 40px;
   }
-  
+
   .adjusted-image {
     /* width: 100%;
     height: auto; */
-  
+
     max-width: 110px;
     max-height: 80px;
     object-fit: contain;
   }
-  
+
   .corner-image {
     background-image: url("/images/iconbcg.png");
     /* Change the path if needed */
@@ -301,11 +302,11 @@
     height: 300px;
     /* Adjust height to ensure the image has space */
   }
-  
+
   .sidemenu {
     font-size: 5px;
   }
-  
+
   /* Style for icons to ensure consistent size and spacing */
   .icon-link {
     font-size: 14px;
@@ -314,21 +315,20 @@
     margin: 0px -10px;
     /* Reduces the spacing between icons */
   }
-  
+
   .user-info {
     display: flex;
     flex-direction: column;
     margin-left: 5px;
   }
-  
+
   .user-info span {
     /* font-weight: bold; */
     color: white;
   }
-  
+
   .user-info small {
     color: gray;
     font-size: 12px;
   }
   </style>
-  

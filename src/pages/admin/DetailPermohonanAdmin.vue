@@ -18,6 +18,7 @@
                 </q-tooltip>
               </q-btn> -->
           <q-btn
+            v-if="!isViewing"
             @click="updateRow1()"
             icon="edit"
             outline
@@ -1684,6 +1685,10 @@ export default defineComponent({
 
   setup() {
     const route = useRoute(); // Access route parameters
+
+    //const isViewing = computed(() => route.query.isViewing === "true");
+    const isViewing = ref(false);
+
     const router = useRouter(); // For navigation if needed
     const storeGetMohon = useRetPermohonanStorePps(); // Pinia store
     const nama = ref(""); // Reactive variable for dynamic label or data
@@ -1913,6 +1918,7 @@ export default defineComponent({
     onMounted(() => {
       fetchDetails();
       onLoad();
+      isViewing.value = history.state.isViewing ?? false;
     });
 
     // function onLoad() {
@@ -1939,6 +1945,7 @@ export default defineComponent({
       horizontalTab: "", // Set a valid default tab name
       splitterModel: 20,
 
+      isViewing,
       updateTindakanModal1,
       updateRow: () => (updateTindakanModal1.value = true),
       updateRow1: () => (new_customer1.value = true),

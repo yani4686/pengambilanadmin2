@@ -261,7 +261,7 @@
                       </q-tooltip>
                     </q-btn>
                   </q-col>
-                  
+
                 </div>
               </template>
               <template v-slot:body-cell-status="props">
@@ -585,7 +585,7 @@ export default defineComponent({
         1: "Approved (PPS)",
         2: "Approved (Faculty)",
         3: "Rejected",
-        4: "In Review",
+        4: "Transfer Faculty",
         5: "Under Processing",
         6: "Requires Action",
         0: "New",

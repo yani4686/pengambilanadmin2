@@ -204,11 +204,19 @@
               <template v-slot:body-cell-actions="props">
                 <q-td align="center">
                   <q-btn
+                    v-if="!isViewing"
                     dense
                     flat
                     color="black"
                     icon="edit"
                     @click="goToDetailsAdmin(props.row.p001nokp)"
+                  />
+                  <q-btn
+                    dense
+                    flat
+                    color="black"
+                    icon="visibility"
+                    @click="goToViewDetails(props.row.p001nokp)"
                   />
                   <!-- <q-btn dense flat icon="edit" color="primary" @click="goToEditDetails(props.row.p001nokp)" /> -->
                 </q-td>
@@ -515,6 +523,7 @@ export default defineComponent({
     const isClicked = ref(false);
     const isClicked1 = ref(false);
     const isClicked2 = ref(false);
+    const isViewing = ref(false);
 
     const handleClick = () => {
       isClicked.value = !isClicked.value;
@@ -624,7 +633,25 @@ export default defineComponent({
     };
 
     const goToDetailsAdmin = (p001nokp) => {
-      router.push({ name: "DetailsPermohonanAdmin", params: { p001nokp } });
+      // router.push({ name: "DetailsPermohonanAdmin", params: { p001nokp } });
+      // this.isViewing = false;
+      router.push({
+        name: "DetailsPermohonanAdmin",
+        params: { p001nokp },
+        state: { isViewing: false },
+        // query: { isViewing: "false" }, // Pass as a query param
+      });
+    };
+
+    const goToViewDetails = (p001nokp) => {
+      // router.push({ name: "DetailsPermohonanAdmin", params: { p001nokp } });
+      // this.isViewing = true;
+      router.push({
+        name: "DetailsPermohonanAdmin",
+        params: { p001nokp },
+        state: { isViewing: true },
+        // query: { isViewing: "true" }, // Pass as a query param
+      });
     };
 
     const goToEditDetailsAdmin = (p001nokp) => {
@@ -692,6 +719,7 @@ export default defineComponent({
       filteredRows,
       selectedStatus,
       selectStatus,
+      goToViewDetails,
       goToDetailsAdmin,
       goToEditDetailsAdmin,
       onRequest,
