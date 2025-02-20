@@ -1,9 +1,9 @@
 const routes = [
   //-------------- LoginPage ---------------------//
-  {
-    path: "/:token",
-    component: () => import("pages/LoginProcess.vue"),
-  },
+  // {
+  //   path: "/:token",
+  //   component: () => import("pages/LoginProcess.vue"),
+  // },
   {
     path: "/login",
     component: () => import("pages/LoginPagePengambilan.vue"),
@@ -15,7 +15,7 @@ const routes = [
     children: [
       {
         path: "",
-        component: () => import("pages/DashboardPengambilan.vue"),
+        component: () => import("pages/dashboard/DashboardPengambilan.vue"),
         meta: {
           hideDrawer: true,
           hideBreadcrumbs: true,

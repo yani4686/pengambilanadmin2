@@ -32,12 +32,6 @@
 <script>
 import staffImage from "/images/staff-unisza.jpg";
 import fpImage from "/images/FP-unisza.jpg";
-import bendahariImage from "/images/bendahari-unisza.jpg";
-import canseloriImage from "/images/portal-dashboard.png";
-import PpengambilanImage from "/images/portal-pengambilan.png";
-import kolejKediaman from "/images/kolejkediaman.png";
-import Hepa from "/images/hepa.png";
-import ELearning from "/images/elearning.png";
 import { api } from "src/boot/axios";
 import { useQuasar } from "quasar";
 import { ref } from "vue";
@@ -46,17 +40,17 @@ export default {
   name: "FeaturePage",
   data() {
     var $q = useQuasar();
-    var token = $q.sessionStorage.getItem("token");
+    //var token = $q.sessionStorage.getItem("token");
     var users = ref({});
 
-    whois();
+    // whois();
 
-    function whois() {
-      api.get("/validateToken/" + token).then((res) => {
-        users.value.username = res.data.data.name;
-        console.log(res.data.data.name);
-      });
-    }
+    // function whois() {
+    //   api.get("/validateToken/" + token).then((res) => {
+    //     users.value.username = res.data.data.name;
+    //     console.log(res.data.data.name);
+    //   });
+    // }
 
     return {
       users,
@@ -64,19 +58,13 @@ export default {
       mainportal: [
         { title: "Menu 1", image: staffImage, disabled: false },
         { title: "Menu 2", image: fpImage, disabled: false },
-        { title: "Menu 3", image: bendahariImage, disabled: false },
-        // { title: "Menu 4", image: canseloriImage, disabled: true }, // Disabled
-        // { title: "Menu 5", image: PpengambilanImage, disabled: true }, // Disabled
-        // { title: "Menu 6", image: Hepa, disabled: true }, // Disabled
-        // { title: "Menu 7", image: kolejKediaman, disabled: true }, // Disabled
-        // { title: "Menu 8", image: ELearning, disabled: true }, // Disabled
       ],
     };
   },
   methods: {
     navigateToPage(title) {
       const formattedTitle = title.replace(/\s+/g, "").toLowerCase();
-      this.$router.push(`dashboard/${formattedTitle}`);
+      this.$router.push(`/${formattedTitle}`);
     },
   },
 };
