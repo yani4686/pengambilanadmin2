@@ -524,6 +524,10 @@ export default defineComponent({
     const isClicked1 = ref(false);
     const isClicked2 = ref(false);
     const isViewing = ref(false);
+    const namaprogram = ref("");
+    const kodprogram = ref("");
+    const necprogram = ref("");
+    const program = ref("");
 
     const handleClick = () => {
       isClicked.value = !isClicked.value;
@@ -623,6 +627,12 @@ export default defineComponent({
         bilLF.value = storeGetMohon.Countbystat.billulusf || "";
         bilLPPS.value = storeGetMohon.Countbystat.billuluspps || "";
         //console.log("Bilstat fetched successfully:", bilB.value);
+         // Fetch data for kodprogram
+         await storeGetMohon.fetchKodProgram();
+        namaprogram.value = storeGetMohon.KodProgram[0].p020namaprogbi || "";
+        kodprogram.value = storeGetMohon.KodProgram[0].p020kprog || "";
+        necprogram.value = storeGetMohon.KodProgram[0].z054bnecdetail || "";
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -663,7 +673,21 @@ export default defineComponent({
       console.log("Request:", props);
     };
 
+    const getProgramName = (kprog) => {
+    const program = storeGetMohon.KodProgram.find(item => item.p020kprog === kprog);
+   // return program ? program.p020namaprogbi : "N/A"; // Default if not found
+    if (program) {
+      return `${program.p020namaprogbi} (${program.z054bnecdetail})`; // Format both values
+    }
+    return "N/A"; // Default if not found
+  };
+
     return {
+      getProgramName,
+      program,
+      kodprogram,
+      namaprogram,
+      necprogram,
       isHovered,
       isHovered1,
       isHovered2,
@@ -699,6 +723,7 @@ export default defineComponent({
           label: "PROGRAM",
           field: "p001kprog",
           align: "center",
+          format: (val) => getProgramName(val), // Call function to get program name
         },
         {
           name: "status",
