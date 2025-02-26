@@ -202,7 +202,7 @@
 
       return {
         user: {
-          username: "alifamiry",
+          username: "yani",
           role: "Admin",
           // avatar: require('@/assets/user-avatar.png'), // Replace with the actual path to the avatar image
         },
