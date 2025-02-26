@@ -15,7 +15,8 @@ const routes = [
     children: [
       {
         path: "",
-        component: () => import("src/pages/dashboardpengambilan/DashboardPengambilan.vue"),
+        component: () =>
+          import("src/pages/dashboardpengambilan/DashboardPengambilan.vue"),
         meta: {
           hideDrawer: true,
           hideBreadcrumbs: true,
@@ -24,7 +25,7 @@ const routes = [
         // meta: { hideBreadcrumbs: true, hideRoleSelection: true }, // Index page, hide breadcrumbs and role selection
       },
       {
-        path: "/landingpgsaringan",
+        path: "/saringan",
         name: "LandingPageSaringan",
         component: () => import("pages/fakulti/LandingPageSaringan.vue"),
       },
@@ -52,7 +53,7 @@ const routes = [
       },
       //page admin lulus
       {
-        path: "/landingpgkelulusan",
+        path: "/kelulusan",
         name: "LandingPageKelulusan",
         component: () => import("pages/admin/LandingPageKelulusan.vue"),
       },

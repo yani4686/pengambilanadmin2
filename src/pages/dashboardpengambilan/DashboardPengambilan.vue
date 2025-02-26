@@ -1,10 +1,100 @@
 <template>
   <div class="page-title text-center">
-    <h1>MODUL PENGAMBILAN</h1>
+    <h1>MODUL PENGAMBILAN CALON PELAJAR SISWAZAH</h1>
+  </div>
+
+  <div class="row justify-center q-pa-lg q-ma-lg">
+    <q-card class="feature-card col-12 col-sm-3 blue-card cursor-pointer">
+      <q-card class="q-pa-md">
+        <div class="row justify-between items-center">
+          <!-- Left Side: Title -->
+          <div class="column q-ml-md">
+            <div class="text-h6 text-weight-bold">Saringan</div>
+            <div class="text-h6 text-weight-bold">Fakulti</div>
+          </div>
+
+          <!-- Right Side: Ticket Info -->
+          <div class="column q-gutter-md">
+            <!-- Bil Permohonan Baru -->
+            <div class="row items-center">
+              <q-avatar size="40px" class="bg-blue-1 text-blue-6">
+                <q-icon name="confirmation_number" />
+              </q-avatar>
+              <div class="q-ml-md">
+                <div class="text-weight-bold">Bil Permohonan Calon Baru</div>
+                <div class="text-grey-7">{{ bilB }}</div>
+              </div>
+            </div>
+
+            <!-- Bil Permohonan Dalam Proses -->
+            <div class="row items-center">
+              <q-avatar size="40px" class="bg-yellow-1 text-yellow-6">
+                <q-icon name="check_circle" />
+              </q-avatar>
+              <div class="q-ml-md">
+                <div class="text-weight-bold">Bil Permohonan Dalam Proses</div>
+                <div class="text-grey-7">142 New Tickets</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+    </q-card>
+
+    <q-card class="feature-card col-12 col-sm-3 green-card cursor-pointer">
+      <q-card class="q-pa-md">
+        <div class="row justify-between items-center">
+          <!-- Left Side: Title -->
+          <div class="column q-ml-md">
+            <div class="text-h6 text-weight-bold">Kelulusan</div>
+            <div class="text-h6 text-weight-bold">PPS</div>
+          </div>
+
+          <!-- Right Side: Ticket Info -->
+          <div class="column q-gutter-md">
+            <!-- Bil Permohonan Baru -->
+            <div class="row items-center">
+              <q-avatar size="40px" class="bg-blue-1 text-blue-6">
+                <q-icon name="confirmation_number" />
+              </q-avatar>
+              <div class="q-ml-md">
+                <div class="text-weight-bold">
+                  Bil Permohonan Disahkan Fakulti
+                </div>
+                <div class="text-grey-7">142 New Tickets</div>
+              </div>
+            </div>
+
+            <!-- Bil Permohonan Dalam Proses -->
+            <div class="row items-center">
+              <q-avatar size="40px" class="bg-yellow-1 text-yellow-6">
+                <q-icon name="check_circle" />
+              </q-avatar>
+              <div class="q-ml-md">
+                <div class="text-weight-bold">
+                  Bil Permohonan Telah Diluluskan
+                </div>
+                <div class="text-grey-7">142 New Tickets</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </q-card>
+    </q-card>
+
+    <!-- <q-card class="feature-card col-12 col-sm-3 green-card cursor-pointer">
+      <q-card-section class="card-content">
+        <q-icon name="done_all" size="lg" class="icon-left" />
+        <div class="card-text">
+          <div class="text-subtitle2">Approved Notice of Submission</div>
+          <div class="text-h5">273</div>
+        </div>
+      </q-card-section>
+    </q-card> -->
   </div>
 
   <!-- Cards Section -->
-  {{ users.username }}
+  <!-- {{ users.username }}
   <div class="cards-container">
     <q-card
       v-for="main in mainportal"
@@ -26,22 +116,51 @@
         </div>
       </q-card-section>
     </q-card>
-  </div>
+  </div> -->
 </template>
 
 <script>
-import staffImage from "/images/staff-unisza.jpg";
-import fpImage from "/images/FP-unisza.jpg";
+// import staffImage from "/images/staff-unisza.jpg";
+// import fpImage from "/images/FP-unisza.jpg";
 import { api } from "src/boot/axios";
 import { useQuasar } from "quasar";
-import { ref } from "vue";
+import { defineComponent, onMounted, ref } from "vue";
+import { useRetPermohonanStore } from "src/stores/getmohon";
 
-export default {
-  name: "FeaturePage",
-  data() {
+export default defineComponent({
+  name: "FeatureDashboard",
+  setup() {
+    const storeGetMohon = useRetPermohonanStore(); // Pinia store
+
     var $q = useQuasar();
+
+    const bilB = ref("");
+    const bilD = ref("");
+    const bilPF = ref("");
+    const bilGF = ref("");
+    const bilLF = ref("");
+
+    // Fetch data on component mount
+    onMounted(() => {
+      onLoad();
+    });
+
+    // Load data from the store
+    async function onLoad() {
+      try {
+        // Fetch data for bilstat
+        await storeGetMohon.fetchbilstat();
+        bilB.value = storeGetMohon.Countbystat.bildraf || "";
+        bilD.value = storeGetMohon.Countbystat.bildraf1 || "";
+        bilPF.value = storeGetMohon.Countbystat.bilpindahf || "";
+        bilGF.value = storeGetMohon.Countbystat.bilgagalf || "";
+        bilLF.value = storeGetMohon.Countbystat.billulusf || "";
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
     //var token = $q.sessionStorage.getItem("token");
-    var users = ref({});
+    // var users = ref({});
 
     // whois();
 
@@ -53,33 +172,62 @@ export default {
     // }
 
     return {
-      users,
-      hoveredCard: null,
-      mainportal: [
-        { title: "LandingPageSaringan", image: staffImage, disabled: false },
-        { title: "Menu 2", image: fpImage, disabled: false },
-<<<<<<<< HEAD:src/pages/dashboardpengambilan/DashboardPengambilan.vue
-       // { title: "Menu 3", image: bendahariImage, disabled: false },
-        // { title: "Menu 4", image: canseloriImage, disabled: true }, // Disabled
-        // { title: "Menu 5", image: PpengambilanImage, disabled: true }, // Disabled
-        // { title: "Menu 6", image: Hepa, disabled: true }, // Disabled
-        // { title: "Menu 7", image: kolejKediaman, disabled: true }, // Disabled
-        // { title: "Menu 8", image: ELearning, disabled: true }, // Disabled
-========
->>>>>>>> 7e02cac3eb765896dae9f7ea4e0837a3b29d9046:src/pages/dashboard/DashboardPengambilan.vue
-      ],
+      onMounted,
+      onLoad,
+      bilB,
+      bilD,
+      bilPF,
+      bilGF,
+      bilLF,
+      // users,
+      // hoveredCard: null,
+      // mainportal: [
+      //   { title: "Saringan", image: staffImage, disabled: false },
+      //   { title: "Kelulusan", image: fpImage, disabled: false },
+      // ],
     };
   },
-  methods: {
-    navigateToPage(title) {
-      const formattedTitle = title.replace(/\s+/g, "").toLowerCase();
-      this.$router.push(`/${formattedTitle}`);
-    },
-  },
-};
+  // methods: {
+  //   navigateToPage(title) {
+  //     const formattedTitle = title.replace(/\s+/g, "").toLowerCase();
+  //     this.$router.push(`/${formattedTitle}`);
+  //   },
+  // },
+});
 </script>
 
 <style scoped>
+.card-content {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.icon-left {
+  margin-right: 15px;
+  flex-shrink: 0;
+}
+.card-text {
+  text-align: left;
+}
+.purple-card {
+  border-left: 8px solid #ab9dd5;
+}
+
+.blue-card {
+  border-left: 8px solid #6395ff;
+}
+.green-card {
+  border-left: 8px solid #99e76c;
+}
+.feature-card {
+  width: 500px;
+  height: 150px;
+  margin: 20px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease-in-out;
+}
+
 .page-title h1 {
   font-size: 20px;
   font-family: "Tahoma", sans-serif;
@@ -94,15 +242,6 @@ export default {
   justify-items: center;
   padding-top: 40px;
   padding-inline: 160px;
-}
-
-.feature-card {
-  width: 300px;
-  height: 240px;
-  margin: 20px;
-  text-align: center;
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
 }
 
 .image-container {

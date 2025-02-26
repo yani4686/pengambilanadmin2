@@ -1,295 +1,306 @@
 <template>
-  <q-card>
+  <q-page class="q-pa-md">
     <q-page-container
       style="padding-top: 10px; padding-bottom: 37px; padding-left: 80px"
     >
-    <div class="text-bold text-h6 col-12">Senarai Permohonan</div>
-      <q-page class="q-pa-lg q-mt-md">
-        <div class="row q-col-gutter-lg" id="test">
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card
-              no-shadow
-              fit
-              bordered
-              class="cursor-pointer"
-              :style="{
-                backgroundColor: isClicked
-                  ? '#68d8f7'
-                  : isHovered
-                  ? '#68d8f7'
-                  : '#ffffff',
-              }"
-              :class="{ hovered: isHovered, clicked: isClicked }"
-              @mouseover="isHovered = true"
-              @mouseleave="isHovered = false"
-              @click="handleClick"
-            >
-              <!-- :class="{ active: status == selectedStatus }"> -->
-              <q-card-section vert class="q-pa-sm" role="">
-                <q-item row no-wrap class="">
-                  <q-item-section column justify-center class=""
-                    ><q-item-label
-                      ><span class="text-weight-medium title text-grey-8"
-                        >Permohonan Baru</span
-                      ></q-item-label
-                    >
-                  </q-item-section>
-                  <q-item-section side justify-center class=""
-                    ><q-avatar
-                      class="text-warning q-chip--colored q-ml-none"
-                      style="
-                        font-size: 45px;
-                        background-color: rgb(231 247 253);
-                      "
-                    >
-                      <a
-                        ><span class="text-weight-medium title text-primary">
-                          {{ bilB }}</span
-                        ></a
+      <q-card class="q-pa-md">
+        <q-card-section>
+          <div class="text-bold text-h6 col-12">Senarai Permohonan Calon</div>
+          <!-- <q-page class="q-pa-lg q-mt-md"> -->
+          <div class="row q-col-gutter-lg" id="test">
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <q-card
+                no-shadow
+                fit
+                bordered
+                class="cursor-pointer"
+                :style="{
+                  backgroundColor: isClicked
+                    ? '#68d8f7'
+                    : isHovered
+                    ? '#68d8f7'
+                    : '#ffffff',
+                }"
+                :class="{ hovered: isHovered, clicked: isClicked }"
+                @mouseover="isHovered = true"
+                @mouseleave="isHovered = false"
+                @click="handleClick"
+              >
+                <!-- :class="{ active: status == selectedStatus }"> -->
+                <q-card-section vert class="q-pa-sm" role="">
+                  <q-item row no-wrap class="">
+                    <q-item-section column justify-center class=""
+                      ><q-item-label
+                        ><span class="text-weight-medium title text-grey-8"
+                          >Permohonan Baru</span
+                        ></q-item-label
                       >
-                    </q-avatar>
-                  </q-item-section>
-                </q-item>
-              </q-card-section>
-            </q-card>
-          </div>
-
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card
-              no-shadow
-              fit
-              bordered
-              class="cursor-pointer"
-              :style="{
-                backgroundColor: isClicked1
-                  ? '#FFFF8F'
-                  : isHovered1
-                  ? '#FFFF8F'
-                  : '#ffffff',
-              }"
-              :class="{ hovered: isHovered1, clicked: isClicked1 }"
-              @mouseover="isHovered1 = true"
-              @mouseleave="isHovered1 = false"
-              @click="handleClick1"
-            >
-              <q-card-section vert class="q-pa-sm" role="">
-                <q-item row no-wrap class="">
-                  <q-item-section column justify-center class=""
-                    ><q-item-label
-                      ><span class="text-weight-medium title text-grey-8"
-                        >Permohonan Pindah Fakulti</span
-                      ></q-item-label
-                    >
-                  </q-item-section>
-                  <q-item-section side justify-center class=""
-                    ><q-avatar
-                      class="text-warning q-chip--colored q-ml-none"
-                      style="
-                        font-size: 45px;
-                        background-color: rgb(255, 239, 226);
-                        /* background-color: rgb(240, 225, 17); */
-                      "
-                    >
-                      <span class="text-weight-medium title"> {{ bilPF }}</span>
-                    </q-avatar>
-                  </q-item-section>
-                </q-item>
-              </q-card-section>
-            </q-card>
-          </div>
-
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card
-              no-shadow
-              fit
-              bordered
-              class="cursor-pointer"
-              :style="{
-                backgroundColor: isClicked2
-                  ? '#22e08e'
-                  : isHovered2
-                  ? '#22e08e'
-                  : '#ffffff',
-              }"
-              :class="{ hovered: isHovered2, clicked: isClicked2 }"
-              @mouseover="isHovered2 = true"
-              @mouseleave="isHovered2 = false"
-              @click="handleClick2"
-            >
-              <q-card-section vert class="q-pa-sm" role="">
-                <q-item row no-wrap class="">
-                  <q-item-section column justify-center class=""
-                    ><q-item-label
-                      ><span class="text-weight-medium title text-grey-8"
-                        >Permohonan Diluluskan</span
-                      ></q-item-label
-                    >
-                  </q-item-section>
-                  <q-item-section side justify-center class=""
-                    ><q-avatar
-                      class="text-positive q-chip--colored q-ml-none"
-                      style="
-                        font-size: 45px;
-                        background-color: rgb(225, 246, 232);
-                      "
-                    >
-                      <span class="text-weight-medium title text-positive">
-                        {{ bilLF }}</span
+                    </q-item-section>
+                    <q-item-section side justify-center class=""
+                      ><q-avatar
+                        class="text-warning q-chip--colored q-ml-none"
+                        style="
+                          font-size: 45px;
+                          background-color: rgb(231 247 253);
+                        "
                       >
-                    </q-avatar>
-                  </q-item-section>
-                </q-item>
-              </q-card-section>
-            </q-card>
-          </div>
+                        <a
+                          ><span class="text-weight-medium title text-primary">
+                            {{ bilB }}</span
+                          ></a
+                        >
+                      </q-avatar>
+                    </q-item-section>
+                  </q-item>
+                </q-card-section>
+              </q-card>
+            </div>
 
-          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-            <q-card
-              no-shadow
-              fit
-              bordered
-              class="cursor-pointer"
-              :style="{
-                backgroundColor: isClicked3
-                  ? '#e66c5c'
-                  : isHovered3
-                  ? '#e66c5c'
-                  : '#ffffff',
-              }"
-              :class="{ hovered: isHovered3, clicked: isClicked3 }"
-              @mouseover="isHovered3 = true"
-              @mouseleave="isHovered3 = false"
-              @click="handleClick3"
-            >
-              <q-card-section vert class="q-pa-sm" role="">
-                <q-item row no-wrap class="">
-                  <q-item-section column justify-center class=""
-                    ><q-item-label
-                      ><span class="text-weight-medium title text-grey-8"
-                        >Permohonan Tidak Diluluskan</span
-                      ></q-item-label
-                    >
-                  </q-item-section>
-                  <q-item-section side justify-center class=""
-                    ><q-avatar
-                      class="text-negative q-chip--colored q-ml-none"
-                      style="
-                        font-size: 45px;
-                        background-color: rgb(253, 228, 227);
-                      "
-                    >
-                      <span class="text-weight-medium title text-negative">
-                        {{ bilGF }}</span
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <q-card
+                no-shadow
+                fit
+                bordered
+                class="cursor-pointer"
+                :style="{
+                  backgroundColor: isClicked1
+                    ? '#FFFF8F'
+                    : isHovered1
+                    ? '#FFFF8F'
+                    : '#ffffff',
+                }"
+                :class="{ hovered: isHovered1, clicked: isClicked1 }"
+                @mouseover="isHovered1 = true"
+                @mouseleave="isHovered1 = false"
+                @click="handleClick1"
+              >
+                <q-card-section vert class="q-pa-sm" role="">
+                  <q-item row no-wrap class="">
+                    <q-item-section column justify-center class=""
+                      ><q-item-label
+                        ><span class="text-weight-medium title text-grey-8"
+                          >Permohonan Pindah Fakulti</span
+                        ></q-item-label
                       >
-                    </q-avatar>
-                  </q-item-section>
-                </q-item>
-              </q-card-section>
-            </q-card>
-          </div>
-          <!-- end 4 kotak -->
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <q-table
-              flat
-              bordered
-              no-wrap
-              :rows="filteredRows"
-              :columns="columns"
-              row-key="p001nokp"
-              :horizontal-separator="separator"
-              style="padding: 2px; border: 1px solid lightgray"
-              v-model:pagination.sync="pagination"
-              :filter="filter"
-              :options="options"
-              ref="tableRef"
-              @request="onRequest"
-            >
-              <template v-slot:top-left>
-                <div class="">
-                  <span style="font-size: medium; font-weight: bold"
-                    >Senarai Permohonan</span
-                  >
-                  <hr />
-                </div>
-              </template>
-              <template v-slot:body-cell-actions="props">
-                <q-td align="center">
-                  <q-btn
+                    </q-item-section>
+                    <q-item-section side justify-center class=""
+                      ><q-avatar
+                        class="text-warning q-chip--colored q-ml-none"
+                        style="
+                          font-size: 45px;
+                          background-color: rgb(255, 239, 226);
+                          /* background-color: rgb(240, 225, 17); */
+                        "
+                      >
+                        <span class="text-weight-medium title">
+                          {{ bilPF }}</span
+                        >
+                      </q-avatar>
+                    </q-item-section>
+                  </q-item>
+                </q-card-section>
+              </q-card>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <q-card
+                no-shadow
+                fit
+                bordered
+                class="cursor-pointer"
+                :style="{
+                  backgroundColor: isClicked2
+                    ? '#22e08e'
+                    : isHovered2
+                    ? '#22e08e'
+                    : '#ffffff',
+                }"
+                :class="{ hovered: isHovered2, clicked: isClicked2 }"
+                @mouseover="isHovered2 = true"
+                @mouseleave="isHovered2 = false"
+                @click="handleClick2"
+              >
+                <q-card-section vert class="q-pa-sm" role="">
+                  <q-item row no-wrap class="">
+                    <q-item-section column justify-center class=""
+                      ><q-item-label
+                        ><span class="text-weight-medium title text-grey-8"
+                          >Permohonan Diluluskan</span
+                        ></q-item-label
+                      >
+                    </q-item-section>
+                    <q-item-section side justify-center class=""
+                      ><q-avatar
+                        class="text-positive q-chip--colored q-ml-none"
+                        style="
+                          font-size: 45px;
+                          background-color: rgb(225, 246, 232);
+                        "
+                      >
+                        <span class="text-weight-medium title text-positive">
+                          {{ bilLF }}</span
+                        >
+                      </q-avatar>
+                    </q-item-section>
+                  </q-item>
+                </q-card-section>
+              </q-card>
+            </div>
+
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+              <q-card
+                no-shadow
+                fit
+                bordered
+                class="cursor-pointer"
+                :style="{
+                  backgroundColor: isClicked3
+                    ? '#e66c5c'
+                    : isHovered3
+                    ? '#e66c5c'
+                    : '#ffffff',
+                }"
+                :class="{ hovered: isHovered3, clicked: isClicked3 }"
+                @mouseover="isHovered3 = true"
+                @mouseleave="isHovered3 = false"
+                @click="handleClick3"
+              >
+                <q-card-section vert class="q-pa-sm" role="">
+                  <q-item row no-wrap class="">
+                    <q-item-section column justify-center class=""
+                      ><q-item-label
+                        ><span class="text-weight-medium title text-grey-8"
+                          >Permohonan Tidak Diluluskan</span
+                        ></q-item-label
+                      >
+                    </q-item-section>
+                    <q-item-section side justify-center class=""
+                      ><q-avatar
+                        class="text-negative q-chip--colored q-ml-none"
+                        style="
+                          font-size: 45px;
+                          background-color: rgb(253, 228, 227);
+                        "
+                      >
+                        <span class="text-weight-medium title text-negative">
+                          {{ bilGF }}</span
+                        >
+                      </q-avatar>
+                    </q-item-section>
+                  </q-item>
+                </q-card-section>
+              </q-card>
+            </div>
+            <!-- end 4 kotak -->
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <q-table
+                flat
+                bordered
+                no-wrap
+                :rows="filteredRows"
+                :columns="columns"
+                row-key="p001nokp"
+                :horizontal-separator="separator"
+                style="padding: 2px; border: 1px solid lightgray"
+                v-model:pagination.sync="pagination"
+                :filter="filter"
+                :options="options"
+                ref="tableRef"
+                @request="onRequest"
+                class="full-width"
+              >
+                <template v-slot:top-left>
+                  <div class="">
+                    <span style="font-size: medium; font-weight: bold"
+                      >Senarai Permohonan</span
+                    >
+                    <hr />
+                  </div>
+                </template>
+                <template v-slot:body-cell-actions="props">
+                  <q-td align="center">
+                    <q-btn
+                      dense
+                      flat
+                      color="black"
+                      icon="edit"
+                      @click="goToDetails(props.row.p001nokp)"
+                    />
+                    <!-- <q-btn dense flat icon="edit" color="primary" @click="goToEditDetails(props.row.p001nokp)" /> -->
+                  </q-td>
+                </template>
+                <template v-slot:top-right>
+                  <div class="row q-gutter-sm">
+                    <q-input
+                      outlined
+                      dense
+                      debounce="300"
+                      v-model="filter"
+                      placeholder="Search"
+                      items-start
+                      class=""
+                    >
+                      <template v-slot:append>
+                        <q-icon name="search" /> </template
+                    ></q-input>
+                    <q-col auto>
+                      <q-btn flat round>
+                        <img
+                          src="src/assets/pdf.svg"
+                          alt="PDF Icon"
+                          class="pdf"
+                        />
+                        <q-tooltip class="bg-no-color" :offset="[5, 5]">
+                          Export PDF
+                        </q-tooltip>
+                      </q-btn></q-col
+                    >
+                    <q-col auto>
+                      <q-btn flat round>
+                        <img
+                          src="src/assets/Excel.png"
+                          alt="Excel Icon"
+                          class="excel"
+                        />
+                        <q-tooltip class="bg-no-color" :offset="[5, 5]">
+                          Export Excel
+                        </q-tooltip>
+                      </q-btn>
+                    </q-col>
+                  </div>
+                </template>
+                <template v-slot:body-cell-status="props">
+                  <q-chip
+                    :color="statusColor(props.row.p001status)"
+                    text-color="white"
                     dense
-                    flat
-                    color="black"
-                    icon="edit"
-                    @click="goToDetails(props.row.p001nokp)"
-                  />
-                  <!-- <q-btn dense flat icon="edit" color="primary" @click="goToEditDetails(props.row.p001nokp)" /> -->
-                </q-td>
-              </template>
-              <template v-slot:top-right>
-                <div class="row q-gutter-sm">
-                  <q-input
-                    outlined
-                    dense
-                    debounce="300"
-                    v-model="filter"
-                    placeholder="Search"
-                    items-start
-                    class=""
+                    class="text-weight-bolder"
+                    square
+                    style="width: 100px; height: 100%"
                   >
-                    <template v-slot:append> <q-icon name="search" /> </template
-                  ></q-input>
-                  <q-col auto>
-                    <q-btn flat round>
-                      <img
-                        src="src/assets/pdf.svg"
-                        alt="PDF Icon"
-                        class="pdf"
-                      />
-                      <q-tooltip class="bg-no-color" :offset="[5, 5]">
-                        Export PDF
-                      </q-tooltip>
-                    </q-btn></q-col
-                  >
-                  <q-col auto>
-                    <q-btn flat round>
-                      <img
-                        src="src/assets/Excel.png"
-                        alt="Excel Icon"
-                        class="excel"
-                      />
-                      <q-tooltip class="bg-no-color" :offset="[5, 5]">
-                        Export Excel
-                      </q-tooltip>
-                    </q-btn>
-                  </q-col>
-
-                </div>
-              </template>
-              <template v-slot:body-cell-status="props">
-                <q-chip
-                  :color="statusColor(props.row.p001status)"
-                  text-color="white"
-                  dense
-                  class="text-weight-bolder"
-                  square
-                  style="width: 100px; height: 100%"
-                >
-                  <!-- {{ props.row.p001status }} -->
-                  {{ statusDescription(props.row.p001status) }}
-                </q-chip>
-              </template>
-            </q-table>
+                    <!-- {{ props.row.p001status }} -->
+                    {{ statusDescription(props.row.p001status) }}
+                  </q-chip>
+                </template>
+              </q-table>
+            </div>
           </div>
-        </div>
-        <!-- end 1st gutter -->
-      </q-page>
+          <!-- end 1st gutter -->
+          <!-- </q-page> -->
+        </q-card-section>
+      </q-card>
     </q-page-container>
-  </q-card>
+  </q-page>
 </template>
 
 <style>
 /* .flex-center {
   align-items: center;
 } */
+.full-width {
+  width: 100%;
+  overflow-x: auto;
+}
 hr {
   box-sizing: content-box;
   height: 0;
@@ -508,6 +519,10 @@ export default defineComponent({
     const isClicked1 = ref(false);
     const isClicked2 = ref(false);
     const isClicked3 = ref(false);
+    const namaprogram = ref("");
+    const kodprogram = ref("");
+    const necprogram = ref("");
+    const program = ref("");
 
     const handleClick = () => {
       isClicked.value = !isClicked.value;
@@ -521,7 +536,7 @@ export default defineComponent({
 
     const handleClick2 = () => {
       isClicked2.value = !isClicked2.value;
-      selectStatus(["1","2","5"]);
+      selectStatus(["1", "2", "5"]);
     };
 
     const handleClick3 = () => {
@@ -612,6 +627,11 @@ export default defineComponent({
         bilGF.value = storeGetMohon.Countbystat.bilgagalf || "";
         bilLF.value = storeGetMohon.Countbystat.billulusf || "";
         //console.log("Bilstat fetched successfully:", bilB.value);
+        // Fetch data for kodprogram
+        await storeGetMohon.fetchKodProgram();
+        namaprogram.value = storeGetMohon.KodProgram[0].p020namaprogbi || "";
+        kodprogram.value = storeGetMohon.KodProgram[0].p020kprog || "";
+        necprogram.value = storeGetMohon.KodProgram[0].z054bnecdetail || "";
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -634,7 +654,23 @@ export default defineComponent({
       console.log("Request:", props);
     };
 
+    const getProgramName = (kprog) => {
+      const program = storeGetMohon.KodProgram.find(
+        (item) => item.p020kprog === kprog
+      );
+      // return program ? program.p020namaprogbi : "N/A"; // Default if not found
+      if (program) {
+        return `${program.p020namaprogbi} (${program.z054bnecdetail})`; // Format both values
+      }
+      return "N/A"; // Default if not found
+    };
+
     return {
+      getProgramName,
+      program,
+      kodprogram,
+      namaprogram,
+      necprogram,
       isHovered,
       isHovered1,
       isHovered2,
@@ -650,11 +686,37 @@ export default defineComponent({
       MohonList,
       tableRef,
       columns: [
-        { name: "name", label: "NAMA PEMOHON", field: "p001nama", align: "center" },
-        { name: "nokp", label: "NO KP/PASSPORT", field: "p001nokp", align: "center" },
-        { name: "tkhmohon", label: "TARIKH MOHON", field: "p001tkhpohon", align: "center" },
-        { name: "program", label: "PROGRAM", field: "p001kprog" , align: "center"},
-        { name: "status", label: "STATUS", field: "p001status", align: "center" },
+        {
+          name: "name",
+          label: "NAMA PEMOHON",
+          field: "p001nama",
+          align: "center",
+        },
+        {
+          name: "nokp",
+          label: "NO KP/PASSPORT",
+          field: "p001nokp",
+          align: "center",
+        },
+        {
+          name: "tkhmohon",
+          label: "TARIKH MOHON",
+          field: "p001tkhpohon",
+          align: "center",
+        },
+        {
+          name: "program",
+          label: "PROGRAM",
+          field: "p001kprog",
+          align: "center",
+          format: (val) => getProgramName(val),
+        },
+        {
+          name: "status",
+          label: "STATUS",
+          field: "p001status",
+          align: "center",
+        },
         { name: "actions", label: "TINDAKAN", align: "center" },
       ],
       filter,
