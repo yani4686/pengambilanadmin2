@@ -15,7 +15,7 @@ const routes = [
     children: [
       {
         path: "",
-        component: () => import("pages/DashboardPengambilan.vue"),
+        component: () => import("src/pages/dashboardpengambilan/DashboardPengambilan.vue"),
         meta: {
           hideDrawer: true,
           hideBreadcrumbs: true,
