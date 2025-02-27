@@ -9,10 +9,10 @@ export const useRetPermohonanStore = defineStore("getmohon", {
     KodProgram: [], // Reactive state for data
     //selectedOption: null,
     formData: {
-      tindakanPengesahan : null,
+      tindakanPengesahan: null,
       kdprogrambaru: null,
-      catatanPengesahan: '',
-      nokpform: '',
+      catatanPengesahan: "",
+      nokpform: "",
     },
   }),
   actions: {
@@ -39,13 +39,26 @@ export const useRetPermohonanStore = defineStore("getmohon", {
     },
     async fetchP() {
       try {
-        const response = await api.get("/retpermohonan"); // API endpoint
-       // console.log("API Response:", response.data);
-        if (response.data.status === "success") {
-          this.MohonList = response.data.data; // Update store state
-          //this.MohonList = Object.values(response.data);
+        const userSession = JSON.parse(sessionStorage.getItem("userSession"));
+        // const response = await api.get("/retpermohonan", {
+        //   withCredentials: true, // Send session cookie
+        // });
+        const headers = {
+          "X-User-Name": userSession.usradminptj1, // Custom header for user
+          "X-Fakulti": userSession.fakulti, // Custom header for faculty
+        };
 
-        //  console.log("Updated MohonList in Store:", this.MohonList);
+        const response = await api.get("/retpermohonan", { headers });
+        // const response = await api.get("/retpermohonan", {
+        //   headers: {
+        //     Authorization: `Bearer ${userSession.token}`, // If you have a token
+        //     "X-User-Name": userSession.usradminptj1, // Custom header for user
+        //     "X-Fakulti": userSession.fakulti, // Custom header for faculty
+        //   },
+        // });
+
+        if (response.data.status === "success") {
+          this.MohonList = response.data.data; // 🔹 Data already filtered by session in backend
           return response;
         }
       } catch (error) {
@@ -57,17 +70,20 @@ export const useRetPermohonanStore = defineStore("getmohon", {
       try {
         const response = await api.get(`/retpermohonanbynokp/${id}`); // Correct URL endpoint
 
-       if (response.data.status === "success") {
-         // this.Details = response.data.data; // Update store state with fetched data
-        //  this.Details = Object.values(response.data);
+        if (response.data.status === "success") {
+          // this.Details = response.data.data; // Update store state with fetched data
+          //  this.Details = Object.values(response.data);
           this.Details = response.data.data;
           // var nama = this.Details.p001nama;
           // var nokp = this.Details.p001nokp;
           // var kdprogram = this.Details.p001kprog;
           //console.log(nama);
-        //  return nama;
+          //  return nama;
         } else {
-          console.warn("Failed to fetch details from axios:", response.data.msg);
+          console.warn(
+            "Failed to fetch details from axios:",
+            response.data.msg
+          );
         }
       } catch (error) {
         console.error("Error fetching details from axios:", error);
@@ -77,13 +93,13 @@ export const useRetPermohonanStore = defineStore("getmohon", {
     async fetchbilstat() {
       try {
         const response = await api.get("/countpermohonan"); // API endpoint
-       // console.log("API Response:", response.data);
+        // console.log("API Response:", response.data);
         if (response.data.status === "success") {
           //this.MohonList = response.data.data; // Update store state
-         // this.Countbystat = Object.values(response.data);
+          // this.Countbystat = Object.values(response.data);
           this.Countbystat = response.data.data;
 
-       //   console.log("Updated Countbystat in Store:", this.Countbystat);
+          //   console.log("Updated Countbystat in Store:", this.Countbystat);
           return response;
         }
       } catch (error) {
@@ -91,25 +107,26 @@ export const useRetPermohonanStore = defineStore("getmohon", {
       }
     },
     async createupdtindakanf(payload) {
-     // console.log(payload);
+      // console.log(payload);
       try {
         const response = await api.post("/updsaringan", payload, {
           headers: {
-            "Authorization": "bearer __q_strn|detailspermohonan",
-            "Content-Type": "application/json"
-          }
+            Authorization: "bearer __q_strn|detailspermohonan",
+            "Content-Type": "application/json",
+          },
         }); // API endpoint
-       // console.log('Success:', response.data);
+        // console.log('Success:', response.data);
         return response.data;
-
       } catch (error) {
         // Handle specific error response
         console.error("Error during API call:", error);
 
         // Optionally, return a default value or error message
-        return { status: 'error', msg: 'Failed to update tindakan. Please try again later.' };
+        return {
+          status: "error",
+          msg: "Failed to update tindakan. Please try again later.",
+        };
       }
-
     },
   },
 });

@@ -20,14 +20,14 @@
                   </div>
                   <br />
                   <div style="text-align: center">
-                    <span>OBE</span>
+                    <span>PPS (PENGAMBILAN)</span>
                   </div>
-                  <div style="text-align: center">
+                  <!-- <div style="text-align: center">
                     <span>SPB</span>
                   </div>
                   <div style="text-align: center">
                     <span>U-Time</span>
-                  </div>
+                  </div> -->
                   <!-- <br />
                   <span class="text-white">Log in using your account on:</span>
                   <br />
@@ -38,74 +38,78 @@
 
               <!-- Second q-card-section -->
               <q-card-section class="col-6">
-                <div class="q-pa-md">
-                  <br />
-                  <div>
-                    <q-input
-                      v-model="username"
-                      label="Username"
-                      outlined
-                      dense
-                      class="q-mb-md"
-                      required
-                    />
-                    <q-input
-                      v-model="password"
-                      label="Password"
-                      :type="showPassword ? 'text' : 'password'"
-                      outlined
-                      dense
-                      class="q-mb-md"
-                      required
-                      @update:focused="onPasswordFocus"
-                    >
-                      <template v-slot:append>
-                        <q-icon
-                          :name="showPassword ? 'visibility' : 'visibility_off'"
-                          class="cursor-pointer"
-                          size="xs"
-                          @click="togglePasswordVisibility"
-                        />
-                      </template>
-                    </q-input>
-                    <q-checkbox
-                      v-model="rememberMe"
-                      label="Remember me"
-                      name="remember"
-                      size="xs"
-                    />
+                <q-form class="q-gutter-md" justify-center>
+                  <div class="q-pa-md">
                     <br />
-
-                    <q-btn
-                      label="Login"
-                      color="primary"
-                      class="full-width q-mb-sm"
-                      @click="onSubmit"
-                    />
                     <div>
-                      <span>Already have an account?</span>
-                    </div>
-                    <q-btn
-                      @click="staffLogin"
-                      color="primary"
-                      class="full-width q-mb-sm"
-                    >
-                      <img
-                        src="images/google-logo.png"
-                        style="width: 20px; height: 20px"
-                        alt="Google Icon"
+                      <q-input
+                        v-model="formData.username"
+                        label="Username"
+                        outlined
+                        dense
+                        class="q-mb-md"
+                        required
                       />
-                      <span>Login via UNISZA ID</span>
-                    </q-btn>
-                    <q-btn
-                      flat
-                      label="Forgotten your username or password?"
-                      class="capitalize-btn"
-                      @click="back"
-                      to="/forgot-password"
-                    />
+                      <q-input
+                        v-model="formData.password"
+                        label="Password"
+                        :type="showPassword ? 'text' : 'password'"
+                        outlined
+                        dense
+                        class="q-mb-md"
+                        required
+                        @update:focused="onPasswordFocus"
+                      >
+                        <template v-slot:append>
+                          <q-icon
+                            :name="
+                              showPassword ? 'visibility' : 'visibility_off'
+                            "
+                            class="cursor-pointer"
+                            size="xs"
+                            @click="togglePasswordVisibility"
+                          />
+                        </template>
+                      </q-input>
+                      <q-checkbox
+                        v-model="rememberMe"
+                        label="Remember me"
+                        name="remember"
+                        size="xs"
+                      />
+                      <br />
+
+                      <q-btn
+                        label="Login"
+                        color="primary"
+                        class="full-width q-mb-sm"
+                        @click="onSubmit"
+                      />
+                      <div>
+                        <span>Already have an account?</span>
+                      </div>
+                      <q-btn
+                        @click="staffLogin"
+                        color="primary"
+                        class="full-width q-mb-sm"
+                      >
+                        <img
+                          src="images/google-logo.png"
+                          style="width: 20px; height: 20px"
+                          alt="Google Icon"
+                        />
+                        <span>Login via UNISZA ID</span>
+                      </q-btn>
+                      <q-btn
+                        flat
+                        label="Forgotten your username or password?"
+                        class="capitalize-btn"
+                        @click="back"
+                        to="/forgot-password"
+                      />
+                    </div>
                   </div>
-                </div>
+                </q-form>
               </q-card-section>
             </div>
           </q-card>
@@ -119,9 +123,12 @@
 import { useQuasar } from "quasar";
 import { useRoute, useRouter } from "vue-router";
 import { ref } from "vue";
+import { useLoginStore } from "src/stores/login.js";
 
 export default {
   setup() {
+    const storeGetLogin = useLoginStore(); // Pinia store
+
     const $q = useQuasar();
     const router = useRouter();
     const route = useRoute();
@@ -131,9 +138,14 @@ export default {
     const showPassword = ref(false); // Ensure this is reactive
     const rememberMe = ref(true);
 
+    const formData = ref({
+      username: "",
+      password: "",
+    });
+
     function staffLogin() {
-      window.location.href =
-        "https://portal.unisza.edu.my/sistem/modules/ssoaccess/postv2.php?link=";
+      // window.location.href =
+      //   "https://portal.unisza.edu.my/sistem/modules/ssoaccess/postv2.php?link=";
     }
 
     function togglePasswordVisibility() {
@@ -146,11 +158,35 @@ export default {
       }
     }
 
-    function onSubmit() {
-      alert("Login submitted");
-    }
+    // function onSubmit() {
+    //   alert("Login submitted");
+    // }
+
+    const onSubmit = async () => {
+      const payload = {
+        username: formData.value.username,
+        password: formData.value.password,
+      };
+
+      try {
+        const response = await storeGetLogin.createretloginadminq(payload);
+        // console.log("API Response:", response.status); // Debugging
+        //console.log('Form submitted successfully');
+        if (response.status === "success") {
+          setTimeout(() => {
+            router.push("/pengambilan");
+            //  console.log("Redirecting to LandingPageSaringan");
+          }, 200);
+          router.push("/pengambilan");
+          // this.$router.push('/landingpgsaringan'); // Redirect
+        }
+      } catch (error) {
+        console.error("Form submission failed:", error);
+      }
+    };
 
     return {
+      formData,
       username,
       password,
       showPassword,

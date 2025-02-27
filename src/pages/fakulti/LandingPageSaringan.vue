@@ -524,6 +524,11 @@ export default defineComponent({
     const necprogram = ref("");
     const program = ref("");
 
+    const userSession = JSON.parse(sessionStorage.getItem("userSession"));
+    let usrsession = userSession?.usradminptj1;
+    let usrsessionfakulti = userSession?.fakulti;
+    //console.log("User from Session:", usrsessionfakulti);
+
     const handleClick = () => {
       isClicked.value = !isClicked.value;
       selectStatus("0");
@@ -666,6 +671,9 @@ export default defineComponent({
     };
 
     return {
+      usrsessionfakulti,
+      usrsession,
+      userSession,
       getProgramName,
       program,
       kodprogram,

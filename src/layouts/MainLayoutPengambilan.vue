@@ -181,7 +181,22 @@
           <!-- Flex container for breadcrumbs and role selection -->
           <div class="row items-center justify-between">
             <!-- Breadcrumbs -->
-            <q-breadcrumbs v-if="!$route.meta.hideBreadcrumbs">
+            <q-breadcrumbs v-if="showBreadcrumbs">
+              <q-breadcrumbs-el
+                label="Dashboard"
+                to="/pengambilan"
+                icon="dashboard"
+              />
+              <q-breadcrumbs-el
+                v-for="(breadcrumb, index) in breadcrumbs"
+                :key="index"
+                :label="breadcrumb.label"
+                :to="breadcrumb.to"
+                exact
+                clickable
+              />
+            </q-breadcrumbs>
+            <!-- <q-breadcrumbs v-if="!$route.meta.hideBreadcrumbs">
               <q-breadcrumbs-el
                 label="Dashboard"
                 icon="dashboard"
@@ -195,7 +210,7 @@
                 exact
                 clickable
               />
-            </q-breadcrumbs>
+            </q-breadcrumbs> -->
           </div>
         </div>
         <!-- <img
@@ -239,16 +254,40 @@ export default {
     // const calendarMenu = ref(false);
     const hoveredTab = ref(null);
     const goToHome = () => {
-      router.push("/");
+      //router.push("/");
+      router.push("/pengambilan");
     };
+
+    const showBreadcrumbs = computed(() => {
+      return route.path !== "/pengambilan"; // Hide when on /pengambilan
+    });
+
     //-------------------------------------------------------- Breadcrumb ----------------------------------------------------------
     // Breadcrumbs calculation
     const breadcrumbs = computed(() => {
       const paths = route.path.split("/").filter(Boolean);
       return paths.map((path, index) => {
-        const to = "/" + paths.slice(0, index + 1).join("/");
+        let label = path.charAt(0).toUpperCase() + path.slice(1); // Default label
+        let to = "/" + paths.slice(0, index + 1).join("/"); // Default path
+
+        // Change "detailpermohonanadmin" to "Kelulusan"
+        if (path === "detailspermohonanadmin") {
+          label = "Kelulusan";
+          to = "/kelulusan"; // Change path to /kelulusan
+        }
+
+        if (path === "detailspermohonan") {
+          label = "Saringan";
+          to = "/saringan"; // Change path to /kelulusan
+        }
+        // Change number (NOKP) to "detailpermohonanadmin"
+        if (!isNaN(path)) {
+          label = "Detail Permohonan";
+        }
+
         return {
-          label: path.charAt(0).toUpperCase() + path.slice(1),
+          label,
+          // label: path.charAt(0).toUpperCase() + path.slice(1),
           to,
         };
       });
@@ -275,9 +314,11 @@ export default {
       showQuickmenu,
       componentMenu,
       hoveredTab,
+      showBreadcrumbs,
       breadcrumbs,
       goToHome() {
-        router.push("/");
+        //   router.push("/");
+        router.push("/pengambilan");
       },
     };
   },

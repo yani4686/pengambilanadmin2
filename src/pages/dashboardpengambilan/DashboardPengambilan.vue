@@ -4,7 +4,10 @@
   </div>
 
   <div class="row justify-center q-pa-lg q-ma-lg">
-    <q-card class="feature-card col-12 col-sm-3 blue-card cursor-pointer">
+    <q-card
+      class="feature-card col-12 col-sm-3 blue-card cursor-pointer"
+      @click="goToPageF"
+    >
       <q-card class="q-pa-md">
         <div class="row justify-between items-center">
           <!-- Left Side: Title -->
@@ -33,7 +36,7 @@
               </q-avatar>
               <div class="q-ml-md">
                 <div class="text-weight-bold">Bil Permohonan Dalam Proses</div>
-                <div class="text-grey-7">142 New Tickets</div>
+                <div class="text-grey-7">{{ bilProF }}</div>
               </div>
             </div>
           </div>
@@ -41,7 +44,10 @@
       </q-card>
     </q-card>
 
-    <q-card class="feature-card col-12 col-sm-3 green-card cursor-pointer">
+    <q-card
+      class="feature-card col-12 col-sm-3 green-card cursor-pointer"
+      @click="goToPagePPS"
+    >
       <q-card class="q-pa-md">
         <div class="row justify-between items-center">
           <!-- Left Side: Title -->
@@ -61,7 +67,7 @@
                 <div class="text-weight-bold">
                   Bil Permohonan Disahkan Fakulti
                 </div>
-                <div class="text-grey-7">142 New Tickets</div>
+                <div class="text-grey-7">{{ bilLF }}</div>
               </div>
             </div>
 
@@ -126,6 +132,7 @@ import { api } from "src/boot/axios";
 import { useQuasar } from "quasar";
 import { defineComponent, onMounted, ref } from "vue";
 import { useRetPermohonanStore } from "src/stores/getmohon";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "FeatureDashboard",
@@ -133,12 +140,19 @@ export default defineComponent({
     const storeGetMohon = useRetPermohonanStore(); // Pinia store
 
     var $q = useQuasar();
+    const router = useRouter();
 
     const bilB = ref("");
     const bilD = ref("");
     const bilPF = ref("");
     const bilGF = ref("");
     const bilLF = ref("");
+    const bilProF = ref("");
+
+    const userSession = JSON.parse(sessionStorage.getItem("userSession"));
+    let usrsession = userSession?.usradminptj1;
+    let usrsessionfakulti = userSession?.fakulti;
+    //console.log("User from Session:", usrsessionfakulti);
 
     // Fetch data on component mount
     onMounted(() => {
@@ -155,6 +169,7 @@ export default defineComponent({
         bilPF.value = storeGetMohon.Countbystat.bilpindahf || "";
         bilGF.value = storeGetMohon.Countbystat.bilgagalf || "";
         bilLF.value = storeGetMohon.Countbystat.billulusf || "";
+        bilProF.value = storeGetMohon.Countbystat.bilprocessf || "";
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -171,14 +186,28 @@ export default defineComponent({
     //   });
     // }
 
+    const goToPageF = () => {
+      router.push({ name: "LandingPageSaringan" }); // Change to your actual route name
+    };
+
+    const goToPagePPS = () => {
+      router.push({ name: "LandingPageKelulusan" }); // Change to your actual route name
+    };
+
     return {
+      usrsessionfakulti,
+      usrsession,
+      userSession,
       onMounted,
       onLoad,
+      goToPageF,
+      goToPagePPS,
       bilB,
       bilD,
       bilPF,
       bilGF,
       bilLF,
+      bilProF,
       // users,
       // hoveredCard: null,
       // mainportal: [

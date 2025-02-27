@@ -5,8 +5,9 @@ const routes = [
   //   component: () => import("pages/LoginProcess.vue"),
   // },
   {
-    path: "/login",
-    component: () => import("pages/LoginPagePengambilan.vue"),
+    path: "/",
+    component: () => import("pages/login/LoginPagePengambilan.vue"),
+    name: "login",
   },
   //-------------- PENGAMBILAN ---------------------//
   {
