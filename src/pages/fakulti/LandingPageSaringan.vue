@@ -219,13 +219,21 @@
                 </template>
                 <template v-slot:body-cell-actions="props">
                   <q-td align="center">
-                    <q-btn
+                    <q-btn v-if="!isViewing && props.row.p001status === '0'"
                       dense
                       flat
                       color="black"
                       icon="edit"
                       @click="goToDetails(props.row.p001nokp)"
                     />
+                    <q-btn
+                     v-if="props.row.p001status !== '0'"
+                    dense
+                    flat
+                    color="black"
+                    icon="visibility"
+                    @click="goToViewDetails(props.row.p001nokp)"
+                  />
                     <!-- <q-btn dense flat icon="edit" color="primary" @click="goToEditDetails(props.row.p001nokp)" /> -->
                   </q-td>
                 </template>
@@ -523,6 +531,7 @@ export default defineComponent({
     const kodprogram = ref("");
     const necprogram = ref("");
     const program = ref("");
+    const isViewing = ref(false);
 
     const userSession = JSON.parse(sessionStorage.getItem("userSession"));
     let usrsession = userSession?.usradminptj1;
@@ -647,7 +656,22 @@ export default defineComponent({
     };
 
     const goToDetails = (p001nokp) => {
-      router.push({ name: "DetailsPermohonan", params: { p001nokp } });
+      router.push({ 
+        name: "DetailsPermohonan",
+        params: { p001nokp },
+        state: { isViewing: false },
+      });
+    };
+
+    const goToViewDetails = (p001nokp) => {
+      // router.push({ name: "DetailsPermohonanAdmin", params: { p001nokp } });
+      // this.isViewing = true;
+      router.push({
+        name: "DetailsPermohonan",
+        params: { p001nokp },
+        state: { isViewing: true },
+        // query: { isViewing: "true" }, // Pass as a query param
+      });
     };
 
     const goToEditDetails = (p001nokp) => {
@@ -736,6 +760,7 @@ export default defineComponent({
       bilPF,
       filteredRows,
       selectedStatus,
+      goToViewDetails,
       selectStatus,
       goToDetails,
       goToEditDetails,

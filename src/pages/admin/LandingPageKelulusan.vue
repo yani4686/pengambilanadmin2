@@ -204,14 +204,14 @@
               <template v-slot:body-cell-actions="props">
                 <q-td align="center">
                   <q-btn
-                    v-if="!isViewing"
+                    v-if="!isViewing && props.row.p001status !== '1'"
                     dense
                     flat
                     color="black"
                     icon="edit"
                     @click="goToDetailsAdmin(props.row.p001nokp)"
                   />
-                  <q-btn
+                  <q-btn v-if="props.row.p001status === '1'"
                     dense
                     flat
                     color="black"

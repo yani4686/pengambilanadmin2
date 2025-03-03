@@ -568,21 +568,8 @@
                     <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                       <q-card bordered no-shadow class="card_style">
                         <q-card-section>
-                          <!-- <q-item type row no-wrap><q-item-section column side justify-center text-grey-8>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Mod Pengajian :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Kaedah :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Program :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Specialization :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Kampus :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Cadangan Tajuk
-                                  Penyelidikan :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Cadangan Penyelia
-                                  :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Pengalaman Bekerja
-                                  :</label>
-                              </q-item-section></q-item> -->
                           <div class="row">
-                            <div class="col-8 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -591,16 +578,16 @@
                                 label="Mod Pengajian"
                               ></q-input>
                             </div>
-                            <div class="col-6 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
                                 v-model="modest"
-                                :label="'Mode'"
+                               
                               ></q-input>
                             </div>
 
-                            <div class="col-8 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -609,33 +596,34 @@
                                 label="Kaedah"
                               ></q-input>
                             </div>
-                            <div class="col-6 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
                                 v-model="kaedah"
-                                :label="'Kaedah'"
+                               
                               ></q-input>
                             </div>
 
-                            <div class="col-8 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
                                 outlined
                                 class="bg-grey-4"
+                                
                                 label="Program"
                               ></q-input>
                             </div>
-                            <div class="col-6 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
-                                v-model="kdprogram"
-                                :label="'Program'"
+                                v-model="namaprogram"
+                               
                               ></q-input>
                             </div>
-                            <div class="col-8 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -644,14 +632,14 @@
                                 label="Specialization"
                               ></q-input>
                             </div>
-                            <div class="col-6 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
                                 label="Tiada"
                               ></q-input>
                             </div>
-                            <div class="col-10 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -661,19 +649,19 @@
                                   Penyelidikan"
                               ></q-input>
                             </div>
-                            <div class="col-8 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
-                                textarea
                                 :readonly="true"
                                 dense
                                 v-model="tajuk"
-                                :label="'Tajuk Penyelidikan'"
+                                type="textarea"
+                                autogrow                             
                               ></q-input>
                             </div>
                           </div>
 
                           <div class="row">
-                            <div class="col-8 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -682,16 +670,16 @@
                                 label="Cadangan Penyelia"
                               ></q-input>
                             </div>
-                            <div class="col-6 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
                                 v-model="sv"
-                                :label="'Penyelia'"
+                              
                               ></q-input>
                             </div>
 
-                            <div class="col-8 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -700,34 +688,14 @@
                                 label="Pengalaman Bekerja"
                               ></q-input>
                             </div>
-                            <div class="col-2 q-px-xs">
+                            <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
                                 v-model="expr"
-                                :label="'Pengalaman Bekerja'"
+                               
                               ></q-input>
                             </div>
-
-                            <!-- <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4"
-                                  label="No Tel (Rumah)"></q-input>
-                              </div>
-                              <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense label="095332222"></q-input>
-                              </div>
-                              <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="No Tel (Pej)"></q-input>
-                              </div>
-                              <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense label="Tiada"></q-input>
-                              </div>
-                              <div class="col-4 q-px-xs">
-                                <q-input :readonly="true" dense outlined class="bg-grey-4" label="Fax No"></q-input>
-                              </div>
-                              <div class="col-2 q-px-xs">
-                                <q-input :readonly="true" dense label="Tiada"></q-input>
-                              </div> -->
                           </div>
                         </q-card-section>
                       </q-card>
@@ -907,7 +875,7 @@
                               <q-input
                                 :readonly="true"
                                 dense
-                                label="MUET"
+                                v-model="bidesc"
                               ></q-input>
                             </div>
                             <div class="col-8 q-px-xs">
@@ -923,7 +891,7 @@
                               <q-input
                                 :readonly="true"
                                 dense
-                                label="Band 3"
+                               v-model="result"
                               ></q-input>
                             </div>
                             <div class="col-8 q-px-xs">
@@ -939,7 +907,7 @@
                               <q-input
                                 :readonly="true"
                                 dense
-                                label="02/02/2024"
+                               v-model="tkhexam"
                               ></q-input>
                             </div>
                           </div> </q-card-section
@@ -1605,6 +1573,9 @@ export default defineComponent({
     const nokpform = ref("");
     const statdesc = ref("");
     const cttnsah = ref("");
+    const bidesc = ref("");
+    const result = ref("");
+    const tkhexam = ref("");
     const namaprogram = ref("");
     const kodprogram = ref("");
     const fakultiprogram = ref("");
@@ -1759,6 +1730,9 @@ export default defineComponent({
           labelText.value = storeGetMohon.Details.label || "Default Label"; // Example: bind label text if available
           statdesc.value = storeGetMohon.Details.statdesc || "N/A";
           cttnsah.value = storeGetMohon.Details.p001catatan || "N/A";
+          bidesc.value = storeGetMohon.Details.bidesc || "N/A";
+          result.value = storeGetMohon.Details.p001muet || "N/A";
+          tkhexam.value = storeGetMohon.Details.p001tkhexm || "N/A";
           //  console.log("Details fetched nokp", nokp.value);
           //  console.log("Details fetched successfully", storeGetMohon.Details);
         } catch (error) {
@@ -1858,6 +1832,9 @@ export default defineComponent({
     };
 
     return {
+      result,
+      tkhexam,
+      bidesc,
       tab: ref("mails"),
       verticalTab: "contact", // Set a valid default tab name
       horizontalTab: "", // Set a valid default tab name

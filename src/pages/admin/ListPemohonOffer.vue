@@ -5,7 +5,18 @@
           <div class="row q-col-gutter-lg">
   
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <q-card no-shadow fit bordered class="cursor-pointer" @click="Total('Baru')">
+              <q-card no-shadow fit bordered class="cursor-pointer"  
+              :style="{
+                backgroundColor: isClicked
+                  ? '#68d8f7'
+                  : isHovered
+                  ? '#68d8f7'
+                  : '#ffffff',
+              }"
+              :class="{ hovered: isHovered, clicked: isClicked }"
+              @mouseover="isHovered = true"
+              @mouseleave="isHovered = false"
+              @click="handleClick">
                 <q-card-section class="q-card__section--vert q-pa-sm" role="">
                   <q-item row no-wrap class="">
                     <q-item-section column justify-center class=""><q-item-label><span
@@ -16,7 +27,7 @@
                           font-size: 45px;
                           background-color: rgb(231 247 253);
                         ">
-                        <a><span class="text-weight-medium title text-primary">2</span></a>
+                        <a><span class="text-weight-medium title text-primary">{{bilLPPS}}</span></a>
                       </q-avatar>
                     </q-item-section>
                   </q-item>
@@ -25,7 +36,17 @@
             </div>
   
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-              <q-card no-shadow fit bordered class="cursor-pointer" @click="Total('Pindah Fakulti')">
+              <q-card no-shadow fit bordered class="cursor-pointer" :style="{
+                  backgroundColor: isClicked1
+                    ? '#FFFF8F'
+                    : isHovered1
+                    ? '#FFFF8F'
+                    : '#ffffff',
+                }"
+                :class="{ hovered: isHovered1, clicked: isClicked1 }"
+                @mouseover="isHovered1 = true"
+                @mouseleave="isHovered1 = false"
+                @click="handleClick1">
                 <q-card-section class="q-card__section--vert q-pa-sm" role="">
                   <q-item row no-wrap class="">
                     <q-item-section column justify-center class=""><q-item-label><span
@@ -36,7 +57,7 @@
                           font-size: 45px;
                           background-color: rgb(255, 239, 226);
                         ">
-                        <span class="text-weight-medium title text-warning">1</span>
+                        <span class="text-weight-medium title text-warning">{{ bilTerima }}</span>
                       </q-avatar>
                     </q-item-section>
                   </q-item>
@@ -53,7 +74,7 @@
               @request="onRequest">
               <template v-slot:top-left>
                 <div class="">
-                  <span style="font-size: medium; font-weight: bold">Senarai Permohonan</span>
+                  <span style="font-size: medium; font-weight: bold">Senarai Permohonan Yang Diluluskan</span>
                   <hr />
                 </div>
               </template>
@@ -287,18 +308,17 @@ hr {
 <script>
 import { useRoute, useRouter } from "vue-router";
 import { defineComponent, onMounted, ref, computed,reactive } from "vue";
-import { useRetPermohonanStore } from "src/stores/getmohon";
-
+import { useRetCalonJayaStorePps } from "src/stores/getcalonjaya";
 
 export default defineComponent({
   name: "ListPageOffer",
   setup() {
 
-    const storeGetMohon = useRetPermohonanStore(); // Pinia store
+    const storeGetCalonJaya = useRetCalonJayaStorePps(); // Pinia store
 
    // Computed property for reactive state
-   const MohonList = computed(() => {
-      const list = storeGetMohon.MohonList;
+   const JayaList = computed(() => {
+      const list = storeGetCalonJaya.JayaList;
      //  console.log("MohonList:", MohonList.value);
      //  console.log("List:", list.value);
 
@@ -318,29 +338,71 @@ export default defineComponent({
     const route = useRoute();
     const filter = ref("");
     const statB = ref('');
-    const bilB = ref('');
-    const bilD = ref('');
-    const bilPF = ref('');
-    const bilGF = ref('');
-    const bilLF = ref('');
+    const bilTerima = ref('');
+    const bilLPPS = ref('');
     const selectedStatus = ref("");
+    const statusterima = ref('');
+    const isHovered = ref(false);
+    const isHovered1 = ref(false);
+    const isClicked = ref(false);
+    const isClicked1 = ref(false);
+  
+    const handleClick = () => {
+      isClicked.value = !isClicked.value;
+      selectStatus("", "status");  // Clear filter, show all
+    };
+
+    const handleClick1 = () => {
+      isClicked1.value = !isClicked1.value;
+      selectStatus("1", "ststerimatwr");;
+    };
+
+    const selectStatus = (status, mode = 'status') => {
+      if (status === "") {
+        selectedStatus.value = [];
+    } else {
+        selectedStatus.value = [status];
+    }
+    filterMode.value = mode;  // Set whether to filter on 'status' or 'ststerimatwr'
+  };
+
+  const filterMode = ref('status');
 
     // Filters rows based on selected status
     const filteredRows = computed(() => {
-   // console.log("Selected Status for Filter:", selectedStatus.value); // Debugging
-    const filtered = selectedStatus.value
-    ? MohonList.value.filter((row) => row.p001status === selectedStatus.value)
-    : MohonList.value;
+  //  console.log("Filtering Rows...");
+  //  console.log("Selected Status:", selectedStatus.value);
+  //  console.log("Filter Mode:", filterMode.value);
 
-  //console.log("Filtered Rows:", filtered); // Debugging
-  return filtered;
-      });
+    if (selectedStatus.value.length === 0) {
+      //  console.log("No filter applied - returning all rows.");
+        return JayaList.value;  // Show all rows
+    }
 
-      const selectStatus = (status) => {
-  //console.log("Clicked Status:", status);
-  selectedStatus.value = status;
-};
-  
+    const result = JayaList.value.filter((row) => {
+      //  console.log("Checking row:", row);
+
+        if (filterMode.value === 'status') {
+         //   console.log(`Comparing p001status (${row.p001status}) with selectedStatus`, selectedStatus.value);
+            return selectedStatus.value.includes(row.p001status);
+        } else if (filterMode.value === 'ststerimatwr') {
+        //    console.log(`Comparing p001ststerimatwr (${row.p001ststerimatwr}) with selectedStatus`, selectedStatus.value);
+            return selectedStatus.value.includes(row.p001ststerimatwr);
+        }
+        return true;
+    });
+
+  //  console.log("Filtered Result:", result);
+    return result;
+});
+
+
+//   const filteredRows = computed(() => {
+//     if (!selectedStatus.value) {
+//         return storeGetCalonJaya.JayaList;
+//     }
+//     return storeGetCalonJaya.JayaList.filter(row => row.p001ststerimatwr === selectedStatus.value);
+// });
 
   const statusColor = (status) => {
   const colors = {
@@ -370,6 +432,17 @@ const statusDescription = (status) => {
   };
   return descriptions[status] || 'Draft';
 };
+
+const program = ref("");
+    const getProgramName = (kprog) => {
+
+    const program = storeGetCalonJaya.KodProgram.find(item => item.p020kprog === kprog);
+   // return program ? program.p020namaprogbi : "N/A"; // Default if not found
+    if (program) {
+      return `${program.p020namaprogbi} (${program.z054bnecdetail})`; // Format both values
+    }
+    return "N/A"; // Default if not found
+  };
     
 
   // Fetch data on component mount
@@ -380,15 +453,19 @@ const statusDescription = (status) => {
     // Load data from the store
     async function onLoad() {
   try {
+    await storeGetCalonJaya.fetchKodProgram();
     // Fetch data for MohonList
-    await storeGetMohon.fetchP();
+    await storeGetCalonJaya.fetchP();
+    if (storeGetCalonJaya.JayaList.length > 0) {
+        // Set initial filter value to first row's p001ststerimatwr
+        statusterima.value = storeGetCalonJaya.JayaList[0].p001ststerimatwr;
+        selectedStatus.value = [statusterima.value];  // Auto-select initial filter
+    }
+   // console.log(statusterima.value);
     // Fetch data for bilstat
-    await storeGetMohon.fetchbilstat();
-    bilB.value = storeGetMohon.Countbystat.bildraf || '';
-    bilD.value = storeGetMohon.Countbystat.bildraf1 || '';
-    bilPF.value = storeGetMohon.Countbystat.bilpindahf || '';
-    bilGF.value = storeGetMohon.Countbystat.bilgagalf || '';
-    bilLF.value = storeGetMohon.Countbystat.billulusf || '';
+    await storeGetCalonJaya.fetchbiljaya();
+    bilLPPS.value = storeGetCalonJaya.Countjayabystat.billuluspps || '';
+    bilTerima.value = storeGetCalonJaya.Countjayabystat.bilterima || '';
     //console.log("Bilstat fetched successfully:", bilB.value);
   } catch (error) {
     console.error("Error fetching data:", error);
@@ -401,7 +478,7 @@ const statusDescription = (status) => {
     }
 
     const goToDetailsAdmin = (p001nokp) => {
-      router.push({ name: "DetailsPermohonanAdmin", params: { p001nokp } });
+      router.push({ name: "DetailsCalonJaya", params: { p001nokp } });
     };
 
     const goToEditDetailsAdmin = (p001nokp) => {
@@ -414,21 +491,56 @@ const statusDescription = (status) => {
     };
 
     return {
-      MohonList,
+      program,
+      getProgramName,
+      filterMode,
+      isHovered,  
+      isHovered1,  
+      isClicked,  
+      isClicked1,  
+      handleClick,
+      handleClick1,
+      statusterima,
+      JayaList,
       tableRef,
-      columns:[{ name: "name", label: "NAMA PEMOHON", field: "p001nama" },
-                { name: "nokp", label: "NO KP/PASSPORT", field: "p001nokp" },
-                { name: "tkhmohon", label: "TARIKH MOHON", field: "p001tkhpohon" },
-                { name: "program", label: "PROGRAM", field: "p001kprog" },
-                { name: "status", label: "STATUS", field: "p001status" },
-                { name: "actions", label: "TINDAKAN" },],
+      columns: [
+        {
+          name: "name",
+          label: "NAMA PEMOHON",
+          field: "p001nama",
+          align: "center",
+        },
+        {
+          name: "nokp",
+          label: "NO KP/PASSPORT",
+          field: "p001nokp",
+          align: "center",
+        },
+        {
+          name: "tkhmohon",
+          label: "TARIKH MOHON",
+          field: "p001tkhpohon",
+          align: "center",
+        },
+        {
+          name: "program",
+          label: "PROGRAM",
+          field: "p001kprog",
+          align: "center",
+          format: (val) => getProgramName(val), // Call function to get program name
+        },
+        {
+          name: "status",
+          label: "STATUS",
+          field: "p001status",
+          align: "center",
+        },
+        { name: "actions", label: "TINDAKAN", align: "center" },
+      ],
       filter,
       statB,
-      bilB,
-      bilD,
-      bilGF,
-      bilLF,
-      bilPF,
+      bilLPPS,
+      bilTerima,
       filteredRows,
       selectedStatus,
       selectStatus,

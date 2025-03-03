@@ -69,14 +69,19 @@ const routes = [
         component: () => import("pages/admin/EditPermohonanAdmin.vue"),
       },
       {
-        path: "/landingpgoffer",
+        path: "/calonjaya",
         name: "LandingPageOffer",
         component: () => import("pages/admin/ListPemohonOffer.vue"),
       },
       {
-        path: "/editoffer/:p001nokp",
-        name: "EditOffer",
+        path: "/detailsoffer/:p001nokp",
+        name: "DetailsCalonJaya",
         component: () => import("pages/admin/DetailPemohonOffer.vue"),
+      },
+      {
+        path: "/editoffer/:p001nokp",
+        name: "KemaskiniCalonJaya",
+        component: () => import("pages/admin/EditPemohonOffer.vue"),
       },
     ],
   },

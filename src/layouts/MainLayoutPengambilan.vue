@@ -127,7 +127,7 @@
               <q-item>
                 <q-item-section>
                   <q-item-label>
-                    <a href="#/landingpgoffer" style="color: white"
+                    <a href="#/calonjaya" style="color: white"
                       >Senarai Calon Jaya</a
                     >
                   </q-item-label>
@@ -279,6 +279,11 @@ export default {
         if (path === "detailspermohonan") {
           label = "Saringan";
           to = "/saringan"; // Change path to /kelulusan
+        }
+
+        if (path === "detailsoffer") {
+          label = "CalonJaya";
+          to = "/calonjaya"; // Change path to /kelulusan
         }
         // Change number (NOKP) to "detailpermohonanadmin"
         if (!isNaN(path)) {
