@@ -583,7 +583,6 @@
                                 :readonly="true"
                                 dense
                                 v-model="modest"
-                               
                               ></q-input>
                             </div>
 
@@ -601,7 +600,6 @@
                                 :readonly="true"
                                 dense
                                 v-model="kaedah"
-                               
                               ></q-input>
                             </div>
 
@@ -611,7 +609,6 @@
                                 dense
                                 outlined
                                 class="bg-grey-4"
-                                
                                 label="Program"
                               ></q-input>
                             </div>
@@ -620,7 +617,6 @@
                                 :readonly="true"
                                 dense
                                 v-model="namaprogram"
-                               
                               ></q-input>
                             </div>
                             <div class="col-xs-12 col-md-8">
@@ -655,7 +651,7 @@
                                 dense
                                 v-model="tajuk"
                                 type="textarea"
-                                autogrow                             
+                                autogrow
                               ></q-input>
                             </div>
                           </div>
@@ -675,7 +671,6 @@
                                 :readonly="true"
                                 dense
                                 v-model="sv"
-                              
                               ></q-input>
                             </div>
 
@@ -693,7 +688,6 @@
                                 :readonly="true"
                                 dense
                                 v-model="expr"
-                               
                               ></q-input>
                             </div>
                           </div>
@@ -891,7 +885,7 @@
                               <q-input
                                 :readonly="true"
                                 dense
-                               v-model="result"
+                                v-model="result"
                               ></q-input>
                             </div>
                             <div class="col-8 q-px-xs">
@@ -907,7 +901,7 @@
                               <q-input
                                 :readonly="true"
                                 dense
-                               v-model="tkhexam"
+                                v-model="tkhexam"
                               ></q-input>
                             </div>
                           </div> </q-card-section
@@ -927,21 +921,6 @@
                     <div class="col-lg-10 col-md-4 col-sm-12 col-xs-12">
                       <q-card bordered no-shadow class="card_style">
                         <q-card-section>
-                          <!-- <q-item type row no-wrap><q-item-section column side justify-center text-grey-8>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Salinan No KP/Passport
-                                  :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Academic Certificates/
-                                  Senate Letter/
-                                  Completion Letter Of Programme :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Transkrip Akademik
-                                  :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">English Language
-                                  Qualification :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Kertas Kerja
-                                  Penyelidikan :</label>
-                                <label class="col-form-label q-mb-none" style="margin-left: 10px">Resit Pembayaran
-                                  :</label>
-                              </q-item-section></q-item> -->
                           <div class="row">
                             <div class="col-8 q-px-xs">
                               <q-input
@@ -1702,7 +1681,7 @@ export default defineComponent({
             namaprogram.value = program.p020namaprogbi || "";
             fakultiprogram.value = program.a019bi || "";
             necprogram.value = program.z054bnecdetail || "";
-            // console.log("Program found, namaprogram:", namaprogram.value);
+            console.log("Program found, namaprogram:", namaprogram.value);
           } else {
             // console.log("Program not found");
             namaprogram.value = ""; // Reset if not found
@@ -1724,7 +1703,7 @@ export default defineComponent({
           urlic.value = storeGetMohon.Details.urlnokppass || ""; // Example: bind the fetched name to the variable
           urlcert.value = storeGetMohon.Details.urlcert || ""; // Example: bind the fetched name to the variable
           urlpro.value = storeGetMohon.Details.urlpro || ""; // Example: bind the fetched name to the variable
-          urlbi.value = storeGetMohon.Details.urlpro || ""; // Example: bind the fetched name to the variable
+          urlbi.value = storeGetMohon.Details.urlupbi || ""; // Example: bind the fetched name to the variable
           urlresit.value = storeGetMohon.Details.urlpro || ""; // Example: bind the fetched name to the variable
           urlexp.value = storeGetMohon.Details.urlpro || ""; // Example: bind the fetched name to the variable
           labelText.value = storeGetMohon.Details.label || "Default Label"; // Example: bind label text if available
