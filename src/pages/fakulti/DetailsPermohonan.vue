@@ -1407,7 +1407,10 @@
                       label="Tindakan Pengesahan"
                       color="blue"
                       v-model="selectedOption"
-                      :options="singleDropdownOptions"
+                      :map-options="true"
+                      :options="filteredDropdownOptions"
+                      option-value="value"
+                      option-label="label"
                       @update:model-value="updateSelectedOption"
                       outlined
                       dense
@@ -1542,6 +1545,7 @@ export default defineComponent({
     const urlpic = ref("");
     const laluan = ref("");
     const transfer = ref("");
+    const transferval = ref("");
     const urlic = ref("");
     const urlcert = ref("");
     const urlpro = ref("");
@@ -1585,7 +1589,6 @@ export default defineComponent({
     });
 
     const selectedOption = ref(""); // Tracks selected dropdown value
-    // watch(selectedOption, (newValue) => {console.log("Selected Option:", newValue);});
 
     const updateSelectedOption = (selected) => {
       selectedOption.value = selected.value; // Extract only the value
@@ -1597,11 +1600,20 @@ export default defineComponent({
       nokpform: "",
     });
 
-    const singleDropdownOptions = [
-      { label: "Permohonan Diluluskan", value: "2" },
-      { label: "Permohonan Tidak Diluluskan", value: "3" },
-      { label: "Pindah Fakulti", value: "4" },
-    ];
+    // ✅ Ensure `singleDropdownOptions` is ALWAYS an array (even if empty at first)
+    const singleDropdownOptions = ref([]);
+
+    // const singleDropdownOptions = [
+    //   { label: "Permohonan Diluluskan", value: "2" },
+    //   { label: "Permohonan Tidak Diluluskan", value: "3" },
+    //   { label: "Pindah Fakulti", value: "4" },
+    // ];
+
+    const filteredDropdownOptions = computed(() => {
+  return singleDropdownOptions.value.length > 0
+    ? singleDropdownOptions.value.filter(option => transferval.value !== "0" || option.value !== "4")
+    : [];
+});
 
     const programOptions = ref([]);
     const filteredPrograms = ref([]);
@@ -1700,6 +1712,15 @@ export default defineComponent({
           urlpic.value = storeGetMohon.Details.urlgmbr || ""; // Example: bind the fetched name to the variable
           laluan.value = storeGetMohon.Details.laluan || ""; // Example: bind the fetched name to the variable
           transfer.value = storeGetMohon.Details.setujutransfer || ""; // Example: bind the fetched name to the variable
+          transferval.value = storeGetMohon.Details.p001setujutransfer || ""; // Example: bind the fetched name to the variable
+          
+          // ✅ Initialize `singleDropdownOptions` properly
+          singleDropdownOptions.value = [
+            { label: "Permohonan Diluluskan", value: "2" },
+            { label: "Permohonan Tidak Diluluskan", value: "3" },
+            { label: "Pindah Fakulti", value: "4" },
+          ];
+
           urlic.value = storeGetMohon.Details.urlnokppass || ""; // Example: bind the fetched name to the variable
           urlcert.value = storeGetMohon.Details.urlcert || ""; // Example: bind the fetched name to the variable
           urlpro.value = storeGetMohon.Details.urlpro || ""; // Example: bind the fetched name to the variable
@@ -1712,8 +1733,7 @@ export default defineComponent({
           bidesc.value = storeGetMohon.Details.bidesc || "N/A";
           result.value = storeGetMohon.Details.p001muet || "N/A";
           tkhexam.value = storeGetMohon.Details.p001tkhexm || "N/A";
-          //  console.log("Details fetched nokp", nokp.value);
-          //  console.log("Details fetched successfully", storeGetMohon.Details);
+      
         } catch (error) {
           console.error("Error fetching details frontend:", error);
         }
@@ -1811,6 +1831,7 @@ export default defineComponent({
     };
 
     return {
+      filteredDropdownOptions,
       result,
       tkhexam,
       bidesc,
@@ -1867,6 +1888,7 @@ export default defineComponent({
       urlpic,
       laluan,
       transfer,
+      transferval,
       urlic,
       urlcert,
       urlpro,
