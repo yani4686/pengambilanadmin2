@@ -251,7 +251,7 @@
                     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                       <q-card bordered no-shadow class="card_style">
                         <q-card-section vert text-center class="image-center">
-                          <q-avatar square size="100px"
+                          <q-avatar square size="150px"
                             ><img :src="urlpic" alt="Avatar" />
                           </q-avatar>
                         </q-card-section>
@@ -569,95 +569,131 @@
                       <q-card bordered no-shadow class="card_style">
                         <q-card-section>
                           <div class="row">
-                            <div class="col-xs-12 col-md-8">
+                            <div class="col-12 q-px-xs">
                               <q-input
-                                :readonly="true"
-                                dense
-                                outlined
-                                class="bg-grey-4"
-                                label="Mod Pengajian"
-                              ></q-input>
-                            </div>
-                            <div class="col-xs-12 col-md-8">
-                              <q-input
-                                :readonly="true"
-                                dense
                                 v-model="modest"
-                              ></q-input>
-                            </div>
-
-                            <div class="col-xs-12 col-md-8">
-                              <q-input
-                                :readonly="true"
-                                dense
+                                type="text"
+                                autogrow
                                 outlined
-                                class="bg-grey-4"
-                                label="Kaedah"
-                              ></q-input>
-                            </div>
-                            <div class="col-xs-12 col-md-8">
-                              <q-input
-                                :readonly="true"
                                 dense
+                                readonly
+                                class="q-mb-md"
+                                label="Type of Study"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Type of Study
+                                  </div>
+                                </template>
+                              </q-input>
+                            </div>
+                            <div class="col-12 q-px-xs">
+                              <q-input
                                 v-model="kaedah"
-                              ></q-input>
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Mode of Study"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Mode of Study
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
 
-                            <div class="col-xs-12 col-md-8">
+                            <div class="col-12 q-px-xs">
                               <q-input
-                                :readonly="true"
-                                dense
-                                outlined
-                                class="bg-grey-4"
-                                label="Program"
-                              ></q-input>
-                            </div>
-                            <div class="col-xs-12 col-md-8">
-                              <q-input
-                                :readonly="true"
-                                dense
                                 v-model="namaprogram"
-                              ></q-input>
-                            </div>
-                            <div class="col-xs-12 col-md-8">
-                              <q-input
-                                :readonly="true"
-                                dense
+                                type="textarea"
+                                autogrow
                                 outlined
-                                class="bg-grey-4"
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Programme"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Programme
+                                  </div>
+                                </template>
+                              </q-input>
+                            </div>
+
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                type="textarea"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
                                 label="Specialization"
-                              ></q-input>
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Specialization
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
-                            <div class="col-xs-12 col-md-8">
+                            <div class="col-12 q-px-xs">
                               <q-input
-                                :readonly="true"
-                                dense
-                                label="Tiada"
-                              ></q-input>
-                            </div>
-                            <div class="col-xs-12 col-md-8">
-                              <q-input
-                                :readonly="true"
-                                dense
-                                outlined
-                                class="bg-grey-4"
-                                label="Cadangan Tajuk
-                                  Penyelidikan"
-                              ></q-input>
-                            </div>
-                            <div class="col-xs-12 col-md-8">
-                              <q-input
-                                :readonly="true"
-                                dense
                                 v-model="tajuk"
                                 type="textarea"
                                 autogrow
-                              ></q-input>
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Proposed Research Title/Area"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Proposed Research Title/Area
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
                           </div>
 
                           <div class="row">
-                            <div class="col-xs-12 col-md-8">
+                            <!-- <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -672,9 +708,34 @@
                                 dense
                                 v-model="sv"
                               ></q-input>
+                            </div> -->
+
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                v-model="sv"
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Proposed Supervisor"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Proposed Supervisor
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
 
-                            <div class="col-xs-12 col-md-8">
+                            <!-- <div class="col-xs-12 col-md-8">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -689,6 +750,30 @@
                                 dense
                                 v-model="expr"
                               ></q-input>
+                            </div> -->
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                v-model="expr"
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Work Experience"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Work Experience
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
                           </div>
                         </q-card-section>
@@ -715,24 +800,30 @@
                           <div class="row">
                             <div class="col-12 q-px-xs">
                               <q-input
-                                :readonly="true"
-                                dense
-                                outlined
-                                class="bg-grey-4"
-                                label="Kelayakan Akdemik
-                                  Tertinggi"
-                              ></q-input>
-                            </div>
-                            <div class="col-8 q-px-xs">
-                              <q-input
-                                :readonly="true"
-                                dense
                                 v-model="akadtggi"
-                                :label="'Kelayakan Akdemik'"
-                              ></q-input>
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Highest Tertiary Education"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Highest Tertiary Education
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
 
-                            <div class="col-12 q-px-xs">
+                            <!-- <div class="col-12 q-px-xs">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -749,9 +840,33 @@
                                 v-model="unilama"
                                 :label="'Universiti Anugerah'"
                               ></q-input>
+                            </div> -->
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                v-model="unilama"
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Awarding University"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Awarding University
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
 
-                            <div class="col-8 q-px-xs">
+                            <!-- <div class="col-8 q-px-xs">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -767,8 +882,32 @@
                                 v-model="negunilama"
                                 :label="'Negara Anugerah'"
                               ></q-input>
+                            </div> -->
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                v-model="negunilama"
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Country Awarding"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Country Awarding
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
-                            <div class="col-6 q-px-xs">
+                            <!-- <div class="col-6 q-px-xs">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -785,11 +924,35 @@
                                 v-model="cgpa"
                                 :label="'CGPA'"
                               ></q-input>
+                            </div> -->
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                v-model="cgpa"
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Class/CGPA"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Class/CGPA
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
                             <!-- <hr /> -->
                           </div>
                           <div class="row">
-                            <div class="col-12 q-px-xs">
+                            <!-- <div class="col-12 q-px-xs">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -806,8 +969,32 @@
                                 v-model="unilama2"
                                 :label="'Universiti Anugerah (Master/Setara)'"
                               ></q-input>
+                            </div> -->
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                v-model="unilama2"
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Awarding University (Master /equivalent)"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Awarding University (Master /equivalent)
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
-                            <div class="col-6 q-px-xs">
+                            <!-- <div class="col-6 q-px-xs">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -824,6 +1011,30 @@
                                 v-model="cgpa2"
                                 :label="'CGPA'"
                               ></q-input>
+                            </div> -->
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                v-model="cgpa2"
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Class/CGPA"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Class/CGPA
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
                           </div>
                         </q-card-section>
@@ -840,7 +1051,7 @@
                                   Lain-lain (IELTS/TOEFL) :</label>
                               </q-item-section></q-item> -->
                           <div class="row">
-                            <div class="col-8 q-px-xs">
+                            <!-- <div class="col-8 q-px-xs">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -855,8 +1066,31 @@
                                 dense
                                 label="Ada"
                               ></q-input>
+                            </div> -->
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="English Language Proficiency"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    English Language Proficiency
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
-                            <div class="col-8 q-px-xs">
+                            <!-- <div class="col-8 q-px-xs">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -871,8 +1105,32 @@
                                 dense
                                 v-model="bidesc"
                               ></q-input>
+                            </div> -->
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                v-model="bidesc"
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Exam Type"
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Exam Type
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
-                            <div class="col-8 q-px-xs">
+                            <!-- <div class="col-8 q-px-xs">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -887,8 +1145,32 @@
                                 dense
                                 v-model="result"
                               ></q-input>
+                            </div> -->
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                v-model="result"
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Result "
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Result
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
-                            <div class="col-8 q-px-xs">
+                            <!-- <div class="col-8 q-px-xs">
                               <q-input
                                 :readonly="true"
                                 dense
@@ -903,9 +1185,58 @@
                                 dense
                                 v-model="tkhexam"
                               ></q-input>
+                            </div> -->
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                v-model="tkhexam"
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Date of Examination "
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                    Date of Examination
+                                  </div>
+                                </template>
+                              </q-input>
                             </div>
-                          </div> </q-card-section
-                      ></q-card>
+
+                            <div class="col-12 q-px-xs">
+                              <q-input
+                                type="text"
+                                autogrow
+                                outlined
+                                dense
+                                readonly
+                                class="q-mb-md"
+                                label="Registration No./Candidate No."
+                              >
+                                <template v-slot:label>
+                                  <div
+                                    style="
+                                      background-color: #f0f0f0;
+                                      padding: 2px 6px;
+                                      border-radius: 4px;
+                                    "
+                                  >
+                                  Registration No./Candidate No.
+                                  </div>
+                                </template>
+                              </q-input>
+                            </div>
+                          </div>
+                        </q-card-section></q-card
+                      >
                     </div>
                   </div>
                 </q-card-section>
@@ -1497,14 +1828,7 @@
 </template>
 
 <script>
-import {
-  defineComponent,
-  onMounted,
-  ref,
-  computed,
-  reactive,
-  watch,
-} from "vue";
+import { defineComponent, onMounted, ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import updateTindakan from "./EditPermohonan.vue";
 import { useRetPermohonanStore } from "src/stores/getmohon";
@@ -1610,10 +1934,12 @@ export default defineComponent({
     // ];
 
     const filteredDropdownOptions = computed(() => {
-  return singleDropdownOptions.value.length > 0
-    ? singleDropdownOptions.value.filter(option => transferval.value !== "0" || option.value !== "4")
-    : [];
-});
+      return singleDropdownOptions.value.length > 0
+        ? singleDropdownOptions.value.filter(
+            (option) => transferval.value !== "0" || option.value !== "4"
+          )
+        : [];
+    });
 
     const programOptions = ref([]);
     const filteredPrograms = ref([]);
@@ -1713,7 +2039,7 @@ export default defineComponent({
           laluan.value = storeGetMohon.Details.laluan || ""; // Example: bind the fetched name to the variable
           transfer.value = storeGetMohon.Details.setujutransfer || ""; // Example: bind the fetched name to the variable
           transferval.value = storeGetMohon.Details.p001setujutransfer || ""; // Example: bind the fetched name to the variable
-          
+
           // ✅ Initialize `singleDropdownOptions` properly
           singleDropdownOptions.value = [
             { label: "Permohonan Diluluskan", value: "2" },
@@ -1733,7 +2059,6 @@ export default defineComponent({
           bidesc.value = storeGetMohon.Details.bidesc || "N/A";
           result.value = storeGetMohon.Details.p001muet || "N/A";
           tkhexam.value = storeGetMohon.Details.p001tkhexm || "N/A";
-      
         } catch (error) {
           console.error("Error fetching details frontend:", error);
         }

@@ -40,8 +40,8 @@
                 </q-avatar>
 
                 <div class="user-info">
-                  <span>{{ user.username }}</span>
-                  <small>{{ user.role }}</small>
+                  <span>{{ usrsessionfakulti }}</span>
+                  <small>{{ usrsession }}</small>
                 </div>
 
                 <q-btn flat icon="arrow_drop_down" size="sm" />
@@ -262,6 +262,11 @@ export default {
       return route.path !== "/pengambilan"; // Hide when on /pengambilan
     });
 
+    const userSession = JSON.parse(sessionStorage.getItem("userSession"));
+    let usrsession = userSession?.usradminptj1;
+    let usrsessionfakulti = userSession?.fakulti;
+    //console.log("User from Session:", usrsessionfakulti);
+
     //-------------------------------------------------------- Breadcrumb ----------------------------------------------------------
     // Breadcrumbs calculation
     const breadcrumbs = computed(() => {
@@ -301,6 +306,9 @@ export default {
     //------------------------------------------------- Sidebar Menu ---------------------------------------------
 
     return {
+      usrsessionfakulti,
+      usrsession,
+      userSession,
       user: {
         username: "yani",
         role: "Admin",

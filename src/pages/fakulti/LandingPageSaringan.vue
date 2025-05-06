@@ -5,7 +5,8 @@
     >
       <q-card class="q-pa-md">
         <q-card-section>
-          <div class="text-bold text-h6 col-12">Senarai Permohonan Calon</div>
+          <div class="text-bold text-h6 col-12">List Of Application</div>
+          <hr />
           <!-- <q-page class="q-pa-lg q-mt-md"> -->
           <div class="row q-col-gutter-lg" id="test">
             <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -192,6 +193,88 @@
               </q-card>
             </div>
             <!-- end 4 kotak -->
+            <div class="row q-col-gutter-sm items-end">
+              <div class="col-12 col-sm-4">
+                <q-input
+                  filled
+                  v-model="filterFrom"
+                  label="From Date Apply"
+                  mask="####-##-##"
+                >
+                  <template v-slot:append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        cover
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date
+                          v-model="filterFrom"
+                          mask="YYYY-MM-DD"
+                          today-btn
+                        >
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-date>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+              </div>
+              <div class="col-12 col-sm-4">
+                <q-input
+                  filled
+                  v-model="filterUntil"
+                  label="Until Date Apply"
+                  mask="####-##-##"
+                >
+                  <template v-slot:append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        cover
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date
+                          v-model="filterUntil"
+                          mask="YYYY-MM-DD"
+                          today-btn
+                        >
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-date>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+              </div>
+              <div class="col-12 col-sm-2">
+                <!-- Search button appears after date inputs -->
+                <q-btn
+                  label="Search"
+                  color="primary"
+                  icon="search"
+                  class="full-width"
+                  unelevated
+                  rounded
+                  @click="applyDateFilter"
+                />
+              </div>
+            </div>
+
+            <!-- end search by data filter -->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
               <q-table
                 flat
@@ -209,17 +292,27 @@
                 @request="onRequest"
                 class="full-width"
               >
-                <template v-slot:top-left>
+                <template v-slot:body-cell-no="props">
+                  <q-td align="justify">
+                    {{
+                      (pagination.page - 1) * pagination.rowsPerPage +
+                      props.pageIndex +
+                      1
+                    }}
+                  </q-td>
+                </template>
+                <!-- <template v-slot:top-left>
                   <div class="">
                     <span style="font-size: medium; font-weight: bold"
-                      >Senarai Permohonan</span
+                      >List Of Application</span
                     >
                     <hr />
                   </div>
-                </template>
+                </template> -->
                 <template v-slot:body-cell-actions="props">
                   <q-td align="center">
-                    <q-btn v-if="!isViewing && props.row.p001status === '0'"
+                    <q-btn
+                      v-if="!isViewing && props.row.p001status === '0'"
                       dense
                       flat
                       color="black"
@@ -227,13 +320,13 @@
                       @click="goToDetails(props.row.p001nokp)"
                     />
                     <q-btn
-                     v-if="props.row.p001status !== '0'"
-                    dense
-                    flat
-                    color="black"
-                    icon="visibility"
-                    @click="goToViewDetails(props.row.p001nokp)"
-                  />
+                      v-if="props.row.p001status !== '0'"
+                      dense
+                      flat
+                      color="black"
+                      icon="visibility"
+                      @click="goToViewDetails(props.row.p001nokp)"
+                    />
                     <!-- <q-btn dense flat icon="edit" color="primary" @click="goToEditDetails(props.row.p001nokp)" /> -->
                   </q-td>
                 </template>
@@ -278,17 +371,19 @@
                   </div>
                 </template>
                 <template v-slot:body-cell-status="props">
-                  <q-chip
-                    :color="statusColor(props.row.p001status)"
-                    text-color="white"
-                    dense
-                    class="text-weight-bolder"
-                    square
-                    style="width: 100px; height: 100%"
-                  >
-                    <!-- {{ props.row.p001status }} -->
-                    {{ statusDescription(props.row.p001status) }}
-                  </q-chip>
+                  <div class="row justify items-center">
+                    <q-chip
+                      :color="statusColor(props.row.p001status)"
+                      text-color="white"
+                      dense
+                      class="text-weight-bolder"
+                      square
+                      style="width: 120px"
+                    >
+                      <!-- {{ props.row.p001status }} -->
+                      {{ statusDescription(props.row.p001status) }}
+                    </q-chip>
+                  </div>
                 </template>
               </q-table>
             </div>
@@ -519,6 +614,8 @@ export default defineComponent({
     const bilGF = ref("");
     const bilLF = ref("");
     const selectedStatus = ref("");
+    const filterFrom = ref(null); // e.g. '2025-04-01'
+    const filterUntil = ref(null); // e.g. '2025-04-30'
     const isHovered = ref(false);
     const isHovered1 = ref(false);
     const isHovered2 = ref(false);
@@ -532,6 +629,7 @@ export default defineComponent({
     const necprogram = ref("");
     const program = ref("");
     const isViewing = ref(false);
+    // const applyDateFilter = ref("");
 
     const userSession = JSON.parse(sessionStorage.getItem("userSession"));
     let usrsession = userSession?.usradminptj1;
@@ -565,18 +663,27 @@ export default defineComponent({
         return MohonList.value; // Return all if no filter is applied
       }
 
+      //combine with filter by date apply
+      // return MohonList.value.filter((row) => {
+      //   const statusMatch =
+      //     selectedStatus.value.length === 0 ||
+      //     selectedStatus.value.includes(row.p001status);
+
+      //   const dateVal = row.p001tkhpohon;
+      //   if (!dateVal) return false;
+
+      //   const from = filterFrom.value;
+      //   const until = filterUntil.value;
+
+      //   const dateMatch =
+      //     (!from || dateVal >= from) && (!until || dateVal <= until);
+
+      //   return statusMatch && dateMatch;
+      // });
+
       return MohonList.value.filter((row) =>
         selectedStatus.value.includes(row.p001status)
       );
-
-      // const filtered = selectedStatus.value
-      //   ? MohonList.value.filter(
-      //       (row) => row.p001status === selectedStatus.value
-      //     )
-      //   : MohonList.value;
-
-      // //console.log("Filtered Rows:", filtered); // Debugging
-      // return filtered;
     });
 
     // const selectStatus = (status) => {
@@ -592,6 +699,21 @@ export default defineComponent({
         selectedStatus.value = [status];
         console.log("Filtering for single status:", status);
       }
+    };
+
+    const applyDateFilter = () => {
+      if (!filterFrom.value && !filterUntil.value) {
+        filteredRows.value = MohonList.value;
+        return;
+      }
+
+      filteredRows.value = MohonList.value.filter((item) => {
+        const date = item.p001tkhpohon; // replace with actual field
+        if (!date) return false;
+        if (filterFrom.value && date < filterFrom.value) return false;
+        if (filterUntil.value && date > filterUntil.value) return false;
+        return true;
+      });
     };
 
     const statusColor = (status) => {
@@ -656,7 +778,7 @@ export default defineComponent({
     };
 
     const goToDetails = (p001nokp) => {
-      router.push({ 
+      router.push({
         name: "DetailsPermohonan",
         params: { p001nokp },
         state: { isViewing: false },
@@ -695,6 +817,9 @@ export default defineComponent({
     };
 
     return {
+      filterFrom,
+      filterUntil,
+      applyDateFilter,
       usrsessionfakulti,
       usrsession,
       userSession,
@@ -719,37 +844,43 @@ export default defineComponent({
       tableRef,
       columns: [
         {
+          name: "no",
+          label: "No",
+          align: "justify",
+          sortable: false,
+        },
+        {
           name: "name",
-          label: "NAMA PEMOHON",
+          label: "NAME",
           field: "p001nama",
-          align: "center",
+          align: "justify",
         },
         {
           name: "nokp",
           label: "NO KP/PASSPORT",
           field: "p001nokp",
-          align: "center",
+          align: "justify",
         },
         {
           name: "tkhmohon",
-          label: "TARIKH MOHON",
+          label: "DATE APPLY",
           field: "p001tkhpohon",
-          align: "center",
+          align: "justify",
         },
         {
           name: "program",
-          label: "PROGRAM",
+          label: "PROGRAMME",
           field: "p001kprog",
-          align: "center",
+          align: "justify",
           format: (val) => getProgramName(val),
         },
         {
           name: "status",
           label: "STATUS",
           field: "p001status",
-          align: "center",
+          align: "justify",
         },
-        { name: "actions", label: "TINDAKAN", align: "center" },
+        { name: "actions", label: "ACTION", align: "justify" },
       ],
       filter,
       statB,

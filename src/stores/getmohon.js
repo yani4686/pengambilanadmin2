@@ -4,7 +4,7 @@ import { api } from "boot/axios"; // Assuming Quasar's Axios setup
 export const useRetPermohonanStore = defineStore("getmohon", {
   state: () => ({
     MohonList: [], // Reactive state for data
-    Details: [], // Reactive state for data
+    Details: {}, //Details: [],
     Countbystat: [], // Reactive state for data
     KodProgram: [], // Reactive state for data
     //selectedOption: null,
