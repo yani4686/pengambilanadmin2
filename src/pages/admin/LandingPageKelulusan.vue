@@ -1,9 +1,14 @@
 <template>
-  <q-card>
+  <q-page class="q-pa-md">
     <q-page-container
       style="padding-top: 10px; padding-bottom: 37px; padding-left: 80px"
     >
-      <div class="text-bold text-h6 col-12">Senarai Saringan Pengambilan</div>
+
+  <q-card class="q-pa-md">
+    <q-page-section>
+      <div class="text-bold text-h6 col-12">List Of Application</div>
+          <hr />
+      <!-- <div class="text-bold text-h6 col-12">Senarai Saringan Pengambilan</div> -->
       <q-page class="q-pa-lg q-mt-md">
         <div class="row q-col-gutter-lg" id="test">
           <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -177,6 +182,151 @@
             </q-card>
           </div>
           <!-- end 4 kotak -->
+           <!-- carian by date -->
+           <div class="row q-col-gutter-sm items-end">
+              <div class="col-12 col-sm-4">
+                <q-input
+                  filled
+                  outlined
+                  dense
+                  v-model="tempFrom"
+                  label="yyyy/mm/dd"
+                  style="margin: 0 12px"
+                  mask="####-##-##"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        ref="fromPopup"
+                        cover
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date
+                          v-model="tempFrom"
+                          mask="YYYY-MM-DD"
+                          @update:model-value="() => $refs.fromPopup.hide()"
+                        >
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-date>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+              </div>
+              <div class="col-12 col-sm-4">
+                <q-input
+                  filled
+                  outlined
+                  dense
+                  v-model="tempUntil"
+                  label="yyyy/mm/dd"
+                  style="margin: 0 12px"
+                  mask="####-##-##"
+                >
+                  <template v-slot:prepend>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        ref="untilPopup"
+                        cover
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date
+                          v-model="tempUntil"
+                          mask="YYYY-MM-DD"
+                          @update:model-value="() => $refs.untilPopup.hide()"
+                        >
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-date>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+              </div>
+              <!-- <div class="col-12 col-sm-4">
+                <q-input filled v-model="tempFrom" label="" mask="####-##-##">
+                  <template v-slot:append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        ref="fromPopup"
+                        cover
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date
+                          v-model="tempFrom"
+                          mask="YYYY-MM-DD"
+                          @update:model-value="() => $refs.fromPopup.hide()"
+                        >
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-date>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+              </div>
+              <div class="col-12 col-sm-4">
+                <q-input filled v-model="tempUntil" label="" mask="####-##-##">
+                  <template v-slot:append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        ref="untilPopup"
+                        cover
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date
+                          v-model="tempUntil"
+                          mask="YYYY-MM-DD"
+                          @update:model-value="() => $refs.untilPopup.hide()"
+                        >
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-date>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+              </div> -->
+              <div class="col-12 col-md-2 flex items-end">
+                <q-btn
+                  label="Search"
+                  color="primary"
+                  class="full-width"
+                  style="font-size: 13px; padding: 8px 16px"
+                  @click="applyDateFilter"
+                />
+              </div>
+            </div>
+           <!-- end date -->
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <q-table
               flat
@@ -193,14 +343,23 @@
               ref="tableRef"
               @request="onRequest"
             >
-              <template v-slot:top-left>
+            <template v-slot:body-cell-no="props">
+                  <q-td align="justify">
+                    {{
+                      (pagination.page - 1) * pagination.rowsPerPage +
+                      props.pageIndex +
+                      1
+                    }}
+                  </q-td>
+                </template>
+              <!-- <template v-slot:top-left>
                 <div class="">
                   <span style="font-size: medium; font-weight: bold"
                     >Senarai Permohonan</span
                   >
                   <hr />
                 </div>
-              </template>
+              </template> -->
               <template v-slot:body-cell-actions="props">
                 <q-td align="center">
                   <q-btn
@@ -240,6 +399,7 @@
                         src="src/assets/pdf.svg"
                         alt="PDF Icon"
                         class="pdf"
+                        @click="downloadPDF()"
                       />
                       <q-tooltip class="bg-no-color" :offset="[5, 5]">
                         Export PDF
@@ -286,8 +446,10 @@
         </div>
         <!-- end 1st gutter -->
       </q-page>
-    </q-page-container>
+    </q-page-section>
   </q-card>
+</q-page-container>
+</q-page>
 </template>
 
 <style>
@@ -484,6 +646,9 @@ hr {
 import { useRoute, useRouter } from "vue-router";
 import { defineComponent, onMounted, ref, computed, reactive } from "vue";
 import { useRetPermohonanStorePps } from "src/stores/getmohonpps";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import * as XLSX from "xlsx";
 
 export default defineComponent({
   name: "PermohonanPagePPS",
@@ -529,45 +694,71 @@ export default defineComponent({
     const necprogram = ref("");
     const program = ref("");
 
+    const tempFrom = ref(""); // User input
+    const tempUntil = ref("");
+
+    const filterFrom = ref(""); // Actual value used in filter
+    const filterUntil = ref("");
+
+    const fromPopup = ref(null);
+    const untilPopup = ref(null);
+
     const handleClick = () => {
+      isClicked.value = true;
       isClicked.value = !isClicked.value;
       selectStatus(["2", "5"]);
     };
 
     const handleClick1 = () => {
+      isClicked1.value = true;
       isClicked1.value = !isClicked1.value;
       selectStatus("1");
     };
 
     const handleClick2 = () => {
+      isClicked2.value = true;
       isClicked2.value = !isClicked2.value;
       selectStatus(["3", "6"]);
     };
 
     // Filters rows based on selected status
+    // const filteredRows = computed(() => {
+    //   if (selectedStatus.value.length === 0) {
+    //     return MohonList.value; // Return all if no filter is applied
+    //   }
+
+    //   return MohonList.value.filter((row) =>
+    //     selectedStatus.value.includes(row.p001status)
+    //   );
+    // });
+
     const filteredRows = computed(() => {
-      if (selectedStatus.value.length === 0) {
-        return MohonList.value; // Return all if no filter is applied
-      }
+      const list = MohonList.value || [];
+      const from = tempFrom.value;
+      const until = tempUntil.value;
+      const selected = selectedStatus.value;
 
-      return MohonList.value.filter((row) =>
-        selectedStatus.value.includes(row.p001status)
-      );
+      return list.filter((row) => {
+        const statusMatch =
+          selected.length === 0 || selected.includes(row.p001status);
 
-      // const filtered = selectedStatus.value
-      //   ? MohonList.value.filter(
-      //       (row) => row.p001status === selectedStatus.value
-      //     )
-      //   : MohonList.value;
+        const dateVal = row.p001tkhpohon;
+        const fromMatch = !from || dateVal >= from;
+        const untilMatch = !until || dateVal <= until;
+        const dateMatch = fromMatch && untilMatch;
 
-      // //console.log("Filtered Rows:", filtered); // Debugging
-      // return filtered;
+        // Allow separate or combined filters
+        return statusMatch && dateMatch;
+      });
     });
 
-    // const selectStatus = (status) => {
-    //   //console.log("Clicked Status:", status);
-    //   selectedStatus.value = status;
-    // };
+    const applyDateFilter = () => {
+      console.log("Search button clicked");
+      filterFrom.value = tempFrom.value || "";
+      filterUntil.value = tempUntil.value || "";
+      console.log("tempFrom:", tempFrom.value);
+      console.log("tempUntil:", tempUntil.value);
+    };
 
     const selectStatus = (status) => {
       if (Array.isArray(status)) {
@@ -608,6 +799,60 @@ export default defineComponent({
       return descriptions[status] || "Draft";
     };
 
+    const downloadPDF = () => {
+      const doc = new jsPDF();
+
+      // Save PDF name as Report
+      doc.setFontSize(12);
+      doc.text("REPORT", 105, 12, { align: "center" });
+
+      // Prepare table data
+      const tableColumn = [
+        "INDEX",
+        "NAME",
+        "NOKP/PASSPORT",
+        "DATE APPLY",
+        "PROGRAMME",
+        "STATUS",
+      ];
+      const tableRows = filteredRows.value.map((row, index) => [
+        index + 1,
+        row.p001nama,
+        row.p001nokp,
+        row.p001tkhpohon,
+        getProgramName(row.p001kprog),
+        statusDescription(row.p001status),
+      ]);
+
+      // Apply border and styling to match the table header
+      doc.autoTable({
+        head: [tableColumn],
+        body: tableRows,
+        startY: 20, // Vertical start position
+        theme: "grid",
+        headStyles: {
+          fillColor: [255, 255, 255], // Header background color
+          textColor: [0, 0, 0], // Header text color
+          lineWidth: 0.1, // Border thickness for header
+          lineColor: [0, 0, 0], // Border color for header
+          halign: "center", // Horizontal alignment for header
+        },
+        styles: {
+          fontSize: 10, // Font size for table content
+          lineColor: [0, 0, 0], // Line color for table content
+          lineWidth: 0.1, // Line width for table content
+        },
+        tableLineColor: [0, 0, 0], // Global table line color
+        tableLineWidth: 0.1, // Global table line width
+        columnStyles: {
+          0: { halign: "center" }, // Center align the INDEX column
+        },
+      });
+
+      // Save the PDF
+      doc.save("List Of Application.pdf");
+    };
+
     // Fetch data on component mount
     onMounted(() => {
       onLoad();
@@ -618,6 +863,7 @@ export default defineComponent({
       try {
         // Fetch data for MohonList
         await storeGetMohon.fetchP();
+        applyDateFilter();
         // Fetch data for bilstat
         await storeGetMohon.fetchbilstat();
         bilB.value = storeGetMohon.Countbystat.bildraf || "";
@@ -683,6 +929,14 @@ export default defineComponent({
   };
 
     return {
+      downloadPDF,
+      tempFrom,
+      tempUntil,
+      fromPopup,
+      untilPopup,
+      filterFrom,
+      filterUntil,
+      applyDateFilter,
       getProgramName,
       program,
       kodprogram,
@@ -700,6 +954,12 @@ export default defineComponent({
       MohonList,
       tableRef,
       columns: [
+      {
+          name: "no",
+          label: "No",
+          align: "justify",
+          sortable: false,
+        },
         {
           name: "name",
           label: "NAMA PEMOHON",
