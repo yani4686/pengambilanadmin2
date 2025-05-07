@@ -283,7 +283,12 @@ export default {
 
         if (path === "detailspermohonan") {
           label = "Saringan";
-          to = "/saringan"; // Change path to /kelulusan
+          to = "/saringan"; // Change path to /saringan
+        }
+
+        if (path === "summarypermohonan") {
+          label = "Summary";
+          to = "/summary"; // Change path to /saringan
         }
 
         if (path === "detailsoffer") {

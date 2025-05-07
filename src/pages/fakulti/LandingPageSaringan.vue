@@ -197,21 +197,25 @@
               <div class="col-12 col-sm-4">
                 <q-input
                   filled
-                  v-model="filterFrom"
-                  label="From Date Apply"
+                  outlined
+                  dense
+                  v-model="tempFrom"
+                  label="yyyy/mm/dd"
+                  style="margin: 0 12px"
                   mask="####-##-##"
                 >
-                  <template v-slot:append>
+                  <template v-slot:prepend>
                     <q-icon name="event" class="cursor-pointer">
                       <q-popup-proxy
+                        ref="fromPopup"
                         cover
                         transition-show="scale"
                         transition-hide="scale"
                       >
                         <q-date
-                          v-model="filterFrom"
+                          v-model="tempFrom"
                           mask="YYYY-MM-DD"
-                          today-btn
+                          @update:model-value="() => $refs.fromPopup.hide()"
                         >
                           <div class="row items-center justify-end">
                             <q-btn
@@ -230,21 +234,25 @@
               <div class="col-12 col-sm-4">
                 <q-input
                   filled
-                  v-model="filterUntil"
-                  label="Until Date Apply"
+                  outlined
+                  dense
+                  v-model="tempUntil"
+                  label="yyyy/mm/dd"
+                  style="margin: 0 12px"
                   mask="####-##-##"
                 >
-                  <template v-slot:append>
+                  <template v-slot:prepend>
                     <q-icon name="event" class="cursor-pointer">
                       <q-popup-proxy
+                        ref="untilPopup"
                         cover
                         transition-show="scale"
                         transition-hide="scale"
                       >
                         <q-date
-                          v-model="filterUntil"
+                          v-model="tempUntil"
                           mask="YYYY-MM-DD"
-                          today-btn
+                          @update:model-value="() => $refs.untilPopup.hide()"
                         >
                           <div class="row items-center justify-end">
                             <q-btn
@@ -260,15 +268,70 @@
                   </template>
                 </q-input>
               </div>
-              <div class="col-12 col-sm-2">
-                <!-- Search button appears after date inputs -->
+              <!-- <div class="col-12 col-sm-4">
+                <q-input filled v-model="tempFrom" label="" mask="####-##-##">
+                  <template v-slot:append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        ref="fromPopup"
+                        cover
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date
+                          v-model="tempFrom"
+                          mask="YYYY-MM-DD"
+                          @update:model-value="() => $refs.fromPopup.hide()"
+                        >
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-date>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+              </div>
+              <div class="col-12 col-sm-4">
+                <q-input filled v-model="tempUntil" label="" mask="####-##-##">
+                  <template v-slot:append>
+                    <q-icon name="event" class="cursor-pointer">
+                      <q-popup-proxy
+                        ref="untilPopup"
+                        cover
+                        transition-show="scale"
+                        transition-hide="scale"
+                      >
+                        <q-date
+                          v-model="tempUntil"
+                          mask="YYYY-MM-DD"
+                          @update:model-value="() => $refs.untilPopup.hide()"
+                        >
+                          <div class="row items-center justify-end">
+                            <q-btn
+                              v-close-popup
+                              label="Close"
+                              color="primary"
+                              flat
+                            />
+                          </div>
+                        </q-date>
+                      </q-popup-proxy>
+                    </q-icon>
+                  </template>
+                </q-input>
+              </div> -->
+              <div class="col-12 col-md-2 flex items-end">
                 <q-btn
                   label="Search"
                   color="primary"
-                  icon="search"
                   class="full-width"
-                  unelevated
-                  rounded
+                  style="font-size: 13px; padding: 8px 16px"
                   @click="applyDateFilter"
                 />
               </div>
@@ -327,6 +390,13 @@
                       icon="visibility"
                       @click="goToViewDetails(props.row.p001nokp)"
                     />
+                    <q-btn
+                      dense
+                      flat
+                      color="black"
+                      icon="description"
+                      @click="goToViewSummary(props.row.p001nokp)"
+                    />
                     <!-- <q-btn dense flat icon="edit" color="primary" @click="goToEditDetails(props.row.p001nokp)" /> -->
                   </q-td>
                 </template>
@@ -350,6 +420,7 @@
                           src="src/assets/pdf.svg"
                           alt="PDF Icon"
                           class="pdf"
+                          @click="downloadPDF()"
                         />
                         <q-tooltip class="bg-no-color" :offset="[5, 5]">
                           Export PDF
@@ -362,6 +433,7 @@
                           src="src/assets/Excel.png"
                           alt="Excel Icon"
                           class="excel"
+                          @click="downloadEXCEL()"
                         />
                         <q-tooltip class="bg-no-color" :offset="[5, 5]">
                           Export Excel
@@ -582,6 +654,9 @@ hr {
 import { useRoute, useRouter } from "vue-router";
 import { defineComponent, onMounted, ref, computed, reactive } from "vue";
 import { useRetPermohonanStore } from "src/stores/getmohon";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
+import * as XLSX from "xlsx";
 
 export default defineComponent({
   name: "PermohonanPage",
@@ -614,8 +689,6 @@ export default defineComponent({
     const bilGF = ref("");
     const bilLF = ref("");
     const selectedStatus = ref("");
-    const filterFrom = ref(null); // e.g. '2025-04-01'
-    const filterUntil = ref(null); // e.g. '2025-04-30'
     const isHovered = ref(false);
     const isHovered1 = ref(false);
     const isHovered2 = ref(false);
@@ -629,7 +702,15 @@ export default defineComponent({
     const necprogram = ref("");
     const program = ref("");
     const isViewing = ref(false);
-    // const applyDateFilter = ref("");
+
+    const tempFrom = ref(""); // User input
+    const tempUntil = ref("");
+
+    const filterFrom = ref(""); // Actual value used in filter
+    const filterUntil = ref("");
+
+    const fromPopup = ref(null);
+    const untilPopup = ref(null);
 
     const userSession = JSON.parse(sessionStorage.getItem("userSession"));
     let usrsession = userSession?.usradminptj1;
@@ -637,59 +718,61 @@ export default defineComponent({
     //console.log("User from Session:", usrsessionfakulti);
 
     const handleClick = () => {
+      isClicked.value = true;
+      //  isHovered.value = false;
       isClicked.value = !isClicked.value;
       selectStatus("0");
     };
 
     const handleClick1 = () => {
+      isClicked1.value = true;
+      //  isHovered1.value = false;
       isClicked1.value = !isClicked1.value;
       selectStatus("4");
     };
 
     const handleClick2 = () => {
+      isClicked2.value = true;
+      //  isHovered2.value = false;
       isClicked2.value = !isClicked2.value;
       selectStatus(["1", "2", "5"]);
     };
 
     const handleClick3 = () => {
+      isClicked3.value = true;
+      // isHovered3.value = false;
       isClicked3.value = !isClicked3.value;
       selectStatus("3");
     };
 
-    // Filters rows based on selected status
+    //const filteredRows = ref([]);
     const filteredRows = computed(() => {
-      // console.log("Selected Status for Filter:", selectedStatus.value); // Debugging
-      if (selectedStatus.value.length === 0) {
-        return MohonList.value; // Return all if no filter is applied
-      }
+      const list = MohonList.value || [];
+      const from = tempFrom.value;
+      const until = tempUntil.value;
+      const selected = selectedStatus.value;
 
-      //combine with filter by date apply
-      // return MohonList.value.filter((row) => {
-      //   const statusMatch =
-      //     selectedStatus.value.length === 0 ||
-      //     selectedStatus.value.includes(row.p001status);
+      return list.filter((row) => {
+        const statusMatch =
+          selected.length === 0 || selected.includes(row.p001status);
 
-      //   const dateVal = row.p001tkhpohon;
-      //   if (!dateVal) return false;
+        const dateVal = row.p001tkhpohon;
+        const fromMatch = !from || dateVal >= from;
+        const untilMatch = !until || dateVal <= until;
+        const dateMatch = fromMatch && untilMatch;
 
-      //   const from = filterFrom.value;
-      //   const until = filterUntil.value;
-
-      //   const dateMatch =
-      //     (!from || dateVal >= from) && (!until || dateVal <= until);
-
-      //   return statusMatch && dateMatch;
-      // });
-
-      return MohonList.value.filter((row) =>
-        selectedStatus.value.includes(row.p001status)
-      );
+        // Allow separate or combined filters
+        return statusMatch && dateMatch;
+      });
     });
 
-    // const selectStatus = (status) => {
-    //   //console.log("Clicked Status:", status);
-    //   selectedStatus.value = status;
-    // };
+    const applyDateFilter = () => {
+      console.log("Search button clicked");
+      filterFrom.value = tempFrom.value || "";
+      filterUntil.value = tempUntil.value || "";
+      console.log("tempFrom:", tempFrom.value);
+      console.log("tempUntil:", tempUntil.value);
+    };
 
     const selectStatus = (status) => {
       if (Array.isArray(status)) {
@@ -699,21 +782,6 @@ export default defineComponent({
         selectedStatus.value = [status];
         console.log("Filtering for single status:", status);
       }
-    };
-
-    const applyDateFilter = () => {
-      if (!filterFrom.value && !filterUntil.value) {
-        filteredRows.value = MohonList.value;
-        return;
-      }
-
-      filteredRows.value = MohonList.value.filter((item) => {
-        const date = item.p001tkhpohon; // replace with actual field
-        if (!date) return false;
-        if (filterFrom.value && date < filterFrom.value) return false;
-        if (filterUntil.value && date > filterUntil.value) return false;
-        return true;
-      });
     };
 
     const statusColor = (status) => {
@@ -745,9 +813,83 @@ export default defineComponent({
       return descriptions[status] || "Draft";
     };
 
+    const downloadEXCEL = () => {
+      const ws = XLSX.utils.json_to_sheet(
+        filteredRows.value.map((row, index) => ({
+          // "#": index + 1,
+          INDEX: index + 1,
+          NAME: row.p001nama,
+          NOKP_PASSPORT: row.p001nokp,
+          DATE_APPLY: row.p001tkhpohon,
+          PROGRAMME: getProgramName(row.p001kprog),
+          STATUS: statusDescription(row.p001status),
+        }))
+      );
+
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Report");
+
+      XLSX.writeFile(wb, "List Of Application.xlsx");
+    };
+
+    const downloadPDF = () => {
+      const doc = new jsPDF();
+
+      // Save PDF name as Report
+      doc.setFontSize(12);
+      doc.text("REPORT", 105, 12, { align: "center" });
+
+      // Prepare table data
+      const tableColumn = [
+        "INDEX",
+        "NAME",
+        "NOKP/PASSPORT",
+        "DATE APPLY",
+        "PROGRAMME",
+        "STATUS",
+      ];
+      const tableRows = filteredRows.value.map((row, index) => [
+        index + 1,
+        row.p001nama,
+        row.p001nokp,
+        row.p001tkhpohon,
+        getProgramName(row.p001kprog),
+        statusDescription(row.p001status),
+      ]);
+
+      // Apply border and styling to match the table header
+      doc.autoTable({
+        head: [tableColumn],
+        body: tableRows,
+        startY: 20, // Vertical start position
+        theme: "grid",
+        headStyles: {
+          fillColor: [255, 255, 255], // Header background color
+          textColor: [0, 0, 0], // Header text color
+          lineWidth: 0.1, // Border thickness for header
+          lineColor: [0, 0, 0], // Border color for header
+          halign: "center", // Horizontal alignment for header
+        },
+        styles: {
+          fontSize: 10, // Font size for table content
+          lineColor: [0, 0, 0], // Line color for table content
+          lineWidth: 0.1, // Line width for table content
+        },
+        tableLineColor: [0, 0, 0], // Global table line color
+        tableLineWidth: 0.1, // Global table line width
+        columnStyles: {
+          0: { halign: "center" }, // Center align the INDEX column
+        },
+      });
+
+      // Save the PDF
+      doc.save("List Of Application.pdf");
+    };
+
     // Fetch data on component mount
     onMounted(() => {
       onLoad();
+      //console.log("Component mounted");
     });
 
     // Load data from the store
@@ -755,6 +897,7 @@ export default defineComponent({
       try {
         // Fetch data for MohonList
         await storeGetMohon.fetchP();
+        applyDateFilter();
         // Fetch data for bilstat
         await storeGetMohon.fetchbilstat();
         bilB.value = storeGetMohon.Countbystat.bildraf || "";
@@ -796,6 +939,17 @@ export default defineComponent({
       });
     };
 
+    const goToViewSummary = (p001nokp) => {
+      // router.push({ name: "DetailsPermohonanAdmin", params: { p001nokp } });
+      // this.isViewing = true;
+      router.push({
+        name: "SummaryPermohonan",
+        params: { p001nokp },
+        // state: { isViewing: true },
+        // query: { isViewing: "true" }, // Pass as a query param
+      });
+    };
+
     const goToEditDetails = (p001nokp) => {
       router.push({ name: "EditPermohonan", params: { p001nokp } });
     };
@@ -817,6 +971,12 @@ export default defineComponent({
     };
 
     return {
+      downloadEXCEL,
+      downloadPDF,
+      tempFrom,
+      tempUntil,
+      fromPopup,
+      untilPopup,
       filterFrom,
       filterUntil,
       applyDateFilter,
@@ -891,6 +1051,7 @@ export default defineComponent({
       bilPF,
       filteredRows,
       selectedStatus,
+      goToViewSummary,
       goToViewDetails,
       selectStatus,
       goToDetails,

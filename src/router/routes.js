@@ -42,6 +42,11 @@ const routes = [
         component: () => import("pages/fakulti/EditPermohonan.vue"),
       },
       {
+        path: "/summarypermohonan/:p001nokp",
+        name: "SummaryPermohonan",
+        component: () => import("pages/fakulti/SummaryPermohonan.vue"),
+      },
+      {
         path: "/test",
         name: "Test",
         component: () => import("pages/fakulti/TestRet.vue"),
