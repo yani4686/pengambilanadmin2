@@ -88,6 +88,12 @@ const routes = [
         name: "KemaskiniCalonJaya",
         component: () => import("pages/admin/EditPemohonOffer.vue"),
       },
+      // konfigurasi sistem
+      {
+        path: "/konfigurasi",
+        name: "SetupAkses",
+        component: () => import("pages/configuration/SetupAkses.vue"),
+      },
     ],
   },
 

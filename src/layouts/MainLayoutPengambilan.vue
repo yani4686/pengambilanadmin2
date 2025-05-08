@@ -150,7 +150,7 @@
               <q-item>
                 <q-item-section>
                   <q-item-label>
-                    <a href="#/" style="color: white">Akses Level</a>
+                    <a href="#/konfigurasi" style="color: white">Akses Level</a>
                   </q-item-label>
                 </q-item-section>
               </q-item>
@@ -288,7 +288,7 @@ export default {
 
         if (path === "summarypermohonan") {
           label = "Summary";
-          to = "/summary"; // Change path to /saringan
+          to = "/saringan"; // Change path to /saringan
         }
 
         if (path === "detailsoffer") {

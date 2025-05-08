@@ -7,6 +7,8 @@ export const useRetPermohonanStore = defineStore("getmohon", {
     Details: {}, //Details: [],
     Countbystat: [], // Reactive state for data
     KodProgram: [], // Reactive state for data
+    KodNegara: [],
+    KodTajaan: [],
     //selectedOption: null,
     formData: {
       tindakanPengesahan: null,
@@ -33,6 +35,26 @@ export const useRetPermohonanStore = defineStore("getmohon", {
         //   console.log(program);
         //   return response;
         // }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    },
+    async fetchKodNegara() {
+      try {
+        const response = await api.get("/getkodnegara"); // API endpoint
+        //  console.log("API Response:", response.data);
+        this.KodNegara = Object.values(response.data); // Update store state
+        return response;
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    },
+    async fetchKodPenaja() {
+      try {
+        const response = await api.get("/getkodpenaja"); // API endpoint
+        //  console.log("API Response:", response.data);
+        this.KodTajaan = Object.values(response.data); // Update store state
+        return response;
       } catch (error) {
         console.error("Error fetching data:", error);
       }
